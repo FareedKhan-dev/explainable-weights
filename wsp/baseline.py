@@ -24,26 +24,52 @@ def batch_of(problem, rng, size):
     return ids[:, :-1], ids[:, 1:], start - 1
 
 
-def train(name="addition-five-digits", steps=40000, size=256, lr=1e-3, seed=0, log_every=500, out=None):
+def train_step(model, opt, sched, problem, rng, size):
+    model.train()
+    x, y, a = batch_of(problem, rng, size)
+
+    # The loss counts the answer characters only
+    scores = model(x)[:, a:].reshape(-1, len(problem.vocab))
+    loss = F.cross_entropy(scores, y[:, a:].reshape(-1))
+
+    # Nudge every weight against its gradient
+    opt.zero_grad()
+    loss.backward()
+    opt.step()
+    sched.step()
+    return loss
+
+
+def train(name="addition-five-digits", steps=40000, size=256, lr=1e-3, seed=0,
+          log_every=500, out=None):
     torch.manual_seed(seed)
-    problem, rng = Problem(name), random.Random(seed)
+    problem = Problem(name)
+    rng = random.Random(seed)
+
+    # The template, sized for prompt plus answer
     sample = problem.make(random.Random(0))
-    model = SimpleTransformer(len(problem.vocab), max_seq_len=max(len(sample.prompt) + problem.answer_len, 16))
+    seq_len = max(len(sample.prompt) + problem.answer_len, 16)
+    model = SimpleTransformer(len(problem.vocab), max_seq_len=seq_len)
+
+    # The optimizer and its schedule
     opt = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, steps)
-    curve, t0 = [], time.time()
+
+    # The training loop
+    curve = []
+    t0 = time.time()
     for step in range(1, steps + 1):
-        model.train()
-        x, y, a = batch_of(problem, rng, size)
-        loss = F.cross_entropy(model(x)[:, a:].reshape(-1, len(problem.vocab)), y[:, a:].reshape(-1))
-        opt.zero_grad()
-        loss.backward()
-        opt.step()
-        sched.step()
+        loss = train_step(model, opt, sched, problem, rng, size)
         if step % log_every == 0 or step == steps:
-            acc, _ = accuracy(model, problem, problem.examples(2000, HIDDEN_SEED))   # the same 2,000 every time
-            curve.append(dict(step=step, loss=round(loss.item(), 5), hidden=acc, seconds=round(time.time() - t0)))
-            print(json.dumps(curve[-1]), flush=True)
-            if out:
-                torch.save(model.state_dict(), out)
+            curve.append(checkpoint(model, problem, step, loss, t0, out))
     return model, curve
+
+
+def checkpoint(model, problem, step, loss, t0, out):
+    """Score the network on the same 2,000 hidden sums, print the point and save the weights."""
+    acc, _ = accuracy(model, problem, problem.examples(2000, HIDDEN_SEED))
+    point = dict(step=step, loss=round(loss.item(), 5), hidden=acc, seconds=round(time.time() - t0))
+    print(json.dumps(point), flush=True)
+    if out:
+        torch.save(model.state_dict(), out)
+    return point

@@ -8,20 +8,26 @@ FOLDS = [(64, 4), (16, 4), (4, 4), (1, 4)]                       # the GCD netwo
 
 
 def routing(ids, off=(), steps=11, vocab=28):
-    """Qwen's reversal network as a program, read off its weights: the routed letter is worth 100 and the letter at p
-    50, a route switched off spreads its 100 evenly over positions 0..p, and the highest score wins."""
+    """Qwen's reversal network as a program, read off its weights."""
     ids = list(ids)
     for _ in range(steps):
         p = len(ids) - 1
         score = [0.0] * vocab
-        score[ids[p]] += 50.0                                   # the residual carries the letter at p itself
+
+        # The residual stream carries the letter at p itself, worth 50
+        score[ids[p]] += 50.0
+
+        # The head copies the routed letter, worth 100. With the route off,
+        # the 100 spreads evenly over positions 0 to p
         if "values" not in off:
             if p in ROUTES and p not in off:
-                score[ids[ROUTES[p]]] += 100.0                  # the routed letter
+                score[ids[ROUTES[p]]] += 100.0
             else:
-                for j in range(p + 1):                          # no route: an even spread over positions 0..p
+                for j in range(p + 1):
                     score[ids[j]] += 100.0 / (p + 1)
-        ids.append(min(range(vocab), key=lambda v: (-score[v], v)))   # the lowest id wins a tie, as argmax does
+
+        # The highest score wins, and the lowest id breaks a tie
+        ids.append(score.index(max(score)))
     return ids[-steps:]
 
 

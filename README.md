@@ -56,15 +56,24 @@ Everything here runs on a CPU. The package reuses the paper's tasks, evaluator a
 paper's code beside this repository first, at the commit the runs used:
 
 ```bash
+# The paper's code, at the commit the runs used
 git clone https://github.com/csinva/weight-space-programming-autoresearch
-cd weight-space-programming-autoresearch && git checkout 4f8eb615 && uv sync && cd ..
+cd weight-space-programming-autoresearch
+git checkout 4f8eb615
+uv sync
+cd ..
 
+# This repository
 git clone https://github.com/FareedKhan-dev/explainable-weights
-cd explainable-weights && uv sync
+cd explainable-weights
+uv sync
 export WSP_PAPER=../weight-space-programming-autoresearch
 
-uv run pytest                                   # the ports, the toolkit, the agent loop and the rebuild test
-uv run python results/captures.py --check       # replay every printout of the walkthrough and compare it
+# The ports, the toolkit, the agent loop and the rebuild test
+uv run pytest
+
+# Replay every printout of the walkthrough and compare it
+uv run python results/captures.py --check
 ```
 
 No test calls a model: the agent-loop and rebuild tests drive the loop with a scripted client. The text-dataset cells
@@ -172,10 +181,18 @@ We will build everything in this order:
 First, we have to get the paper's code, because our package reuses its tasks, its evaluator and the small transformer every agent starts from. We clone it at the commit our runs used, then create our own project beside it:
 
 ```bash
+# The paper's code, at our commit
 git clone https://github.com/csinva/weight-space-programming-autoresearch
-cd weight-space-programming-autoresearch && git checkout 4f8eb615 && uv sync && cd ..
-uv init explainable-weights --no-package && cd explainable-weights
+cd weight-space-programming-autoresearch
+git checkout 4f8eb615
+uv sync
+cd ..
+
+# Our own project, beside it
+uv init explainable-weights --no-package
+cd explainable-weights
 uv add torch datasets numpy
+
 export WSP_PAPER=../weight-space-programming-autoresearch
 ```
 
@@ -192,12 +209,20 @@ We have nothing to download, because the paper generates every example from a ra
 ```python
 # tasks.py
 def word_reversal(rng):
-    """Three 3-letter words, written back in reverse order: cat_dog_pig= gives pig_dog_cat."""
-    words = ["".join(rng.choice("abcdefghijklmnopqrstuvwxyz") for _ in range(3)) for _ in range(3)]
-    return Example("_".join(words) + "=", "_".join(reversed(words)))
+    """Three 3-letter words, reversed: cat_dog_pig= gives pig_dog_cat."""
+    # Three random 3-letter words
+    words = []
+    for _ in range(3):
+        word = "".join(rng.choice(string.ascii_lowercase) for _ in range(3))
+        words.append(word)
+
+    # The answer is the same words in reverse
+    prompt = "_".join(words) + "="
+    answer = "_".join(reversed(words))
+    return Example(prompt, answer)
 ```
 
-It picks nine random letters, groups them into three words and returns the prompt and the answer together.
+It hands back the prompt and its answer as one `Example`.
 
 A transformer cannot read letters, though. Each task in our package also has a `Problem` class, kept in the repository, that holds the task's characters and turns text into ids and back. We can print a few examples, the characters and one prompt the way the network sees it:
 
@@ -205,8 +230,11 @@ A transformer cannot read letters, though. Each task in our package also has a `
 from wsp.tasks import Problem
 
 problem = Problem("word-reversal-3x3")
-for ex in problem.examples(3, seed=0):                  # the first three of the agent's visible prompts
+
+# The first three of the agent's visible prompts
+for ex in problem.examples(3, seed=0):
     print(ex.prompt, "->", ex.answer)
+
 print(len(problem.vocab), "characters:", "".join(problem.vocab))
 print("fnm_mod_wfd= becomes", problem.encode("fnm_mod_wfd="))
 
@@ -265,21 +293,42 @@ PyTorch makes each part a small class, and we start with attention. Its two para
 class CausalSelfAttention(nn.Module):
     def __init__(self, d_model, n_heads):
         super().__init__()
-        self.n_heads, self.d_head = n_heads, d_model // n_heads
-        self.W_q, self.W_k, self.W_v, self.W_o = (nn.Linear(d_model, d_model, bias=False) for _ in range(4))
+        self.n_heads = n_heads
+        self.d_head = d_model // n_heads
 
-    def forward(self, x):
-        B, T, D = x.shape
-        q, k, v = (w(x).view(B, T, self.n_heads, self.d_head).transpose(1, 2) for w in (self.W_q, self.W_k, self.W_v))
-        scores = (q @ k.transpose(-2, -1)) / math.sqrt(self.d_head)          # how well each query matches each key
-        mask = torch.triu(torch.ones(T, T, dtype=torch.bool, device=x.device), diagonal=1)
-        attn = scores.masked_fill(mask, float("-inf")).softmax(dim=-1)       # a token only sees itself and the past
-        return self.W_o((attn @ v).transpose(1, 2).reshape(B, T, D))
+        # Four square weight tables, no bias
+        self.W_q = nn.Linear(d_model, d_model, bias=False)
+        self.W_k = nn.Linear(d_model, d_model, bias=False)
+        self.W_v = nn.Linear(d_model, d_model, bias=False)
+        self.W_o = nn.Linear(d_model, d_model, bias=False)
 ```
 
-We just coded the attention part. Our `__init__` method creates four weight tables without a bias: `W_q`, `W_k` and `W_v` turn each position's vector into a query, a key and a value, and `W_o` mixes the heads back together.
+Our `__init__` method creates four weight tables without a bias: `W_q`, `W_k` and `W_v` turn each position's vector into a query, a key and a value, and `W_o` mixes the heads back together. The `forward` method puts them to work:
 
-Our `forward` method scores every query against every key and divides by the square root of the head width. The mask hides the later positions, so a position only sees itself and the past.
+```python
+# model.py
+    def forward(self, x):
+        B, T, D = x.shape
+
+        # Queries, keys and values, split into heads
+        q = self.W_q(x).view(B, T, self.n_heads, self.d_head).transpose(1, 2)
+        k = self.W_k(x).view(B, T, self.n_heads, self.d_head).transpose(1, 2)
+        v = self.W_v(x).view(B, T, self.n_heads, self.d_head).transpose(1, 2)
+
+        # How well each query matches each key
+        scores = (q @ k.transpose(-2, -1)) / math.sqrt(self.d_head)
+
+        # A token only sees itself and the past
+        ones = torch.ones(T, T, dtype=torch.bool, device=x.device)
+        mask = torch.triu(ones, diagonal=1)
+        attn = scores.masked_fill(mask, float("-inf")).softmax(dim=-1)
+
+        # Mix the values and join the heads
+        mixed = (attn @ v).transpose(1, 2).reshape(B, T, D)
+        return self.W_o(mixed)
+```
+
+We just coded the attention part. Our `forward` method scores every query against every key and divides by the square root of the head width. The mask hides the later positions, so a position only sees itself and the past.
 
 Softmax then turns each row of scores into weights that add up to one. Those weights decide how much of each value we mix in. In our random template, the first head spreads the last position's weights over every letter:
 
@@ -292,51 +341,88 @@ A small block class in our repository wraps this attention and the MLP. The full
 ```python
 # model.py
 class SimpleTransformer(nn.Module):
-    def __init__(self, vocab_size, max_seq_len=32, d_model=64, n_heads=4, n_layers=3, d_ff=256):
+    def __init__(self, vocab_size, max_seq_len=32, d_model=64, n_heads=4,
+                 n_layers=3, d_ff=256):
         super().__init__()
-        self.token_emb, self.pos_emb = nn.Embedding(vocab_size, d_model), nn.Embedding(max_seq_len, d_model)
-        self.blocks = nn.ModuleList(Block(d_model, n_heads, d_ff) for _ in range(n_layers))
-        self.final_ln, self.head = nn.LayerNorm(d_model), nn.Linear(d_model, vocab_size, bias=False)
 
-    def forward(self, ids):
-        h = self.token_emb(ids) + self.pos_emb(torch.arange(ids.shape[1], device=ids.device))[None]
-        for block in self.blocks:
-            h = block(h)
-        return self.head(self.final_ln(h))                  # one score per character, at every position
+        # The two embedding tables
+        self.token_emb = nn.Embedding(vocab_size, d_model)
+        self.pos_emb = nn.Embedding(max_seq_len, d_model)
+
+        blocks = [Block(d_model, n_heads, d_ff) for _ in range(n_layers)]
+        self.blocks = nn.ModuleList(blocks)
+
+        # A final LayerNorm and the output head
+        self.final_ln = nn.LayerNorm(d_model)
+        self.head = nn.Linear(d_model, vocab_size, bias=False)
 ```
 
-That completes our template. Its `__init__` method builds the token and position tables, the blocks, a final LayerNorm and the head, and the default arguments in its signature are the paper's sizes.
+Its `__init__` method uses the paper's sizes as its default arguments. The `forward` method runs these parts in order:
 
-Our `forward` method adds the two vectors, runs the sum through every block and scores every character at every position.
+```python
+# model.py
+    def forward(self, ids):
+        # Character vector plus position vector
+        positions = torch.arange(ids.shape[1], device=ids.device)
+        h = self.token_emb(ids) + self.pos_emb(positions)[None]
+
+        # Run the stream through every block
+        for block in self.blocks:
+            h = block(h)
+
+        # One score per character, at every position
+        return self.head(self.final_ln(h))
+```
+
+That completes our template, the network every agent run starts from.
 
 ### Counting the Computation
 
-Even a small transformer does a lot of arithmetic. PyTorch's `FlopCounterMode` counts every multiplication and addition inside a block of code, and we can run our template on our prompt one letter at a time, the way the evaluator does:
+Even a small transformer does a lot of arithmetic. We can load the paper's template with random weights and count them first:
 
 ```python
 import torch
-from torch.utils.flop_counter import FlopCounterMode
 from wsp import config, networks
 
-torch.manual_seed(0)                                            # the template's weights start random
-task, template = networks.build(networks.load(config.EVOLVE / "interpretable_transformer.py"), "word-reversal-3x3")
-ids, work = task.encode("fnm_mod_wfd="), []
-for _ in range(task.answer_len):                                # one new letter per step
+torch.manual_seed(0)
+path = config.EVOLVE / "interpretable_transformer.py"
+task, template = networks.build(networks.load(path), "word-reversal-3x3")
+
+weights = sum(p.numel() for p in template.parameters())
+print(f"{weights:,d} weights")
+
+#### OUTPUT ####
+154,368 weights
+```
+
+These weights are random, so none of them has a job yet. PyTorch's `FlopCounterMode` counts every multiplication and addition inside a block of code. We can run the template on our prompt one letter at a time, the way the evaluator does:
+
+```python
+from torch.utils.flop_counter import FlopCounterMode
+
+ids = task.encode("fnm_mod_wfd=")
+work = []
+
+# Each new letter runs the whole sequence again
+for _ in range(task.answer_len):
     with FlopCounterMode(display=False) as count, torch.no_grad():
-        scores = template(torch.tensor([ids]))                  # the whole sequence goes through again
+        scores = template(torch.tensor([ids]))
     work.append(count.get_total_flops())
-    ids = ids + [int(scores[0, -1].argmax())]                   # the highest score is the next letter
-print(f"{sum(p.numel() for p in template.parameters()):,d} weights, answer {task.decode(ids[-task.answer_len:])}")
+
+    # The highest score is the next letter
+    ids.append(int(scores[0, -1].argmax()))
+
+print("answer", task.decode(ids[-task.answer_len:]))
 print(f"first letter {work[0]:,d} operations, last letter {work[-1]:,d}")
 print(f"all {len(work)} letters {sum(work):,d} operations")
 
 #### OUTPUT ####
-154,368 weights, answer kxrrvjl=cok
+answer kxrrvjl=cok
 first letter 3,692,544 operations, last letter 6,938,624
 all 11 letters 58,344,704 operations
 ```
 
-Our weights are random and the answer is nonsense, but the count is real. Even this small template needs tens of millions of operations for eleven letters.
+The answer is nonsense, but the count is real. Even this small template needs tens of millions of operations for eleven letters.
 
 The last letter costs almost twice as much as the first, because every step sends the whole sequence so far through the network again:
 
@@ -354,38 +440,56 @@ Each of those operations multiplies a weight that training set, and no weight co
 
 To see the problem for ourselves, we will build a black box of our own: the same template, fitted to five-digit addition by gradient descent. Training means we show the network examples, measure how wrong it is, and nudge every weight a little in the direction that makes it less wrong.
 
-Our training loop is the standard one for transformers:
+Our training loop is the standard one for transformers, and we start with a single step:
 
 ```python
 # baseline.py
-def train(name="addition-five-digits", steps=40000, size=256, lr=1e-3, seed=0, log_every=500, out=None):
+def train_step(model, opt, sched, problem, rng, size):
+    model.train()
+    x, y, a = batch_of(problem, rng, size)
+
+    # The loss counts the answer characters only
+    scores = model(x)[:, a:].reshape(-1, len(problem.vocab))
+    loss = F.cross_entropy(scores, y[:, a:].reshape(-1))
+
+    # Nudge every weight against its gradient
+    opt.zero_grad()
+    loss.backward()
+    opt.step()
+    sched.step()
+    return loss
+```
+
+Each step draws a fresh batch of sums and computes the loss on the answer digits only. Then `backward` and `step` change all the weights at once. The trainer repeats that step:
+
+```python
+# baseline.py
+def train(name="addition-five-digits", steps=40000, size=256, lr=1e-3, seed=0,
+          log_every=500, out=None):
     torch.manual_seed(seed)
-    problem, rng = Problem(name), random.Random(seed)
+    problem = Problem(name)
+    rng = random.Random(seed)
+
+    # The template, sized for prompt plus answer
     sample = problem.make(random.Random(0))
-    model = SimpleTransformer(len(problem.vocab), max_seq_len=max(len(sample.prompt) + problem.answer_len, 16))
+    seq_len = max(len(sample.prompt) + problem.answer_len, 16)
+    model = SimpleTransformer(len(problem.vocab), max_seq_len=seq_len)
+
+    # The optimizer and its schedule
     opt = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, steps)
-    curve, t0 = [], time.time()
+
+    # The training loop
+    curve = []
+    t0 = time.time()
     for step in range(1, steps + 1):
-        model.train()
-        x, y, a = batch_of(problem, rng, size)
-        loss = F.cross_entropy(model(x)[:, a:].reshape(-1, len(problem.vocab)), y[:, a:].reshape(-1))
-        opt.zero_grad()
-        loss.backward()
-        opt.step()
-        sched.step()
+        loss = train_step(model, opt, sched, problem, rng, size)
         if step % log_every == 0 or step == steps:
-            acc, _ = accuracy(model, problem, problem.examples(2000, HIDDEN_SEED))   # the same 2,000 every time
-            curve.append(dict(step=step, loss=round(loss.item(), 5), hidden=acc, seconds=round(time.time() - t0)))
-            print(json.dumps(curve[-1]), flush=True)
-            if out:
-                torch.save(model.state_dict(), out)
+            curve.append(checkpoint(model, problem, step, loss, t0, out))
     return model, curve
 ```
 
 We just coded the trainer. It uses AdamW, the usual optimizer for transformers, with a learning rate that decays along a cosine curve.
-
-Each step draws a fresh batch of sums and computes the loss on the answer digits only. Then `backward` and `step` change all the weights at once.
 
 Every `log_every` steps, the trainer scores the network on sums it never trained on and writes a checkpoint to disk. I planned 40,000 steps, but an overnight pause in my runs stopped training at step 35,000, and that checkpoint is our black box. Its curve shows how quickly it learned to add:
 
@@ -404,12 +508,16 @@ from wsp.model import SimpleTransformer
 from wsp.tasks import Problem
 
 add = Problem("addition-five-digits")
-black_box = SimpleTransformer(len(add.vocab), max_seq_len=18)              # the template, trained with AdamW
+black_box = SimpleTransformer(len(add.vocab), max_seq_len=18)
 black_box.load_state_dict(torch.load("results/baseline_addition.step35000.pt"))
+
 every = torch.cat([p.detach().flatten() for p in black_box.parameters()])
-print(f"{every.numel():,d} weights, {(every.abs() < 0.01).float().mean():.1%} of them near zero")
+near_zero = (every.abs() < 0.01).float().mean()
+print(f"{every.numel():,d} weights, {near_zero:.1%} of them near zero")
+
+corner = black_box.blocks[0].attn.W_q.weight[:4, :6].detach()
 print("the first query table, top left corner:")
-print(black_box.blocks[0].attn.W_q.weight[:4, :6].detach().numpy().round(3))
+print(corner.numpy().round(3))
 
 #### OUTPUT ####
 152,000 weights, 9.0% of them near zero
@@ -424,7 +532,7 @@ Almost every weight is a small number that is not zero, and none of them carries
 
 ![Trained weights beside written ones](images/g-wall.gif)
 
-The left grid is our adder's first query table, all of its numbers. The right one is the same kind of table from the network Qwen3.7-Max wrote, where only a few cells are not zero and each has a job we can name.
+Beside our adder's first query table, the same table from the network Qwen3.7-Max wrote has only a few cells that are not zero, and each has a job we can name.
 
 Making a model's reasoning readable to a person is what explainable AI is about, and we can get there in two ways:
 
@@ -485,31 +593,53 @@ A run is a chain of sessions, and this is one of them:
 ```python
 # agent.py
 def session(client, box, messages, limits, k, state, logs, tools=TOOLS):
-    """One session: call, act, repeat, until the agent ends its turn or a limit or the prompt size stops it."""
-    s = dict(k=k, calls=0, input_tokens=0, output_tokens=0, reasoning_tokens=0, cached_tokens=0, tools_used={}, cut_offs=0, end="")
-    cuts = 0                                                     # cut-off replies in a row
+    s = new_stats(k)
+    cuts = 0
     while not (end := limits.reached(state["calls"])):
+        # Ask the model for its next reply
         r = call_model(client, box, messages, state, s, logs, tools)
         if r is None or r.status == "infra":
-            return s, stopped(s, r)                              # a context error starts a fresh session
+            return s, stopped(s, r)
         msg, calls = assistant_message(r, state["calls"])
-        if r.stop_reason == "length" and not calls:              # cut off while thinking, never an end of turn
+
+        # A reply cut off while thinking gets a note and another try
+        if r.stop_reason == "length" and not calls:
             cuts += 1
             if not cut_off(messages, msg, r, s, logs, cuts):
-                return s, True                                   # still cut off after three notes: a fresh session
+                return s, True
             continue
+
+        # A full reply goes on to its tools
         cuts = 0
-        messages.append(msg)
-        logs.turn(k, msg, len(r.reasoning))
-        if not calls:
-            return finish(s, "end of turn", False)
-        messages.extend(act(box, calls, s, logs))
-        if (r.input_tokens or 0) > limits.compact_at:
-            return finish(s, "compacted", True)
+        ended = take_turn(box, messages, msg, calls, r, s, logs, limits)
+        if ended:
+            return ended
     return finish(s, end, False)
 ```
 
-We just coded a session. Each turn calls the model, adds its reply to the conversation and runs the tools it asked for. Our session ends when the agent stops calling tools, when the run hits its limit on calls, or when the prompt grows so long that we start afresh.
+We just coded a session. Each turn calls the model, and a full reply goes to `take_turn`, which keeps it in the conversation and runs the tools it asked for:
+
+```python
+# agent.py
+def take_turn(box, messages, msg, calls, r, s, logs, limits):
+    """Keep a full reply and run its tools, or end the session."""
+    messages.append(msg)
+    logs.turn(s["k"], msg, len(r.reasoning))
+
+    # No tool call ends the turn
+    if not calls:
+        return finish(s, "end of turn", False)
+
+    # Run the tools and keep their results
+    messages.extend(act(box, calls, s, logs))
+
+    # A prompt past the limit starts a fresh session
+    if (r.input_tokens or 0) > limits.compact_at:
+        return finish(s, "compacted", True)
+    return None
+```
+
+Our session ends when the agent stops calling tools, when the run hits its limit on calls, or when the prompt grows so long that we start afresh.
 
 There are two important points about this loop:
 
@@ -595,8 +725,6 @@ Each position after it copies the next letter in reverse word order, and two rou
 
 ![Two positions light their own slots](images/g-stream.gif)
 
-The `w` lights its letter and its position, while the `=` lights its own letter and a query for the position of the `w`.
-
 ### Token and Position Embeddings
 
 Characters were the first thing the agent wrote weights for. It gave every character a channel of its own, with one number switched on and every other number left at zero.
@@ -639,12 +767,18 @@ The first loop gives each prompt position its key, and the second gives each ans
 We can load the finished network and print the channels that our `w` and our two positions switch on:
 
 ```python
-qwen_file = "runs/word-reversal-3x3-qwen37-max-s1/attempts/027_PosRouting_noW_o.py"
+run = "runs/word-reversal-3x3-qwen37-max-s1"
+qwen_file = f"{run}/attempts/027_PosRouting_noW_o.py"
 task, qwen = networks.build(networks.load(qwen_file), "word-reversal-3x3")
+
 w = task.encode("w")[0]
-print(f"w (id {w}) lights channel {qwen.token_emb.weight[w].nonzero().flatten().tolist()}")
-for p in (8, 11):                                               # the w of fnm_mod_wfd=, and the = after it
-    print(f"position {p} lights channel {qwen.pos_emb.weight[p].nonzero().flatten().tolist()}")
+channels = qwen.token_emb.weight[w].nonzero().flatten().tolist()
+print(f"w (id {w}) lights channel {channels}")
+
+# Position 8 holds a w, and position 11 the =
+for p in (8, 11):
+    channels = qwen.pos_emb.weight[p].nonzero().flatten().tolist()
+    print(f"position {p} lights channel {channels}")
 
 #### OUTPUT ####
 w (id 22) lights channel [22]
@@ -652,9 +786,9 @@ position 8 lights channel [36]
 position 11 lights channel [47]
 ```
 
-Inside the network we loaded, `w` is one number in one channel. The `w` is at position 8 and lights the eighth slot of the key zone, which begins right after the letters.
+Inside the network we loaded, `w` is one number in one channel. The `w` at position 8 lights the key channel of position 8, in the zone right after the letters.
 
-The `=` lights the eighth slot of the query zone. Both point at the same prompt position, and attention turns that match into a copy.
+The `=` lights the query channel that names position 8. Both point at the same prompt position, and attention turns that match into a copy.
 
 ### Query Key Matching
 
@@ -681,9 +815,16 @@ After that, a query and a key share a channel only when the query names the key'
 
 ```python
 attn = qwen.blocks[0].attn
-h = qwen.token_emb(torch.tensor(task.encode("fnm_mod_wfd="))) + qwen.pos_emb.weight[:12]
-q, k = attn.W_q(h[11]), attn.W_k(h)                             # the last position asks, every position answers
+
+# Our prompt as vectors
+prompt = torch.tensor(task.encode("fnm_mod_wfd="))
+h = qwen.token_emb(prompt) + qwen.pos_emb.weight[:12]
+
+# The last position asks, and every position answers
+q = attn.W_q(h[11])
+k = attn.W_k(h)
 scores = (k @ q / 50 ** 0.5).detach()
+
 print("scores :", [round(s, 2) for s in scores.tolist()])
 print("softmax:", [round(a, 2) for a in scores.softmax(0).tolist()])
 
@@ -727,8 +868,11 @@ model.head.weight.data = head_weight
 At the first answer step, two letters reach the head: the `w` that attention copied, and the `=` that the position already had. We can print the two highest scores:
 
 ```python
+# One score per character, at the last position
+x = torch.tensor([task.encode("fnm_mod_wfd=")])
 with torch.no_grad():
-    out = qwen(torch.tensor([task.encode("fnm_mod_wfd=")]))[0, -1]    # one score per character, at the last position
+    out = qwen(x)[0, -1]
+
 best = out.topk(2)
 for s, i in zip(best.values.tolist(), best.indices.tolist()):
     print(f"{task.decode([i])} scores {s:.1f}")
@@ -755,9 +899,11 @@ from wsp import verify
 
 with FlopCounterMode(display=False) as count:
     answer = verify.answers(qwen, task, ["fnm_mod_wfd="])[0]
-nonzero = sum(int((p != 0).sum()) for p in qwen.parameters())
 print(f"answer {answer}, {count.get_total_flops():,d} operations")
-print(f"{nonzero} of {sum(p.numel() for p in qwen.parameters()):,d} weights are not zero")
+
+total = sum(p.numel() for p in qwen.parameters())
+nonzero = sum(int((p != 0).sum()) for p in qwen.parameters())
+print(f"{nonzero} of {total:,d} weights are not zero")
 
 #### OUTPUT ####
 answer wfd_mod_fnm, 3,986,400 operations
@@ -770,8 +916,6 @@ Only 29,172 of them involve a weight that is not zero, and we have now read ever
 
 ![Each written weight has a job](images/g-jobs.gif)
 
-Those seven jobs are the whole network, because every other weight in it is zero.
-
 ### Switch Off Test
 
 An explanation is only useful if it is true. If the routing table is the real mechanism, cutting one route should break exactly one letter, and we should be able to say in advance which letter takes its place.
@@ -781,36 +925,43 @@ I wrote the explanation down as a program. It reads the routes off the weights a
 ```python
 # programs.py
 def routing(ids, off=(), steps=11, vocab=28):
-    """Qwen's reversal network as a program, read off its weights: the routed letter is worth 100 and the letter at p
-    50, a route switched off spreads its 100 evenly over positions 0..p, and the highest score wins."""
+    """Qwen's reversal network as a program, read off its weights."""
     ids = list(ids)
     for _ in range(steps):
         p = len(ids) - 1
         score = [0.0] * vocab
-        score[ids[p]] += 50.0                                   # the residual carries the letter at p itself
+
+        # The residual stream carries the letter at p itself, worth 50
+        score[ids[p]] += 50.0
+
+        # The head copies the routed letter, worth 100. With the route off,
+        # the 100 spreads evenly over positions 0 to p
         if "values" not in off:
             if p in ROUTES and p not in off:
-                score[ids[ROUTES[p]]] += 100.0                  # the routed letter
+                score[ids[ROUTES[p]]] += 100.0
             else:
-                for j in range(p + 1):                          # no route: an even spread over positions 0..p
+                for j in range(p + 1):
                     score[ids[j]] += 100.0 / (p + 1)
-        ids.append(min(range(vocab), key=lambda v: (-score[v], v)))   # the lowest id wins a tie, as argmax does
+
+        # The highest score wins, and the lowest id breaks a tie
+        ids.append(score.index(max(score)))
     return ids[-steps:]
 ```
 
-We just coded the routing program. At each answer step it gives the position's own letter fifty and the routed letter a hundred, as the head does.
-
-With a route switched off, it spreads that hundred evenly over every position so far.
+We just coded the routing program. It never runs the network, so any answer it gets right comes from the rules alone.
 
 We can switch off the single weight that holds route 14 and run the network and our program side by side:
 
 ```python
 from wsp import programs, switchoff
 
-route_14 = ("pos_emb.weight", 14 * 50 + 39 + programs.ROUTES[14])     # the one weight that names step 14's source
+# Row 14 of the position table, column 39 plus its source
+route_14 = ("pos_emb.weight", 14 * 50 + 39 + programs.ROUTES[14])
+
 with switchoff.off(qwen, params=[route_14]):
     print("network:", verify.answers(qwen, task, ["fnm_mod_wfd="])[0])
-print("program:", task.decode(programs.routing(task.encode("fnm_mod_wfd="), off=(14,))))
+ids = programs.routing(task.encode("fnm_mod_wfd="), off=(14,))
+print("program:", task.decode(ids))
 
 #### OUTPUT ####
 network: wfddmod_fnm
@@ -854,8 +1005,6 @@ Two fresh Qwen3.7-Max sessions read only that text. Each one built a network of 
 ![Words rebuild the same network twice](images/g-rebuild.gif)
 
 The control, with no words to go on, also reached a perfect score, but with 28.6 times the weights.
-
-The description carried the design itself: two readers who had only the words built the very same network.
 
 ### Results on Ten Problems
 
@@ -943,12 +1092,19 @@ The black boxes are exploratory, and all but the MRPC one trained on more labell
 Much smaller networks came out of the paper's runs, and two of them are worth reading in full. The paper's word reversal network has just 3 weights. We can load it, run it on our prompt, and then switch one of its weights off:
 
 ```python
-originals = config.PAPER / "experiments" / "nl-bottleneck" / "originals"     # the paper's own networks
-_, tiny = networks.build(networks.load(originals / "word-reversal-3x3.py"), "word-reversal-3x3")
-print(sum(p.numel() for p in tiny.parameters()), "weights:", tiny.reads.tolist(), verify.answers(tiny, task, ["fnm_mod_wfd="])[0])
+originals = config.PAPER / "experiments" / "nl-bottleneck" / "originals"
+source = networks.load(originals / "word-reversal-3x3.py")
+_, tiny = networks.build(source, "word-reversal-3x3")
+
+weights = sum(p.numel() for p in tiny.parameters())
+answer = verify.answers(tiny, task, ["fnm_mod_wfd="])[0]
+print(weights, "weights:", tiny.reads.tolist(), answer)
+
+# Switch off the jump back at each new word
 with torch.no_grad():
-    tiny.reads[2] = 0.0                                          # switch off the jump back at each new word
-print("jump off:", tiny.reads.tolist(), verify.answers(tiny, task, ["fnm_mod_wfd="])[0])
+    tiny.reads[2] = 0.0
+answer = verify.answers(tiny, task, ["fnm_mod_wfd="])[0]
+print("jump off:", tiny.reads.tolist(), answer)
 
 #### OUTPUT ####
 3 weights: [9.0, 1.0, -8.0] wfd_mod_fnm
@@ -964,8 +1120,12 @@ The head starts at the ninth position, steps one position right for each charact
 The paper's GCD network is a bigger idea in 332 weights. It runs Euclid's algorithm, more than two thousand years old, by folding: each fold makes one number smaller or leaves it alone, and never changes the greatest common divisor the two numbers share. We can run it on one pair:
 
 ```python
-gcd_task, folder = networks.build(networks.load(originals / "gcd-three-digits.py"), "gcd-three-digits")
-print(sum(p.numel() for p in folder.parameters()), "weights:", "084,036= gives", verify.answers(folder, gcd_task, ["084,036="])[0])
+source = networks.load(originals / "gcd-three-digits.py")
+gcd_task, folder = networks.build(source, "gcd-three-digits")
+
+weights = sum(p.numel() for p in folder.parameters())
+answer = verify.answers(folder, gcd_task, ["084,036="])[0]
+print(weights, "weights:", "084,036= gives", answer)
 
 #### OUTPUT ####
 332 weights: 084,036= gives 012

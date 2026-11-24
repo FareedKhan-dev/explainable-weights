@@ -4,6 +4,7 @@ Each generator draws the same examples as the paper's own task code for the same
 network scored here and a network scored by the paper see identical prompts."""
 import calendar
 import random
+import string
 from dataclasses import dataclass
 from math import gcd
 
@@ -18,9 +19,17 @@ class Example:
 
 
 def word_reversal(rng):
-    """Three 3-letter words, written back in reverse order: cat_dog_pig= gives pig_dog_cat."""
-    words = ["".join(rng.choice("abcdefghijklmnopqrstuvwxyz") for _ in range(3)) for _ in range(3)]
-    return Example("_".join(words) + "=", "_".join(reversed(words)))
+    """Three 3-letter words, reversed: cat_dog_pig= gives pig_dog_cat."""
+    # Three random 3-letter words
+    words = []
+    for _ in range(3):
+        word = "".join(rng.choice(string.ascii_lowercase) for _ in range(3))
+        words.append(word)
+
+    # The answer is the same words in reverse
+    prompt = "_".join(words) + "="
+    answer = "_".join(reversed(words))
+    return Example(prompt, answer)
 
 
 def addition(rng):

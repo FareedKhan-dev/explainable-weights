@@ -187,29 +187,53 @@ def finish(s, end, fresh):
     return s, fresh
 
 
+def new_stats(k):
+    """The record of one session: its calls, tokens, tools, cut-off replies and how it ended."""
+    return dict(k=k, calls=0, input_tokens=0, output_tokens=0, reasoning_tokens=0, cached_tokens=0,
+                tools_used={}, cut_offs=0, end="")
+
+
 def session(client, box, messages, limits, k, state, logs, tools=TOOLS):
-    """One session: call, act, repeat, until the agent ends its turn or a limit or the prompt size stops it."""
-    s = dict(k=k, calls=0, input_tokens=0, output_tokens=0, reasoning_tokens=0, cached_tokens=0, tools_used={}, cut_offs=0, end="")
-    cuts = 0                                                     # cut-off replies in a row
+    s = new_stats(k)
+    cuts = 0
     while not (end := limits.reached(state["calls"])):
+        # Ask the model for its next reply
         r = call_model(client, box, messages, state, s, logs, tools)
         if r is None or r.status == "infra":
-            return s, stopped(s, r)                              # a context error starts a fresh session
+            return s, stopped(s, r)
         msg, calls = assistant_message(r, state["calls"])
-        if r.stop_reason == "length" and not calls:              # cut off while thinking, never an end of turn
+
+        # A reply cut off while thinking gets a note and another try
+        if r.stop_reason == "length" and not calls:
             cuts += 1
             if not cut_off(messages, msg, r, s, logs, cuts):
-                return s, True                                   # still cut off after three notes: a fresh session
+                return s, True
             continue
+
+        # A full reply goes on to its tools
         cuts = 0
-        messages.append(msg)
-        logs.turn(k, msg, len(r.reasoning))
-        if not calls:
-            return finish(s, "end of turn", False)
-        messages.extend(act(box, calls, s, logs))
-        if (r.input_tokens or 0) > limits.compact_at:
-            return finish(s, "compacted", True)
+        ended = take_turn(box, messages, msg, calls, r, s, logs, limits)
+        if ended:
+            return ended
     return finish(s, end, False)
+
+
+def take_turn(box, messages, msg, calls, r, s, logs, limits):
+    """Keep a full reply and run its tools, or end the session."""
+    messages.append(msg)
+    logs.turn(s["k"], msg, len(r.reasoning))
+
+    # No tool call ends the turn
+    if not calls:
+        return finish(s, "end of turn", False)
+
+    # Run the tools and keep their results
+    messages.extend(act(box, calls, s, logs))
+
+    # A prompt past the limit starts a fresh session
+    if (r.input_tokens or 0) > limits.compact_at:
+        return finish(s, "compacted", True)
+    return None
 
 
 class Logs:
