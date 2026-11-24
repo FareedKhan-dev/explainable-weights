@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+
+# local data and runs
+.hfh/
+.test_runs/
+runs/*/agent_logs/
+runs/*/*.out
+*.log
+
+# secrets and controls
+api_key.txt
+*.key
+.env
+STOP
+
+# notebooks and editors
+.ipynb_checkpoints/
+.vscode/
+.idea/
+.DS_Store

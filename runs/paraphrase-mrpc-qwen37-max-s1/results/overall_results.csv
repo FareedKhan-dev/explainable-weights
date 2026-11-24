@@ -1,0 +1,52 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+paraphrase-mrpc,0.0000,,RandomInitInterpretable,1.61e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+paraphrase-mrpc,0.0000,,always-one,1.61e+05,Always predict '1' (majority class). Simple baseline exploiting class imbalance.
+paraphrase-mrpc,0.0000,,always-one-v2,1.61e+05,Always predict '1' using '=' token embedding to create signal at final position.
+paraphrase-mrpc,0.0000,,always-one-v3,1.61e+05,Always predict '1' with proper LayerNorm initialization.
+paraphrase-mrpc,0.3200,,always-one-v4,1.61e+05,Always predict '1' using position embeddings to create varying signal that survives LayerNorm.
+paraphrase-mrpc,0.6800,,always-one-v5,1.61e+05,Always predict '1' using final LayerNorm bias to inject constant signal.
+paraphrase-mrpc,0.6800,,separator-compare,1.61e+05,Use attention to find '|' separator and compare sentences before/after.
+paraphrase-mrpc,0.3200,,char-overlap,1.61e+05,"Use attention to count character matches between sentences, threshold to predict paraphrase."
+paraphrase-mrpc,0.4250,,char-bag-compare,1.61e+05,Bag-of-characters comparison using attention to count matches between sentence halves.
+paraphrase-mrpc,0.3200,,length-similarity,1.61e+05,Predict paraphrase based on length similarity between two sentences.
+paraphrase-mrpc,0.6800,,bigram-overlap,1.61e+05,Detect paraphrases using bigram (2-character sequence) overlap between sentences.
+paraphrase-mrpc,0.6800,,char-freq-compare,1.61e+05,Compare character frequency distributions between sentences to detect paraphrases.
+paraphrase-mrpc,0.6800,,random-plus-the-count,1.61e+05,"Random init with LayerNorm bias for majority class, plus 'the' frequency as discriminative feature."
+paraphrase-mrpc,0.6800,,ngram-threshold,1.61e+05,Character n-gram overlap with learned thresholds and majority class bias.
+paraphrase-mrpc,0.6800,,length-ratio,1.61e+05,Use sentence length ratio as discriminative feature with majority bias.
+paraphrase-mrpc,0.6800,,word-boundary,1.61e+05,Use word boundary (space) detection as discriminative feature with majority bias.
+paraphrase-mrpc,0.6800,,multi-head-compare,1.61e+05,"Multiple attention heads comparing character identity, word boundaries, common letters, and length."
+paraphrase-mrpc,0.6000,,always-zero,1.61e+05,Always predict '0' (minority class) to establish baseline comparison.
+paraphrase-mrpc,0.6000,,word-overlap-v1,1.61e+05,Detect paraphrases by comparing token overlap between sentences using attention-based matching.
+paraphrase-mrpc,0.6800,,pos-match-v1,1.61e+05,Position-aware character matching between sentence halves with threshold-based decision.
+paraphrase-mrpc,0.3200,,final-pos-compare,1.61e+05,Use final position attention to compare character distributions between sentence halves.
+paraphrase-mrpc,0.3200,,char-freq-v2,2.88e+05,"Character frequency comparison with larger model (128d, 8 heads) for better bag-of-chars aggregation."
+paraphrase-mrpc,0.6800,,ref-level-v1,2.88e+05,"Character overlap with reference-level trick: dim 0 carries match score, dims 1-32 carry constant reference for LayerNorm comparison."
+paraphrase-mrpc,0.3200,,decision-boundary-v1,2.88e+05,"Character overlap with explicit decision boundary: final_ln.bias shifts threshold, attention computes cross-sentence similarity."
+paraphrase-mrpc,0.6800,,pos-weighted-v1,2.88e+05,Position-weighted character frequency with linear position encoding.
+paraphrase-mrpc,0.3200,,trigram-v1,2.88e+05,Trigram (3-char sequence) overlap detection between sentence halves.
+paraphrase-mrpc,0.6800,,always-one-bias10,2.88e+05,Always predict '1' with final_ln bias of 10.
+paraphrase-mrpc,0.6800,,always-one-bias12,2.88e+05,Always predict '1' with final_ln bias of 12.
+paraphrase-mrpc,0.6800,,clean-ref-v1,1.61e+05,"Clean reference-level circuit: dims 1-62 at constant R, dim 0 carries overlap score, LayerNorm normalizes relative to R."
+paraphrase-mrpc,0.6800,,clean-ref-R05,1.61e+05,Clean reference circuit with R=0.5 instead of R=1.0.
+paraphrase-mrpc,0.6800,,clean-ref-R20,1.61e+05,Clean reference circuit with R=2.0.
+paraphrase-mrpc,0.6800,,clean-ref-mlp05,1.61e+05,Clean reference with MLP bias of 0.5 for paraphrase preference.
+paraphrase-mrpc,0.6800,,clean-ref-mlp10,1.61e+05,Clean reference with MLP bias of 1.0.
+paraphrase-mrpc,0.6800,,clean-ref-mlp3,1.61e+05,Clean reference with MLP fc1 weight of 3.0.
+paraphrase-mrpc,0.6800,,clean-ref-qk3,1.61e+05,Clean reference with attention Q/K weights of 3.0.
+paraphrase-mrpc,0.6800,,clean-ref-tok1,1.61e+05,Clean reference with token embedding scale of 1.0.
+paraphrase-mrpc,0.3200,,vowel-ratio-v1,1.61e+05,Compare vowel ratios between sentences using attention to detect paraphrases.
+paraphrase-mrpc,0.6800,,word-count-sim,1.61e+05,Use word count similarity (space counting) between sentences to detect paraphrases.
+paraphrase-mrpc,0.3200,,two-block-thresh,1.61e+05,"Two-block circuit: block 0 computes char overlap, block 1 applies threshold decision."
+paraphrase-mrpc,0.6800,,pos-aligned-compare,1.61e+05,Position-aligned character comparison: match characters at same relative positions in each sentence half.
+paraphrase-mrpc,0.6800,,common-bigrams,1.61e+05,Detect common bigrams and trigrams using attention with position encoding.
+paraphrase-mrpc,0.6800,,word-boundary-match,1.61e+05,"Word-level matching: detect word boundaries and compare word patterns (start, end, length) between sentences."
+paraphrase-mrpc,0.6800,,jaccard-approx,1.61e+05,Approximate Jaccard similarity: compute character set intersection/union ratio using attention.
+paraphrase-mrpc,0.6800,,cosine-sim-approx,1.61e+05,Approximate cosine similarity between character frequency vectors using dot product and magnitude estimation.
+paraphrase-mrpc,0.6800,,levenshtein-approx,1.61e+05,Approximate Levenshtein edit distance using character alignment with position offsets for insertions/deletions.
+paraphrase-mrpc,0.6800,,pos-exact-match,1.61e+05,Position-by-position exact character matching with tolerance windows for insertions/deletions.
+paraphrase-mrpc,0.6800,,substring-detect,1.61e+05,Detect common substrings of varying lengths using attention with position encoding.
+paraphrase-mrpc,0.6800,,function-word-match,1.61e+05,"Detect overlap in common function words (the, and, is, of) between sentences."
+paraphrase-mrpc,0.6800,,combined-similarity,1.61e+05,Combined similarity: character overlap + position alignment + word boundaries + frequency correlation.
+paraphrase-mrpc,0.6800,,negation-detect,1.61e+05,"Detect negation words (not, no, never, n't) that flip sentence meaning."
+paraphrase-mrpc,0.6800,,proper-noun-detect,1.61e+05,Detect proper nouns (capitalized words) to identify entity mismatches between sentences.

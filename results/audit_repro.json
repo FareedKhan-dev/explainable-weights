@@ -1,0 +1,577 @@
+{
+ "provisional": false,
+ "checked": 81,
+ "identical": 81,
+ "label_dependent": 28,
+ "nondeterministic": 3,
+ "independent_sampled": 50,
+ "rows": [
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 13,
+   "name": "DataDrivenWords",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 15,
+   "name": "SmartWordBigrams",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 16,
+   "name": "RobustWordPresence",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 17,
+   "name": "FirstCharHeuristic",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 18,
+   "name": "CharFrequencyAnalysis",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 21,
+   "name": "HighSignalWords",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 22,
+   "name": "CharTrigrams",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 24,
+   "name": "MultipleCommonWords",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 27,
+   "name": "SpatialPrepositions",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 28,
+   "name": "ActionVerbs",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 29,
+   "name": "ColorWords",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 30,
+   "name": "DataDrivenComprehensive",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 32,
+   "name": "BayesCharBag",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 33,
+   "name": "HypothesisFocus",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 34,
+   "name": "FirstWordHypothesis",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 36,
+   "name": "TwoCharBigrams",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 37,
+   "name": "MultiFeatureEnsemble",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 38,
+   "name": "EnhancedNumberWords",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 39,
+   "name": "CharFrequencyFingerprint",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 40,
+   "name": "CharFrequencyFingerprint",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 41,
+   "name": "ClassPreferenceEncoding",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 42,
+   "name": "HybridCharWord",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 43,
+   "name": "AggressiveWordDetection",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 44,
+   "name": "CharFreqV2",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 45,
+   "name": "CharFreqV3",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 49,
+   "name": "CharBigramsV2",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 51,
+   "name": "NaiveBayesPosition",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "paraphrase-mrpc-qwen37-max-s1",
+   "idx": 8,
+   "name": "always-one-v4",
+   "study": "nondeterministic",
+   "now": "nondeterministic"
+  },
+  {
+   "run": "paraphrase-mrpc-qwen37-max-s1",
+   "idx": 9,
+   "name": "always-one-v5",
+   "study": "nondeterministic",
+   "now": "nondeterministic"
+  },
+  {
+   "run": "sentiment-sst2-qwen37-max-s1",
+   "idx": 23,
+   "name": "sentiment-bag-of-chars-v1",
+   "study": "nondeterministic",
+   "now": "nondeterministic"
+  },
+  {
+   "run": "sentiment-sst2-qwen37-max-s2",
+   "idx": 10,
+   "name": "UniformAttnBagOfChars",
+   "study": "label_dependent",
+   "now": "label_dependent"
+  },
+  {
+   "run": "trec-coarse-qwen37-max-s2",
+   "idx": 8,
+   "name": "BigModel256-v2",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "smallest-prime-factor-qwen37-max-s2",
+   "idx": 23,
+   "name": "spf-exp16-full-chain",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s1",
+   "idx": 9,
+   "name": "CharOverlap_v3",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "word-reversal-3x3-qwen37-max-s2",
+   "idx": 18,
+   "name": "D52_StrongHead_v5",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "sentiment-sst2-qwen37-max-s1",
+   "idx": 3,
+   "name": "small-random-init",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "word-reversal-3x3-qwen37-max-s2",
+   "idx": 5,
+   "name": "CopyCircuit_v1",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "date-normalization-qwen37-max-s1",
+   "idx": 3,
+   "name": "baseline-larger",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "date-normalization-qwen37-max-s1",
+   "idx": 32,
+   "name": "xavier-onehot-2047",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "word-reversal-3x3-qwen37-max-s2",
+   "idx": 20,
+   "name": "D64_2Heads_v7",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "sentiment-sst2-qwen37-max-s1",
+   "idx": 7,
+   "name": "seed1234-random",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "addition-five-digits-qwen37-max-s1",
+   "idx": 25,
+   "name": "simple_sum_v1",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "gcd-three-digits-qwen37-max-s2",
+   "idx": 22,
+   "name": "DivBy2And5",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "sentiment-sst2-qwen37-max-s2",
+   "idx": 24,
+   "name": "Position80Classifier",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "smallest-prime-factor-qwen37-max-s2",
+   "idx": 13,
+   "name": "spf-exp9-pos-select",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "smallest-prime-factor-qwen37-max-s2",
+   "idx": 4,
+   "name": "spf-exp1-random",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "linear-interpolation-two-points-qwen37-max-s1",
+   "idx": 37,
+   "name": "v25_nearest_neighbor",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "word-reversal-3x3-qwen37-max-s2",
+   "idx": 23,
+   "name": "D128_HeadWt10_v9",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "paraphrase-mrpc-qwen37-max-s2",
+   "idx": 31,
+   "name": "ThresholdOverlap",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "paraphrase-mrpc-qwen37-max-s1",
+   "idx": 21,
+   "name": "word-boundary",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "sentiment-sst2-qwen37-max-s1",
+   "idx": 25,
+   "name": "direct-sentiment-v1",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "trec-coarse-qwen37-max-s1",
+   "idx": 6,
+   "name": "exp03_question_word_signals",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s1",
+   "idx": 39,
+   "name": "RatioClassify_v21",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "smallest-prime-factor-qwen37-max-s2",
+   "idx": 38,
+   "name": "spf-exp27-single-layer",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "smallest-prime-factor-qwen37-max-s1",
+   "idx": 15,
+   "name": "constant_10331",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 48,
+   "name": "MultiSignalCombined",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "paraphrase-mrpc-qwen37-max-s2",
+   "idx": 3,
+   "name": "RandomInitInterpretable",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "gcd-three-digits-qwen37-max-s1",
+   "idx": 27,
+   "name": "always-001-v3",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "sentiment-sst2-qwen37-max-s1",
+   "idx": 13,
+   "name": "constant-signal-to-one",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "smallest-prime-factor-qwen37-max-s2",
+   "idx": 40,
+   "name": "spf-exp29-massive-weights",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "paraphrase-mrpc-qwen37-max-s2",
+   "idx": 40,
+   "name": "PosAlignMatch_v1",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "word-reversal-3x3-qwen37-max-s1",
+   "idx": 17,
+   "name": "PosRouting_dff8",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "sentiment-sst2-qwen37-max-s2",
+   "idx": 23,
+   "name": "Position80Classifier",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "word-reversal-3x3-qwen37-max-s1",
+   "idx": 9,
+   "name": "PosRouting_Small32",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "linear-interpolation-two-points-qwen37-max-s1",
+   "idx": 32,
+   "name": "v23_lookup_table",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "word-reversal-3x3-qwen37-max-s2",
+   "idx": 25,
+   "name": "D52_StrongV_v10",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "trec-coarse-qwen37-max-s1",
+   "idx": 37,
+   "name": "exp31_no_layernorm",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s2",
+   "idx": 23,
+   "name": "TherePatternDetector",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "trec-coarse-qwen37-max-s2",
+   "idx": 24,
+   "name": "BigModel256-fix",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "linear-interpolation-two-points-qwen37-max-s1",
+   "idx": 27,
+   "name": "v18_copy_y1",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "smallest-prime-factor-qwen37-max-s2",
+   "idx": 12,
+   "name": "spf-exp8-algorithmic",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "linear-interpolation-two-points-qwen37-max-s1",
+   "idx": 19,
+   "name": "v11_always_zero",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "word-reversal-3x3-qwen37-max-s1",
+   "idx": 21,
+   "name": "PosRouting_d50",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "sentiment-sst2-qwen37-max-s1",
+   "idx": 30,
+   "name": "refined-sentiment-v1",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "nli-snli-qwen37-max-s1",
+   "idx": 40,
+   "name": "StrongRouting_v22",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "date-normalization-qwen37-max-s1",
+   "idx": 30,
+   "name": "xavier-onehot-2045",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "date-normalization-qwen37-max-s2",
+   "idx": 33,
+   "name": "exp19-format-parser",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "sentiment-sst2-qwen37-max-s2",
+   "idx": 39,
+   "name": "LinearPosWeightLarge",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "paraphrase-mrpc-qwen37-max-s2",
+   "idx": 11,
+   "name": "AlwaysPredict1",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "smallest-prime-factor-qwen37-max-s1",
+   "idx": 1,
+   "name": "RandomInitInterpretable",
+   "study": "independent",
+   "now": "independent"
+  },
+  {
+   "run": "gcd-three-digits-qwen37-max-s2",
+   "idx": 42,
+   "name": "DetectBothEven_v11",
+   "study": "independent",
+   "now": "independent"
+  }
+ ]
+}

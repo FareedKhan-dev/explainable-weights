@@ -1,0 +1,2 @@
+network: wfddmod_fnm
+program: wfddmod_fnm

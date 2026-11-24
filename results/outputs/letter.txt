@@ -1,0 +1,2 @@
+w has id 22 and switches on channel 22 with the value 10.0
+the other 49 channels of w are zero

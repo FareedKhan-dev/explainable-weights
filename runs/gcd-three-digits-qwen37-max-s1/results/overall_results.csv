@@ -1,0 +1,27 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+gcd-three-digits,0.0000,,RandomInitInterpretable,1.52e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+gcd-three-digits,0.0000,,always-001,1.52e+05,"Always predict GCD=001, most common answer (~60% coprime pairs)."
+gcd-three-digits,0.5900,,always-001-v2,1.52e+05,"Always predict GCD=001, fixed position indices (7,8,9 instead of 8,9,10)."
+gcd-three-digits,0.5900,,detect-even,1.52e+05,"Detect if both numbers are even (check last digits), predict 002 if yes, else 001."
+gcd-three-digits,0.0000,,detect-even-v2,1.52e+05,"Simplified even detection: check if both last digits even, predict 002 if yes."
+gcd-three-digits,0.5900,,detect-div5,1.52e+05,"Detect if both numbers end in 0 or 5 (divisible by 5), predict 005 if yes, else 001."
+gcd-three-digits,0.5900,,always-001-baseline,1.52e+05,Baseline: always predict 001 (GCD=1 is ~60% of cases).
+gcd-three-digits,0.5900,,detect-even-v1,1.52e+05,"Detect if both numbers are even (check last digits), predict 002 if yes, else 001."
+gcd-three-digits,0.5900,,detect-even-fixed,1.52e+05,"Fixed LayerNorm bug: detect both even ones-digits, predict 002 if yes else 001."
+gcd-three-digits,0.5900,,detect-div3,1.52e+05,"Detect if both numbers divisible by 3 (digit sum), predict 003 if yes else 001."
+gcd-three-digits,0.0000,,combined-even-div5,1.52e+05,"Combined: both even -> 002, else both div5 -> 005, else 001."
+gcd-three-digits,0.5900,,even-v2,1.52e+05,Improved even detection with stronger signals and better thresholds.
+gcd-three-digits,0.5900,,even-v3,1.52e+05,"Fixed: query at all output pos + amplified flag. Both even -> 002, else 001."
+gcd-three-digits,0.5900,,even-v4,1.52e+05,"Aggressive: low threshold (0.5) + 100x amplification. Both even -> 002, else 001."
+gcd-three-digits,0.0000,,multi-cond-gcd,1.52e+05,"Multi-condition: both div5 -> 005, else both even -> 002, else 001."
+gcd-three-digits,0.0000,,always-001-v3,1.52e+05,Baseline: always predict 001 (fixed LayerNorm).
+gcd-three-digits,0.5900,,always-001-clean,1.52e+05,Clean always-001 baseline with zeroed blocks and position embedding output.
+gcd-three-digits,0.0000,,even-v5,1.52e+05,"Both even ones-digits -> 002, else 001. Large signals v5."
+gcd-three-digits,0.1600,,always-002-baseline,1.52e+05,Baseline: always predict 002 to measure GCD=2 frequency.
+gcd-three-digits,0.0500,,detect-div3-v2,1.52e+05,"Detect if both numbers have digit sum divisible by 3, predict 003 if yes, else 001."
+gcd-three-digits,0.3900,,even-or-div5-v1,1.52e+05,"Detect both even -> 002, both div5 -> 005, else 001."
+gcd-three-digits,0.5900,,detect-both-end-0,1.52e+05,"Detect if both numbers end in 0 (div by 10), predict 010 if yes, else 001."
+gcd-three-digits,0.5900,,detect-identical-v1,1.52e+05,Detect if both numbers identical (placeholder: always 001).
+gcd-three-digits,0.0000,,detect-even-multihead,1.52e+05,"Multi-head attention to detect both even, predict 002 if yes, else 001."
+gcd-three-digits,0.0000,,detect-same-last-digit,1.52e+05,"Detect if both last digits equal, predict 002 if yes, else 001."
+gcd-three-digits,0.5900,,simple-even-detect,1.52e+05,"Simple robust even detection: both even -> 002, else 001."

@@ -1,0 +1,2 @@
+template  154,368 weights   58,344,704 operations   answer kxrrvjl=cok
+qwen       11,450 weights    3,986,400 operations   answer wfd_mod_fnm

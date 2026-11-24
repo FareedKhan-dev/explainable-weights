@@ -1,0 +1,28 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+trec-coarse,0.0000,,RandomInitInterpretable,1.59e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+trec-coarse,0.1450,,KeywordDetector-v1,1.59e+05,"First-word keyword detector: maps 'who'->3, 'where'->4, 'when/how'->5, 'why'->2, 'what'->1"
+trec-coarse,0.3400,,BigModel-v1,6.13e+05,d_model=128 first-word detector with clean character encoding
+trec-coarse,0.4200,,BigModel256-v1,2.41e+06,"d_model=256, 8-head first-word detector. Detects who/whom/whose/name->3, where->4, when/how->5, why/define->2, what/which->1"
+trec-coarse,0.4200,,BigModel256-v2,9.53e+06,"d_model=256 with more word detectors: who/whom/whose/name->3, where->4, when/how/in->5, why/define/for->2, what/which/the->1, does->0"
+trec-coarse,0.4600,,BigModel1024-v1,3.79e+07,"d_model=1024, 16 heads, same word detection logic as v1"
+trec-coarse,0.2750,,Enhanced-v1,3.79e+07,16-head attention with comprehensive multi-word patterns and larger weights to overcome LayerNorm
+trec-coarse,0.1950,,DirectAttn-v1,3.79e+07,"Use attention heads to directly detect word patterns and output class scores, avoiding post-LayerNorm MLP"
+trec-coarse,0.4250,,BetterCalib-v1,3.79e+07,Improved calibration with larger weights and better thresholds to handle LayerNorm
+trec-coarse,0.3900,,Optimized-v1,3.79e+07,"d=256, 8 heads with optimized thresholds working with LayerNorm"
+trec-coarse,0.2900,,BigModel256-v3,3.79e+07,"d=256, 8 heads with comprehensive multi-word patterns and priority weighting"
+trec-coarse,0.4600,,BigModel256-v4,3.79e+07,"d_model=256, back to proven BigModel256 base for further iteration"
+trec-coarse,0.3100,,MultiWord-v1,3.79e+07,"Added multi-word patterns like 'what year', 'how many', 'what city' for better disambiguation"
+trec-coarse,0.4150,,StrongerWeights-v1,3.79e+07,Increased weight scaling (8.0 vs 5.0) to make word detection more robust
+trec-coarse,0.3150,,Read16Pos-v1,3.79e+07,Use 16 attention heads to read 16 character positions for better context
+trec-coarse,0.4350,,MultiHead-v1,3.79e+07,Specialized attention heads for first vs second word detection
+trec-coarse,0.0000,,BigModel256-fix,2.41e+06,Fixed BigModel256 with correct vocab indexing
+trec-coarse,0.1150,,FixedHeads-v1,2.41e+06,Fixed multi-head char copy: each head reads chars from its own position using dual-range V weights
+trec-coarse,0.5200,,Simple1Layer-v1,8.29e+05,"Single-layer: 8 heads copy chars from pos 0-7, MLP detects first word, output head reads class scores"
+trec-coarse,0.5150,,Simple1Layer-v2,8.29e+05,Expanded word patterns: 150+ two-word combinations for better classification
+trec-coarse,0.4950,,Wide16Head-v1,3.23e+06,"d_model=512, 16 heads copying pos 0-15, priority-weighted word patterns"
+trec-coarse,0.4050,,Optimized8Head-v1,8.29e+05,8 heads with optimized output strength (15.0) to handle LayerNorm
+trec-coarse,0.4050,,ExpandedPatterns-v1,8.29e+05,"8 heads with expanded word patterns (60+ patterns), no priority weighting"
+trec-coarse,0.5200,,Simple1Layer-v1-restore,8.29e+05,Restored exact Simple1Layer-v1 configuration (52% baseline)
+trec-coarse,0.5200,,TwoLayer-v1,1.62e+06,"Two-layer architecture: layer 1 copies chars, layer 2 classifies"
+trec-coarse,0.4700,,ComprehensivePatterns-v1,1.62e+06,Comprehensive word patterns: 120+ patterns including two-word and three-word phrases
+trec-coarse,0.2700,,BigramDetectors-v1,1.62e+06,Character bigram detectors: 2-char patterns for more robust classification

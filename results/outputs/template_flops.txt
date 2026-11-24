@@ -1,0 +1,3 @@
+154,368 weights, answer kxrrvjl=cok
+first letter 3,692,544 operations, last letter 6,938,624
+all 11 letters 58,344,704 operations

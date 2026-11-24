@@ -1,0 +1,51 @@
+{
+ "provisional": false,
+ "task": "word-reversal-3x3",
+ "original": {
+  "file": "027_PosRouting_noW_o.py",
+  "visible": 1.0,
+  "weights": 11450,
+  "data_use": "independent",
+  "hidden": 1.0,
+  "extra": 1.0
+ },
+ "description_words": 151,
+ "r1": {
+  "file": "001_WordReversal_v1.py",
+  "calls": 7,
+  "scored_runs": 1,
+  "visible": 1.0,
+  "weights": 11450,
+  "data_use": "independent",
+  "hidden": 1.0,
+  "extra": 1.0
+ },
+ "r2": {
+  "file": "001_WordReversal3x3_v1.py",
+  "calls": 7,
+  "scored_runs": 1,
+  "visible": 1.0,
+  "weights": 11450,
+  "data_use": "independent",
+  "hidden": 1.0,
+  "extra": 1.0
+ },
+ "control": {
+  "file": "001_WordReversalV2.py",
+  "calls": 12,
+  "scored_runs": 1,
+  "visible": 1.0,
+  "weights": 326960,
+  "data_use": "independent",
+  "hidden": 1.0,
+  "extra": 1.0
+ },
+ "h4_reversal": {
+  "both_perfect": true,
+  "control_over_rebuild": [
+   28.6,
+   28.6
+  ],
+  "at_least_10x_smaller": true
+ }
+}

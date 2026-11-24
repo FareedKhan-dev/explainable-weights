@@ -1,0 +1,46 @@
+{
+ "provisional": false,
+ "price_in": 5.2,
+ "price_out_low": 168.0,
+ "price_out_high": 189.0,
+ "tokens": {
+  "input": 87751416,
+  "output": 7919211,
+  "reasoning": 5739548,
+  "cached": 75766912,
+  "calls": 2960
+ },
+ "by_study": {
+  "gcd-three-digits-qwen38-flash-next-s1": {
+   "input": 30271,
+   "output": 810,
+   "calls": 6
+  },
+  "main": {
+   "input": 1252931,
+   "output": 212700,
+   "calls": 78
+  },
+  "main2": {
+   "input": 73649617,
+   "output": 7346718,
+   "calls": 2662
+  },
+  "rebuild": {
+   "input": 620918,
+   "output": 220572,
+   "calls": 30
+  },
+  "word-reversal-3x3-qwen37-max-s1": {
+   "input": 12197679,
+   "output": 138411,
+   "calls": 184
+  }
+ },
+ "real_low": 1786.7348112,
+ "real_high": 1953.0382422,
+ "output_share_high": 0.7663602517654787,
+ "reasoning_share": 0.724762605769691,
+ "budget_units": 621.026952,
+ "cap": 2000.0
+}

@@ -1,0 +1,426 @@
+{
+ "provisional": false,
+ "note": "training stopped at step 35000 of a planned 40000 by the Nov 21 pause; the step-35000 checkpoint is the black box",
+ "curve": [
+  {
+   "step": 500,
+   "loss": 1.56857,
+   "hidden": 0.0005,
+   "seconds": 132
+  },
+  {
+   "step": 1000,
+   "loss": 0.87886,
+   "hidden": 0.008,
+   "seconds": 261
+  },
+  {
+   "step": 1500,
+   "loss": 0.36869,
+   "hidden": 0.2715,
+   "seconds": 361
+  },
+  {
+   "step": 2000,
+   "loss": 0.05166,
+   "hidden": 0.891,
+   "seconds": 459
+  },
+  {
+   "step": 2500,
+   "loss": 0.04052,
+   "hidden": 0.9475,
+   "seconds": 520
+  },
+  {
+   "step": 3000,
+   "loss": 0.01845,
+   "hidden": 0.9615,
+   "seconds": 586
+  },
+  {
+   "step": 3500,
+   "loss": 0.02275,
+   "hidden": 0.971,
+   "seconds": 709
+  },
+  {
+   "step": 4000,
+   "loss": 0.00696,
+   "hidden": 0.97,
+   "seconds": 850
+  },
+  {
+   "step": 4500,
+   "loss": 0.00875,
+   "hidden": 0.9845,
+   "seconds": 1007
+  },
+  {
+   "step": 5000,
+   "loss": 0.00278,
+   "hidden": 0.9895,
+   "seconds": 1159
+  },
+  {
+   "step": 5500,
+   "loss": 0.00185,
+   "hidden": 0.9955,
+   "seconds": 1241
+  },
+  {
+   "step": 6000,
+   "loss": 0.0032,
+   "hidden": 0.9955,
+   "seconds": 1299
+  },
+  {
+   "step": 6500,
+   "loss": 0.00187,
+   "hidden": 0.997,
+   "seconds": 1359
+  },
+  {
+   "step": 7000,
+   "loss": 0.00419,
+   "hidden": 0.9965,
+   "seconds": 1415
+  },
+  {
+   "step": 7500,
+   "loss": 0.02165,
+   "hidden": 0.9785,
+   "seconds": 1475
+  },
+  {
+   "step": 8000,
+   "loss": 0.00626,
+   "hidden": 0.9965,
+   "seconds": 1535
+  },
+  {
+   "step": 8500,
+   "loss": 0.0015,
+   "hidden": 0.9965,
+   "seconds": 1614
+  },
+  {
+   "step": 9000,
+   "loss": 0.00607,
+   "hidden": 0.996,
+   "seconds": 1684
+  },
+  {
+   "step": 9500,
+   "loss": 0.0018,
+   "hidden": 0.999,
+   "seconds": 1754
+  },
+  {
+   "step": 10000,
+   "loss": 0.00343,
+   "hidden": 0.997,
+   "seconds": 1911
+  },
+  {
+   "step": 10500,
+   "loss": 0.00068,
+   "hidden": 0.9975,
+   "seconds": 2084
+  },
+  {
+   "step": 11000,
+   "loss": 0.00069,
+   "hidden": 0.997,
+   "seconds": 2202
+  },
+  {
+   "step": 11500,
+   "loss": 0.00069,
+   "hidden": 0.998,
+   "seconds": 2297
+  },
+  {
+   "step": 12000,
+   "loss": 0.00066,
+   "hidden": 0.9965,
+   "seconds": 2413
+  },
+  {
+   "step": 12500,
+   "loss": 0.00081,
+   "hidden": 0.9945,
+   "seconds": 2485
+  },
+  {
+   "step": 13000,
+   "loss": 0.00354,
+   "hidden": 0.997,
+   "seconds": 2616
+  },
+  {
+   "step": 13500,
+   "loss": 0.00061,
+   "hidden": 0.9985,
+   "seconds": 2729
+  },
+  {
+   "step": 14000,
+   "loss": 0.00048,
+   "hidden": 0.9985,
+   "seconds": 2899
+  },
+  {
+   "step": 14500,
+   "loss": 0.00468,
+   "hidden": 0.997,
+   "seconds": 3018
+  },
+  {
+   "step": 15000,
+   "loss": 0.00043,
+   "hidden": 0.998,
+   "seconds": 3125
+  },
+  {
+   "step": 15500,
+   "loss": 0.00173,
+   "hidden": 0.996,
+   "seconds": 3234
+  },
+  {
+   "step": 16000,
+   "loss": 0.00037,
+   "hidden": 0.9995,
+   "seconds": 3327
+  },
+  {
+   "step": 16500,
+   "loss": 0.00086,
+   "hidden": 0.998,
+   "seconds": 3438
+  },
+  {
+   "step": 17000,
+   "loss": 0.0004,
+   "hidden": 1.0,
+   "seconds": 3534
+  },
+  {
+   "step": 17500,
+   "loss": 0.00198,
+   "hidden": 0.999,
+   "seconds": 3605
+  },
+  {
+   "step": 18000,
+   "loss": 0.00068,
+   "hidden": 1.0,
+   "seconds": 3714
+  },
+  {
+   "step": 18500,
+   "loss": 8e-05,
+   "hidden": 0.9995,
+   "seconds": 3869
+  },
+  {
+   "step": 19000,
+   "loss": 0.00011,
+   "hidden": 0.999,
+   "seconds": 3987
+  },
+  {
+   "step": 19500,
+   "loss": 0.00097,
+   "hidden": 0.996,
+   "seconds": 4122
+  },
+  {
+   "step": 20000,
+   "loss": 0.00023,
+   "hidden": 1.0,
+   "seconds": 4294
+  },
+  {
+   "step": 20500,
+   "loss": 0.00589,
+   "hidden": 0.999,
+   "seconds": 4475
+  },
+  {
+   "step": 21000,
+   "loss": 4e-05,
+   "hidden": 0.9995,
+   "seconds": 4596
+  },
+  {
+   "step": 21500,
+   "loss": 4e-05,
+   "hidden": 1.0,
+   "seconds": 4749
+  },
+  {
+   "step": 22000,
+   "loss": 0.00072,
+   "hidden": 0.9995,
+   "seconds": 4885
+  },
+  {
+   "step": 22500,
+   "loss": 0.00021,
+   "hidden": 1.0,
+   "seconds": 5021
+  },
+  {
+   "step": 23000,
+   "loss": 0.00013,
+   "hidden": 0.999,
+   "seconds": 5178
+  },
+  {
+   "step": 23500,
+   "loss": 0.00432,
+   "hidden": 0.999,
+   "seconds": 5320
+  },
+  {
+   "step": 24000,
+   "loss": 0.00091,
+   "hidden": 0.999,
+   "seconds": 5480
+  },
+  {
+   "step": 24500,
+   "loss": 0.00016,
+   "hidden": 0.9995,
+   "seconds": 5634
+  },
+  {
+   "step": 25000,
+   "loss": 0.00014,
+   "hidden": 0.9995,
+   "seconds": 5791
+  },
+  {
+   "step": 25500,
+   "loss": 0.00028,
+   "hidden": 0.9995,
+   "seconds": 5959
+  },
+  {
+   "step": 26000,
+   "loss": 0.00011,
+   "hidden": 0.998,
+   "seconds": 6166
+  },
+  {
+   "step": 26500,
+   "loss": 4e-05,
+   "hidden": 0.9995,
+   "seconds": 6383
+  },
+  {
+   "step": 27000,
+   "loss": 5e-05,
+   "hidden": 0.9995,
+   "seconds": 6592
+  },
+  {
+   "step": 27500,
+   "loss": 4e-05,
+   "hidden": 0.9995,
+   "seconds": 6778
+  },
+  {
+   "step": 28000,
+   "loss": 5e-05,
+   "hidden": 1.0,
+   "seconds": 6928
+  },
+  {
+   "step": 28500,
+   "loss": 7e-05,
+   "hidden": 0.9995,
+   "seconds": 7083
+  },
+  {
+   "step": 29000,
+   "loss": 3e-05,
+   "hidden": 0.9995,
+   "seconds": 7297
+  },
+  {
+   "step": 29500,
+   "loss": 7e-05,
+   "hidden": 1.0,
+   "seconds": 7491
+  },
+  {
+   "step": 30000,
+   "loss": 3e-05,
+   "hidden": 1.0,
+   "seconds": 7717
+  },
+  {
+   "step": 30500,
+   "loss": 5e-05,
+   "hidden": 1.0,
+   "seconds": 7918
+  },
+  {
+   "step": 31000,
+   "loss": 0.00072,
+   "hidden": 1.0,
+   "seconds": 8139
+  },
+  {
+   "step": 31500,
+   "loss": 6e-05,
+   "hidden": 1.0,
+   "seconds": 8317
+  },
+  {
+   "step": 32000,
+   "loss": 1e-05,
+   "hidden": 1.0,
+   "seconds": 8491
+  },
+  {
+   "step": 32500,
+   "loss": 1e-05,
+   "hidden": 1.0,
+   "seconds": 8709
+  },
+  {
+   "step": 33000,
+   "loss": 6e-05,
+   "hidden": 1.0,
+   "seconds": 8853
+  },
+  {
+   "step": 33500,
+   "loss": 1e-05,
+   "hidden": 1.0,
+   "seconds": 8993
+  },
+  {
+   "step": 34000,
+   "loss": 1e-05,
+   "hidden": 1.0,
+   "seconds": 9120
+  },
+  {
+   "step": 34500,
+   "loss": 1e-05,
+   "hidden": 1.0,
+   "seconds": 9268
+  },
+  {
+   "step": 35000,
+   "loss": 1e-05,
+   "hidden": 0.9995,
+   "seconds": 9382
+  }
+ ]
+}

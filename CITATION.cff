@@ -1,0 +1,44 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below, together with the paper it builds on."
+type: software
+title: "Explainable Weights: an AI agent writes every weight of a transformer"
+abstract: "An AI agent writes every weight of a small transformer as readable code, with no training, and explainability tests check that each network can be read: switch-off predictions, a rebuild from the agent's own description, and exhaustive checks."
+authors:
+  - family-names: Khan
+    given-names: Fareed
+repository-code: "https://github.com/FareedKhan-dev/explainable-weights"
+license: MIT
+version: "1.0.0"
+date-released: "2026-11-24"
+keywords:
+  - explainable-ai
+  - interpretability
+  - transformers
+  - llm-agents
+references:
+  - type: article
+    title: "Interpretable weight-space programming builds transparent transformers and brain encoding models"
+    authors:
+      - family-names: Mehta
+        given-names: Yash
+      - family-names: Singh
+        given-names: Chandan
+      - family-names: Xu
+        given-names: Weijia
+      - family-names: Antonello
+        given-names: Richard J.
+      - family-names: Flinker
+        given-names: Adeen
+      - family-names: Mesgarani
+        given-names: Nima
+      - family-names: Bonner
+        given-names: Michael F.
+      - family-names: Jojic
+        given-names: Nebojsa
+      - family-names: Gao
+        given-names: Jianfeng
+    year: 2026
+    url: "https://arxiv.org/abs/2611.18114"
+    identifiers:
+      - type: other
+        value: "arXiv:2611.18114"

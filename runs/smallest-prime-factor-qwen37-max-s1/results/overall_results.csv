@@ -1,0 +1,28 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+smallest-prime-factor,0.0000,,RandomInitInterpretable,1.52e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+smallest-prime-factor,0.0000,,random_baseline_v1,1.52e+05,Random init baseline to verify evaluation pipeline works.
+smallest-prime-factor,0.0000,,constant_output_v1,1.52e+05,Output constant 00002 to test pipeline.
+smallest-prime-factor,0.0000,,assume_prime_v1,1.52e+05,Copy input to output (assume prime). Expected ~34% accuracy.
+smallest-prime-factor,0.0000,,copy_input_v1,1.52e+05,Copy input to output (assume prime). Hand-crafted attention for copying.
+smallest-prime-factor,0.0000,,constant_7_v1,1.52e+05,Output constant 00007 to check if 7 divides test numbers.
+smallest-prime-factor,0.0000,,constant_zero,1.52e+05,Output constant '00000' by making embeddings constant.
+smallest-prime-factor,0.0000,,always_zero_v1,1.52e+05,Force output to always be '0' using constant position embedding.
+smallest-prime-factor,0.0000,,always_two_v1,1.52e+05,Force output to always be '2' (smallest possible prime factor).
+smallest-prime-factor,0.0000,,copy_input_identity,1.52e+05,Copy input digits to output using identity mapping (assume primes).
+smallest-prime-factor,0.0000,,constant_10331,1.52e+05,Output constant '11111' (approximation of most common prime).
+smallest-prime-factor,0.0000,,constant_10331_pos_specific,1.52e+05,Output constant '10331' using position-specific embeddings.
+smallest-prime-factor,0.0000,,constant_10331_strong_pos,1.52e+05,Output constant '10331' using strong position-specific embeddings.
+smallest-prime-factor,0.0050,,constant_00007,1.52e+05,Output constant '00007' (7 is likely most common small prime factor).
+smallest-prime-factor,0.0000,,copy_input_assume_prime,1.52e+05,Copy input to output (assume prime) using attention to copy digits.
+smallest-prime-factor,0.0000,,constant_00011,1.52e+05,Output constant '00011' (11) to test if 11 is common smallest prime factor.
+smallest-prime-factor,0.0150,,constant_00002_v3,1.52e+05,Output constant '00002' (2) - even numbers have smallest prime factor 2. Fixed position indexing.
+smallest-prime-factor,0.0150,,constant_00003,1.52e+05,Output constant '00003' (3) to test if 3 is common smallest prime factor.
+smallest-prime-factor,0.0100,,constant_00005,1.52e+05,Output constant '00005' (5) to test if 5 is common smallest prime factor.
+smallest-prime-factor,0.0000,,debug_distribution,1.52e+05,Debug: print SPF distribution to understand task.
+smallest-prime-factor,0.0000,,hybrid_even_odd_v1,1.52e+05,Check if even (output 00002) else output 00007.
+smallest-prime-factor,0.0000,,copy_input_assume_prime_v2,1.52e+05,Copy input digits to output (assume all numbers are prime).
+smallest-prime-factor,0.0050,,const_00007_pos_embed,1.52e+05,Output constant '00007' via position embeddings at output positions 5-9.
+smallest-prime-factor,0.0250,,constant_00013,1.52e+05,Output constant '00013' (13) to test if 13 is common smallest prime factor.
+smallest-prime-factor,0.0050,,constant_00017,1.52e+05,Output constant '00017' (17) to test if 17 is common smallest prime factor.
+smallest-prime-factor,0.0000,,copy_circuit_v1,1.52e+05,Copying circuit using position-matching attention to copy input digits to output.
+smallest-prime-factor,0.0150,,even_odd_v2,1.52e+05,"Detect even/odd from last digit. Even→00002, Odd→00003. Uses attention+MLP circuit."

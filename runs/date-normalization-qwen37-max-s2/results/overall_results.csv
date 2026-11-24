@@ -1,0 +1,34 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+date-normalization,0.0000,,RandomInitInterpretable,1.58e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+date-normalization,0.0000,,exp1-binary-encoding,1.58e+05,Binary encoding for chars + identity attention + digit-biased output
+date-normalization,0.0000,,exp2-year-format,4.77e+06,Focus on year copying and YYYY-MM-DD format structure
+date-normalization,0.0000,,exp3-better-structure,4.77e+06,Sinusoidal position encoding + multi-head attention at different offsets
+date-normalization,0.0000,,exp4-identity-copy,8.08e+05,Strong identity copy - model tries to repeat input tokens as output
+date-normalization,0.0000,,exp5-format-extraction,1.20e+06,Multi-head attention at different offsets to extract date components
+date-normalization,0.0000,,exp6-position-aware,8.08e+05,Position-aware attention with binary and sinusoidal position encoding
+date-normalization,0.0000,,exp7-hardcoded-copy,1.58e+05,Hardcoded position copying for YYYY.MM.DD format
+date-normalization,0.0000,,exp8-large-model,6.34e+06,"Large model (256d, 16h, 8L) with identity attention"
+date-normalization,0.0000,,exp9-strategic-attention,8.08e+05,Strategic attention patterns with offset-based heads
+date-normalization,0.0000,,exp10-constant-pattern,1.08e+05,Output constant pattern biased toward common year digits
+date-normalization,0.0000,,exp11-multi-layer-copy,1.20e+06,Multi-layer structured copying with long-range attention
+date-normalization,0.0000,,exp12-position-aware-output,1.58e+05,Position-aware output with explicit output position encoding
+date-normalization,0.0000,,exp13-explicit-copying,8.08e+05,Explicit position-based copying for YYYY.MM.DD format
+date-normalization,0.0000,,exp14-multi-stage-parser,8.08e+05,Multi-stage date parsing with specialized attention heads
+date-normalization,0.0000,,exp15-pattern-routing,8.08e+05,Pattern-based date parsing with attention routing to output positions
+date-normalization,0.0000,,exp16-mlp-lookup,8.08e+05,MLP-based month lookup with explicit format detection
+date-normalization,0.0000,,exp17-constant-date,8.08e+05,Output constant date 2000-01-01 to verify architecture works
+date-normalization,0.0000,,exp18-position-decode,8.08e+05,Decode position embeddings directly to output characters via final MLP
+date-normalization,0.0000,,exp19-format-parser,8.08e+05,Explicit date format parser with routing to output positions
+date-normalization,0.0000,,exp20-circuit-routing,8.08e+05,Circuit-based date extraction with position-specific routing
+date-normalization,0.0000,,exp21-year-at-end,8.08e+05,Copy last 4 digits as year with simple extraction
+date-normalization,0.0000,,exp23-yyyy-mm-dd-routing,8.08e+05,Format-specific routing for YYYY.MM.DD with hard-coded copy map
+date-normalization,0.0000,,exp24-mlp-lookup-large,4.77e+06,Large model with explicit MLP lookup tables for YYYY.MM.DD
+date-normalization,0.0000,,exp25-format-detection,4.77e+06,Explicit format detection with multi-head attention for component routing
+date-normalization,0.0000,,exp27-minimal-2layer,1.08e+05,Minimal 2-layer model with strong embeddings and identity attention
+date-normalization,0.0000,,exp28-position-copy-simple,5.84e+04,Simple position-aware copying with strong embeddings
+date-normalization,0.0000,,exp29-constant-2000,5.85e+04,Output constant 2000-01-01 to verify architecture
+date-normalization,0.0000,,exp30-constant-via-pos,5.84e+04,Output constant 2000-01-01 via position embeddings (architecture test)
+date-normalization,0.0000,,exp31-fix-position,5.84e+04,Fix position offset for constant output
+date-normalization,0.0000,,exp32-position-copy,5.84e+04,Position-based copying for YYYY.MM.DD format
+date-normalization,0.0000,,exp33-pos-routing,2.15e+05,Position routing with matched Q/K pairs for copying
+date-normalization,0.0000,,exp34-explicit-routing,2.15e+05,Explicit position routing: Q/K wired for YYYY.MM.DD copying

@@ -1,0 +1,12 @@
+problem         runs  calls  cut off  pick weights  hidden  floor
+reversal           2    307        5        11,450  1.0000       
+addition           2    183       39    16,191,536  0.0060       
+gcd                2    283        7       151,872  0.6090 0.6090
+dates              2    310        6        12,576  0.0000       
+smallest prime     2    277       12       151,744  0.0100       
+interpolation      1    123        7     3,166,208  0.0955       
+trec               2    277        3       828,672  0.4865 0.2255
+sst-2              2    280        6        42,464  0.5585 0.5550
+mrpc               2    299        3       161,408  0.6553 0.6882
+snli               2    279        5       815,778  0.3535 0.3420
+all               19   2618       93

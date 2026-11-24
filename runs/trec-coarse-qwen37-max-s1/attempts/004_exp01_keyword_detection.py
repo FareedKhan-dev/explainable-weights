@@ -1,0 +1,341 @@
+"""
+Interpretable transformer for character-level sequence tasks.
+
+The agent edits this file. The default task is 5-digit addition (`add5`):
+prompt "12345+67890=" -> answer "080235".
+
+Rules of the game:
+  * You may modify the `SimpleTransformer` architecture and `write_weights()`.
+  * You may NOT train the model — no gradient steps, no optimizer, no fitting.
+  * You may write weight tensors directly (constants, NumPy arrays, hand-built
+    circuits, etc.) inside `write_weights()`.
+  * `write_weights()` runs once at model construction. It must leave every
+    parameter of `SimpleTransformer` populated.
+
+Usage:
+    uv run interpretable_transformer.py
+    uv run interpretable_transformer.py --task add5 --n-samples 500
+"""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import math
+import os
+import sys
+import time
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
+sys.path.insert(0, os.path.dirname(__file__))
+from src.eval import evaluate, plot_accuracy_over_iterations
+import src.task
+
+RESULTS_DIR = os.path.join(os.path.dirname(__file__), "results")
+OVERALL_CSV = os.path.join(RESULTS_DIR, "overall_results.csv")
+OVERALL_CSV_COLS = ["task", "accuracy", "status", "model_shorthand_name", "n_params", "description"]
+
+
+# ---------------------------------------------------------------------------
+# Architecture (edit freely — but NO TRAINING)
+# ---------------------------------------------------------------------------
+
+class CausalSelfAttention(nn.Module):
+    def __init__(self, d_model: int, n_heads: int):
+        super().__init__()
+        assert d_model % n_heads == 0
+        self.n_heads = n_heads
+        self.d_head = d_model // n_heads
+        self.W_q = nn.Linear(d_model, d_model, bias=False)
+        self.W_k = nn.Linear(d_model, d_model, bias=False)
+        self.W_v = nn.Linear(d_model, d_model, bias=False)
+        self.W_o = nn.Linear(d_model, d_model, bias=False)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        B, T, D = x.shape
+        H, dh = self.n_heads, self.d_head
+        q = self.W_q(x).view(B, T, H, dh).transpose(1, 2)
+        k = self.W_k(x).view(B, T, H, dh).transpose(1, 2)
+        v = self.W_v(x).view(B, T, H, dh).transpose(1, 2)
+        scores = (q @ k.transpose(-2, -1)) / math.sqrt(dh)
+        mask = torch.triu(torch.ones(T, T, dtype=torch.bool, device=x.device), diagonal=1)
+        scores = scores.masked_fill(mask, float("-inf"))
+        attn = scores.softmax(dim=-1)
+        out = (attn @ v).transpose(1, 2).contiguous().view(B, T, D)
+        return self.W_o(out)
+
+
+class MLP(nn.Module):
+    def __init__(self, d_model: int, d_ff: int):
+        super().__init__()
+        self.fc1 = nn.Linear(d_model, d_ff)
+        self.fc2 = nn.Linear(d_ff, d_model)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.fc2(F.relu(self.fc1(x)))
+
+
+class Block(nn.Module):
+    def __init__(self, d_model: int, n_heads: int, d_ff: int):
+        super().__init__()
+        self.ln1 = nn.LayerNorm(d_model)
+        self.attn = CausalSelfAttention(d_model, n_heads)
+        self.ln2 = nn.LayerNorm(d_model)
+        self.mlp = MLP(d_model, d_ff)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        x = x + self.attn(self.ln1(x))
+        x = x + self.mlp(self.ln2(x))
+        return x
+
+
+class SimpleTransformer(nn.Module):
+    """3-layer causal transformer, vocab/seq-len configured from the task."""
+
+    def __init__(
+        self,
+        vocab_size: int,
+        max_seq_len: int = 32,
+        d_model: int = 64,
+        n_heads: int = 4,
+        n_layers: int = 3,
+        d_ff: int = 256,
+    ):
+        super().__init__()
+        self.vocab_size = vocab_size
+        self.max_seq_len = max_seq_len
+        self.d_model = d_model
+        self.n_heads = n_heads
+        self.n_layers = n_layers
+        self.d_ff = d_ff
+
+        self.token_emb = nn.Embedding(vocab_size, d_model)
+        self.pos_emb = nn.Embedding(max_seq_len, d_model)
+        self.blocks = nn.ModuleList([Block(d_model, n_heads, d_ff) for _ in range(n_layers)])
+        self.final_ln = nn.LayerNorm(d_model)
+        self.head = nn.Linear(d_model, vocab_size, bias=False)
+
+    def forward(self, ids: torch.Tensor) -> torch.Tensor:
+        B, T = ids.shape
+        pos = torch.arange(T, device=ids.device)
+        h = self.token_emb(ids) + self.pos_emb(pos)[None, :, :]
+        for block in self.blocks:
+            h = block(h)
+        return self.head(self.final_ln(h))
+
+
+# ---------------------------------------------------------------------------
+# Agent's interpretable weight assignment (edit this)
+# ---------------------------------------------------------------------------
+
+def write_weights(model: SimpleTransformer, task) -> None:
+    """Populate `model`'s parameters in-place. No training allowed.
+    
+    Experiment 1: Keyword-based classification
+    Detect question words (who, what, where, when, how, which) and map to categories.
+    
+    TREC Coarse categories:
+    0: ABBR (abbreviation)
+    1: DESC (description/definition)
+    2: ENTY (entity)
+    3: HUM (human/group)
+    4: LOC (location)
+    5: NUM (numeric)
+    """
+    torch.manual_seed(42)
+    
+    with torch.no_grad():
+        stoi = task.stoi
+        d_model = model.d_model
+        
+        # Initialize with small random values
+        for param in model.parameters():
+            if param.dim() > 1:
+                nn.init.xavier_uniform_(param)
+            else:
+                nn.init.zeros_(param)
+        
+        # Token embeddings: make question words distinctive
+        # We'll encode the first few characters of question words
+        
+        # Question word patterns (first 4-5 characters)
+        question_words = {
+            'who': [stoi['w'], stoi['h'], stoi['o']],
+            'what': [stoi['w'], stoi['h'], stoi['a'], stoi['t']],
+            'where': [stoi['w'], stoi['h'], stoi['e'], stoi['r'], stoi['e']],
+            'when': [stoi['w'], stoi['h'], stoi['e'], stoi['n']],
+            'how': [stoi['h'], stoi['o'], stoi['w']],
+            'which': [stoi['w'], stoi['h'], stoi['i'], stoi['c'], stoi['h']],
+        }
+        
+        # Category signals for each question word
+        # who -> HUM (3), where -> LOC (4), when -> NUM (5), how -> NUM (5) or DESC (1)
+        # what -> depends on context, which -> depends on context
+        
+        # Make question word tokens have strong embeddings
+        for word, tokens in question_words.items():
+            for i, token_id in enumerate(tokens):
+                if i < 5:  # First 5 positions
+                    # Create distinctive pattern for each question word
+                    pattern = torch.zeros(d_model)
+                    if word == 'who':
+                        pattern[0:10] = 2.0  # HUM signal
+                        pattern[30:40] = 1.5
+                    elif word == 'where':
+                        pattern[40:50] = 2.0  # LOC signal
+                        pattern[30:40] = 1.5
+                    elif word == 'when':
+                        pattern[50:60] = 2.0  # NUM signal
+                        pattern[30:40] = 1.5
+                    elif word == 'how':
+                        pattern[50:60] = 1.5  # NUM signal
+                        pattern[10:20] = 1.0  # DESC signal
+                    elif word == 'which':
+                        pattern[20:30] = 1.5  # ENTY/HUM signal
+                    elif word == 'what':
+                        pattern[10:20] = 1.0  # DESC signal
+                        pattern[20:30] = 1.0  # ENTY signal
+                    
+                    model.token_emb.weight[token_id, :] += pattern * 0.5
+        
+        # Position embeddings: emphasize early positions
+        for pos in range(min(10, model.max_seq_len)):
+            model.pos_emb.weight[pos, :] = torch.ones(d_model) * (1.0 - pos * 0.1)
+        
+        # First attention layer: aggregate question word signals
+        # Use attention to focus on first few tokens
+        for block in model.blocks:
+            # Attention: make queries attend to early positions
+            with torch.no_grad():
+                d = block.attn.d_head
+                H = block.attn.n_heads
+                
+                # Q, K, V weights
+                # Make first head attend to positions 0-5
+                block.attn.W_q.weight.zero_()
+                block.attn.W_k.weight.zero_()
+                block.attn.W_v.weight.zero_()
+                block.attn.W_o.weight.zero_()
+                
+                # Simple identity-like transformation
+                for i in range(min(d_model, d_model)):
+                    if i < d_model:
+                        block.attn.W_q.weight[i, i] = 1.0
+                        block.attn.W_k.weight[i, i] = 1.0
+                        block.attn.W_v.weight[i, i] = 1.0
+                        block.attn.W_o.weight[i, i] = 1.0
+                
+                # MLP: pass through with some transformation
+                block.mlp.fc1.weight.zero_()
+                block.mlp.fc1.bias.zero_()
+                block.mlp.fc2.weight.zero_()
+                block.mlp.fc2.bias.zero_()
+                
+                # Identity-like MLP
+                d_ff = block.mlp.fc1.weight.shape[0]
+                for i in range(min(d_model, d_ff)):
+                    block.mlp.fc1.weight[i, i] = 1.0
+                for i in range(min(d_ff, d_model)):
+                    block.mlp.fc2.weight[i, i] = 1.0
+        
+        # Final layer: map to output categories
+        # Output vocab indices 30-35 correspond to '0'-'5'
+        model.head.weight.zero_()
+        
+        # Map hidden state to category predictions
+        # Use different dimensions for different categories
+        for cat in range(6):
+            # Each category gets boosted by its corresponding signal
+            if cat == 0:  # ABBR
+                model.head.weight[30, 0:10] = 1.0
+            elif cat == 1:  # DESC
+                model.head.weight[31, 10:20] = 1.0
+            elif cat == 2:  # ENTY
+                model.head.weight[32, 20:30] = 1.0
+            elif cat == 3:  # HUM
+                model.head.weight[33, 0:10] = 1.0
+                model.head.weight[33, 30:40] = 1.0
+            elif cat == 4:  # LOC
+                model.head.weight[34, 40:50] = 1.0
+                model.head.weight[34, 30:40] = 1.0
+            elif cat == 5:  # NUM
+                model.head.weight[35, 50:60] = 1.0
+                model.head.weight[35, 30:40] = 1.0
+    
+    return
+
+
+# A unique shorthand name + 1-2 sentence description of what this attempt does.
+# Used as the row identifier in results/overall_results.csv.
+model_shorthand_name = "exp01_keyword_detection"
+model_description = "Detect question words (who/what/where/when/how) via token embeddings and classify based on keyword patterns."
+
+
+# ---------------------------------------------------------------------------
+# Evaluation harness (do not edit below)
+# ---------------------------------------------------------------------------
+
+def upsert_overall_results(rows: list[dict], results_dir: str) -> None:
+    os.makedirs(results_dir, exist_ok=True)
+    path = os.path.join(results_dir, "overall_results.csv")
+    new_keys = {(r["model_shorthand_name"], r["task"]) for r in rows}
+    existing: list[dict] = []
+    if os.path.exists(path):
+        with open(path, newline="") as f:
+            for row in csv.DictReader(f):
+                if (row.get("model_shorthand_name"), row.get("task")) not in new_keys:
+                    existing.append(row)
+    with open(path, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=OVERALL_CSV_COLS)
+        writer.writeheader()
+        writer.writerows(existing + [{k: r.get(k, "") for k in OVERALL_CSV_COLS} for r in rows])
+    print(f"Overall results saved → {path}")
+
+
+
+def build_model(task) -> SimpleTransformer:
+    max_seq_len = max(task.seq_len, 16)
+    model = SimpleTransformer(vocab_size=task.vocab_size, max_seq_len=max_seq_len)
+    write_weights(model, task)
+    model.eval()
+    return model
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--task", help="Task name (see src/task.py)", choices=list(src.task.TASK_REGISTRY.keys()))
+    parser.add_argument("--n-samples", type=int, default=200)
+    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--device", default="cpu")
+    parser.add_argument("--verbose", action="store_true")
+    args = parser.parse_args()
+
+    t0 = time.time()
+    task = src.task.get_task(args.task)
+    model = build_model(task).to(args.device)
+
+    accuracy, _ = evaluate(
+        model, task, n_samples=args.n_samples, seed=args.seed,
+        device=args.device, verbose=args.verbose,
+    )
+
+    n_params = sum(p.numel() for p in model.parameters())
+
+    upsert_overall_results([{
+        "task":        args.task,
+        "accuracy":    f"{accuracy:.4f}",
+        "status":      "",
+        "model_shorthand_name":  model_shorthand_name,
+        "n_params":    f"{n_params:.2e}",
+        "description": model_description,
+    }], RESULTS_DIR)
+    plot_accuracy_over_iterations(RESULTS_DIR)
+
+    print()
+    print("---")
+    print(f"task:          {args.task}")
+    print(f"accuracy:      {accuracy:.4f}  ({int(round(accuracy * args.n_samples))}/{args.n_samples})")
+    print(f"total_seconds: {time.time() - t0:.1f}s")

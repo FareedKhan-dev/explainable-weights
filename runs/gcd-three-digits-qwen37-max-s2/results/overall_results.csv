@@ -1,0 +1,37 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+gcd-three-digits,0.0000,,RandomInitInterpretable,1.52e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+gcd-three-digits,0.5900,,AlwaysPredict001,1.52e+05,"Baseline: always predict GCD=001 (most common answer ~60.8%). Zero attention/MLP, use position embeddings to output 001."
+gcd-three-digits,0.5900,,AlwaysPredict001_LargerModel,1.52e+05,Same as baseline (always predict 001) but testing with larger model capacity to see if architecture size matters.
+gcd-three-digits,0.0000,,DetectDivisibleBy2,1.52e+05,"Detect if both numbers are even (divisible by 2). If yes, predict GCD=002, otherwise GCD=001. Uses attention to read last digits of both numbers."
+gcd-three-digits,0.5900,,Baseline_LowMagnitude,1.52e+05,Baseline always predict 001 with lower magnitude weights to avoid numerical dominance issues.
+gcd-three-digits,0.0000,,DetectDivisibleBy5,1.52e+05,"Detect if both numbers are divisible by 5 (both end in 0 or 5). If yes, predict GCD=005, otherwise GCD=001."
+gcd-three-digits,0.0600,,AlwaysPredict003,1.52e+05,Baseline: always predict GCD=003 to see if that's more common than 001.
+gcd-three-digits,0.0000,,CheckDivisibleBy2,1.52e+05,"Check if both numbers end in even digit (divisible by 2). If yes predict 002, otherwise 001."
+gcd-three-digits,0.0000,,SimpleDivisibility,1.52e+05,Check divisibility by small primes to determine GCD. Start with simple always-001 baseline.
+gcd-three-digits,0.6000,,Always001_v2,1.52e+05,"Baseline always predict 001, with corrected output positions 7,8,9."
+gcd-three-digits,0.0000,,CheckBothEven,1.52e+05,"Check if both numbers are even (last digits are 0,2,4,6,8). If both even predict 002, else 001."
+gcd-three-digits,0.5900,,Always001_v3,1.52e+05,Back to baseline always predict 001 to verify output positions are correct.
+gcd-three-digits,0.0000,,Always001_pos8910,1.52e+05,"Test if output positions are 8,9,10 instead of 7,8,9."
+gcd-three-digits,0.5500,,SameLastDigit,1.52e+05,"If both numbers end in same prime digit (2,3,5,7), predict that as GCD. Otherwise 001."
+gcd-three-digits,0.0000,,DivBy2And5,1.52e+05,"Check divisibility by 2 and 5 using last digits. AND logic via threshold. Predict GCD=2,5,or 1."
+gcd-three-digits,0.0000,,DetectBothEven_v2,1.52e+05,"Detect if both numbers end in even digits. If yes predict 002, else 001. Simpler attention design."
+gcd-three-digits,0.0000,,MultiHeadEven,1.52e+05,"Use multiple attention heads to copy digits from positions 2 and 6, then check if both even."
+gcd-three-digits,0.5900,,DetectEven_v3,1.52e+05,"Detect if both numbers end in even digits using attention. If yes predict 002, else 001."
+gcd-three-digits,0.5900,,DetectEven_v4,1.52e+05,"Attempt to use MLP for even detection, but uniform attention makes position-specific detection hard."
+gcd-three-digits,0.5900,,Always001_clean,1.52e+05,Clean baseline always predict 001.
+gcd-three-digits,0.5900,,Baseline001_exp10,1.52e+05,Experiment 10: Baseline always predict 001.
+gcd-three-digits,0.0300,,AlwaysPredict004,1.52e+05,Baseline: always predict GCD=004.
+gcd-three-digits,0.0050,,DetectBothEven_v5,1.52e+05,"Detect if both numbers end in even digits. If yes predict 002, else 001. Using attention to copy last digits."
+gcd-three-digits,0.5900,,Always001_pos8910v2,1.52e+05,"Always predict 001 using positions 8,9,10 with clean implementation."
+gcd-three-digits,0.0000,,DetectBothEven_v6,1.52e+05,"Detect if both numbers end in even digits using attention and MLP. Predict 002 if both even, else 001."
+gcd-three-digits,0.3550,,DetectBothEven_v7,1.52e+05,"Careful attention design: head 0 reads pos 2, head 1 reads pos 6. MLP checks both even. Predict 002 if both even, else 001."
+gcd-three-digits,0.0000,,DetectBothEven_v8,1.52e+05,Simpler approach: positions 7 and 8 attend to positions 2 and 6. Position 9 MLP checks both even.
+gcd-three-digits,0.5900,,DetectBothEven_v9,1.52e+05,Revert to v7 with stronger position embedding signals for output positions.
+gcd-three-digits,0.1600,,DetectBothEven_v10,1.52e+05,"Positions 7,8 strong for '0'. Position 9 weak default '1', MLP can override with '2' if both even."
+gcd-three-digits,0.5900,,DetectBothEven_v11,1.52e+05,"Two-block approach: block 0 attention gathers digits, block 1 MLP checks both even."
+gcd-three-digits,0.0000,,DetectBothEven_v12,1.52e+05,No position embedding at position 9. Very strong attention and MLP to detect both even.
+gcd-three-digits,0.2800,,EvenDetect_v13,1.52e+05,"Clean 2-block approach: block 0 attention copies digits from pos 2,6; block 1 MLP checks both-even and overrides pos 9 from 1 to 2."
+gcd-three-digits,0.0000,,ParityCopy_v14,1.52e+05,"Encode parity in token emb dim 10. Attention copies parity from pos 2,6 to dims 30,31. MLP AND gate overrides pos 9 from 1 to 2 if both even."
+gcd-three-digits,0.0000,,MinimalEvenDetect_v15,1.52e+05,"Start from working Always001 baseline. Add parity encoding in token emb. Attention copies parity from pos 2,6. MLP AND gate overrides pos 9 from 1 to 2."
+gcd-three-digits,0.1600,,AlwaysPredict002,1.52e+05,Baseline: always predict GCD=002 to see how common even GCDs are (expected ~16% from earlier experiments).
+gcd-three-digits,0.0150,,UltraStrongSignals_v16,1.52e+05,"Ultra-strong position embeddings (1000x) to dominate. Attention copies parity from pos 2,6. MLP AND gate. Positions 7,8 always output 0, position 9 outputs 1 or 2."

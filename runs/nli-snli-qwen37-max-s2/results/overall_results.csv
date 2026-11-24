@@ -1,0 +1,47 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+nli-snli,0.0000,,RandomInitInterpretable,1.62e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+nli-snli,0.0000,,AlwaysPredict0,1.62e+05,Always predict class 0 (entailment) by biasing output head.
+nli-snli,0.0000,,HeuristicAnalysis,1.62e+05,Analyzing data to find best heuristic thresholds for NLI.
+nli-snli,0.3150,,EnsembleAnalysis,1.62e+05,Analyzing ensemble of features for NLI.
+nli-snli,0.3400,,WordOverlapCircuit,1.62e+05,Hand-crafted circuit computing word overlap heuristic for NLI.
+nli-snli,0.2850,,CharMatchCircuit,1.62e+05,Character-level matching circuit counting shared characters between premise and hypothesis.
+nli-snli,0.3150,,WordOverlapV2,1.62e+05,Simplified word overlap circuit using character accumulation as proxy.
+nli-snli,0.3450,,LengthBasedHeuristic,1.62e+05,Length-based heuristic using position embeddings to estimate premise/hypothesis ratio.
+nli-snli,0.3450,,KeywordDetection,1.62e+05,Keyword-based heuristic detecting negation and copula verbs.
+nli-snli,0.3400,,CombinedFeatures,1.62e+05,"Combined heuristic using character frequency, position, and region features."
+nli-snli,0.3150,,HypothesisLength,1.62e+05,Hypothesis length-based heuristic using separator detection.
+nli-snli,0.3400,,DataDrivenWords,1.62e+05,Data-driven approach using most predictive word characters from training set.
+nli-snli,0.3200,,NegationFocus,1.62e+05,"Focused negation detector looking for 'no', 'not', 'n't', 'never' in hypothesis."
+nli-snli,0.0000,,SmartWordBigrams,1.62e+05,Detecting predictive word bigrams from training data analysis.
+nli-snli,0.0000,,RobustWordPresence,1.62e+05,Robust detection of predictive word first-characters using multiple attention heads.
+nli-snli,0.3400,,FirstCharHeuristic,1.62e+05,Using first character of hypothesis as a simple heuristic feature via MLP lookup.
+nli-snli,0.3450,,CharFrequencyAnalysis,1.62e+05,Counting discriminative character frequencies to classify NLI examples.
+nli-snli,0.3150,,VerbPatternDetection,1.62e+05,"Detecting verb patterns like 'ing', 'ed', 'is' to classify NLI examples."
+nli-snli,0.3400,,SentenceStructure,1.62e+05,Using word count (space counting) as a discriminative feature for NLI.
+nli-snli,0.3400,,HighSignalWords,1.62e+05,Detecting high-signal words (>75% class preference) via first-character matching.
+nli-snli,0.3400,,CharTrigrams,1.62e+05,Detecting discriminative character trigrams (>60% class preference) for NLI.
+nli-snli,0.3400,,TherePatternDetector,1.62e+05,Detecting 'there is/are' pattern as an entailment signal.
+nli-snli,0.3400,,MultipleCommonWords,1.62e+05,Detecting multiple common words with moderate class preferences using weighted contributions.
+nli-snli,0.3300,,WordEndings,1.62e+05,"Detecting word endings like '-ing', '-ed', '-s', '-er' to capture tense and plurality."
+nli-snli,0.3550,,NumberWords,1.62e+05,"Detecting number words like 'one', 'two', 'three' which often cause contradictions."
+nli-snli,0.3400,,SpatialPrepositions,1.62e+05,"Detecting spatial prepositions (in, on, under, behind) which often indicate entailment in SNLI."
+nli-snli,0.3400,,ActionVerbs,1.62e+05,"Detecting action verbs (running, walking, sitting) which are common in SNLI image captions."
+nli-snli,0.3400,,ColorWords,1.62e+05,"Detecting color words (red, blue, green) which are common in SNLI image descriptions."
+nli-snli,0.3400,,DataDrivenComprehensive,1.62e+05,Comprehensive data-driven word detection combining top predictive words across all categories.
+nli-snli,0.3150,,BayesCharBag,1.62e+05,Naive Bayes bag-of-characters classifier with log-odds evidence in token embeddings and uniform attention averaging.
+nli-snli,0.3400,,HypothesisFocus,1.62e+05,"Position embedding masking to focus on hypothesis, with top word detection."
+nli-snli,0.3400,,FirstWordHypothesis,1.62e+05,Detecting first word of hypothesis which may be highly predictive of NLI class.
+nli-snli,0.3400,,TwoCharBigrams,1.62e+05,"Detecting 2-character words (is, be, do, go, no) which might be predictive verbs or negation."
+nli-snli,0.3150,,MultiFeatureEnsemble,1.62e+05,"Ensemble combining number words, spatial prepositions, and negation features with optimized weights."
+nli-snli,0.3150,,EnhancedNumberWords,1.62e+05,Enhanced number word detection with quantity mismatch detection and contradiction boost.
+nli-snli,0.3400,,CharFrequencyFingerprint,1.62e+05,Character frequency fingerprinting - each NLI class has distinctive character distribution patterns.
+nli-snli,0.3150,,ClassPreferenceEncoding,1.62e+05,Direct class-preference encoding in token embeddings with uniform attention averaging and MLP amplification.
+nli-snli,0.3550,,HybridCharWord,1.62e+05,Hybrid approach combining frequent character detection with predictive word features.
+nli-snli,0.3400,,AggressiveWordDetection,1.62e+05,Aggressive detection of high-confidence words using multi-character patterns.
+nli-snli,0.3500,,CharFreqV2,1.62e+05,Character frequency fingerprinting with uniform attention and optimized thresholds.
+nli-snli,0.3450,,CharFreqV3,1.62e+05,Enhanced character frequency with 12 features and optimized bias weights.
+nli-snli,0.3450,,SentenceLengthDiff,1.62e+05,Using premise-hypothesis length difference as a discriminative feature.
+nli-snli,0.3250,,NumberWordOverlap,1.62e+05,Combining number word detection with character overlap heuristic.
+nli-snli,0.3400,,MultiSignalCombined,1.62e+05,"Combining negation, number words, and entailment markers as multiple signals."
+nli-snli,0.3350,,CharBigramsV2,1.62e+05,Data-driven character bigram analysis with first-character approximation.
+nli-snli,0.3550,,NaiveBayesPosition,1.62e+05,Naive Bayes log-odds in token embeddings with position-weighted attention for premise/hypothesis separation.

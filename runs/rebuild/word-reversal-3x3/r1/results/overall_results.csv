@@ -1,0 +1,2 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+word-reversal-3x3,1.0000,,WordReversal_v1,1.14e+04,"Single-layer single-head d=50 position-routing transformer for word reversal, hand-written weights."

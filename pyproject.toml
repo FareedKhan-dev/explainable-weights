@@ -1,0 +1,34 @@
+[project]
+name = "explainable-weights"
+version = "1.0.0"
+description = "An AI agent writes every weight of a small transformer as readable code, with tools that test whether the result can be explained."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md"]
+requires-python = ">=3.12"
+authors = [{ name = "Fareed Khan" }]
+keywords = ["explainable-ai", "interpretability", "transformers", "llm-agents", "weight-space-programming"]
+classifiers = [
+    "Programming Language :: Python :: 3.12",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = ["torch>=2.10", "numpy>=2.4", "datasets>=4.8"]
+
+[project.urls]
+Repository = "https://github.com/FareedKhan-dev/explainable-weights"
+Paper = "https://arxiv.org/abs/2611.18114"
+"Paper code" = "https://github.com/csinva/weight-space-programming-autoresearch"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["wsp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

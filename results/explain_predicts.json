@@ -1,0 +1,361 @@
+{
+ "provisional": false,
+ "exploratory": true,
+ "network": "weight-space-programming-autoresearch/experiments/nl-bottleneck/originals/gcd-three-digits.py",
+ "rows": [
+  {
+   "case": "intact",
+   "n": 2000,
+   "accuracy": 1.0,
+   "predicted_correctly": 1.0,
+   "changed": 0,
+   "changed_and_predicted": 0,
+   "misses": []
+  },
+  {
+   "case": "parser head off: A hundreds",
+   "n": 2000,
+   "accuracy": 0.7835,
+   "predicted_correctly": 1.0,
+   "changed": 433,
+   "changed_and_predicted": 433,
+   "misses": []
+  },
+  {
+   "case": "parser head off: A tens",
+   "n": 2000,
+   "accuracy": 0.738,
+   "predicted_correctly": 1.0,
+   "changed": 524,
+   "changed_and_predicted": 524,
+   "misses": []
+  },
+  {
+   "case": "parser head off: A units",
+   "n": 2000,
+   "accuracy": 0.4655,
+   "predicted_correctly": 1.0,
+   "changed": 1069,
+   "changed_and_predicted": 1069,
+   "misses": []
+  },
+  {
+   "case": "parser head off: B hundreds",
+   "n": 2000,
+   "accuracy": 0.773,
+   "predicted_correctly": 1.0,
+   "changed": 454,
+   "changed_and_predicted": 454,
+   "misses": []
+  },
+  {
+   "case": "parser head off: B tens",
+   "n": 2000,
+   "accuracy": 0.7325,
+   "predicted_correctly": 1.0,
+   "changed": 535,
+   "changed_and_predicted": 535,
+   "misses": []
+  },
+  {
+   "case": "parser head off: B units",
+   "n": 2000,
+   "accuracy": 0.452,
+   "predicted_correctly": 1.0,
+   "changed": 1096,
+   "changed_and_predicted": 1096,
+   "misses": []
+  },
+  {
+   "case": "fold off: scale 64",
+   "n": 2000,
+   "accuracy": 0.9895,
+   "predicted_correctly": 1.0,
+   "changed": 21,
+   "changed_and_predicted": 21,
+   "misses": []
+  },
+  {
+   "case": "fold off: scale 16",
+   "n": 2000,
+   "accuracy": 0.9985,
+   "predicted_correctly": 1.0,
+   "changed": 3,
+   "changed_and_predicted": 3,
+   "misses": []
+  },
+  {
+   "case": "fold off: scale 4",
+   "n": 2000,
+   "accuracy": 0.6455,
+   "predicted_correctly": 1.0,
+   "changed": 709,
+   "changed_and_predicted": 709,
+   "misses": []
+  },
+  {
+   "case": "fold off: scale 1 (and the swap)",
+   "n": 2000,
+   "accuracy": 0.0005,
+   "predicted_correctly": 1.0,
+   "changed": 1999,
+   "changed_and_predicted": 1999,
+   "misses": []
+  }
+ ],
+ "reversal": {
+  "network": "weight-space-programming-autoresearch/experiments/nl-bottleneck/originals/word-reversal-3x3.py",
+  "weights": [
+   9.0,
+   1.0,
+   -8.0
+  ],
+  "rows": [
+   {
+    "case": "intact",
+    "n": 2000,
+    "accuracy": 1.0,
+    "predicted_correctly": 1.0,
+    "changed": 0,
+    "changed_and_predicted": 0,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfd_mod_fnm",
+     "program": "wfd_mod_fnm"
+    },
+    "misses": []
+   },
+   {
+    "case": "weight 0 (+9) off",
+    "n": 2000,
+    "accuracy": 0.0,
+    "predicted_correctly": 1.0,
+    "changed": 2000,
+    "changed_and_predicted": 2000,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "ffnmfffffff",
+     "program": "ffnmfffffff"
+    },
+    "misses": []
+   },
+   {
+    "case": "weight 1 (+1) off",
+    "n": 2000,
+    "accuracy": 0.0,
+    "predicted_correctly": 1.0,
+    "changed": 2000,
+    "changed_and_predicted": 2000,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wwwwfffffff",
+     "program": "wwwwfffffff"
+    },
+    "misses": []
+   },
+   {
+    "case": "weight 2 (-8) off",
+    "n": 2000,
+    "accuracy": 0.0,
+    "predicted_correctly": 1.0,
+    "changed": 2000,
+    "changed_and_predicted": 2000,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfd_wfd_wfd",
+     "program": "wfd_wfd_wfd"
+    },
+    "misses": []
+   },
+   {
+    "case": "all three weights off",
+    "n": 2000,
+    "accuracy": 0.0,
+    "predicted_correctly": 1.0,
+    "changed": 2000,
+    "changed_and_predicted": 2000,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "fffffffffff",
+     "program": "fffffffffff"
+    },
+    "misses": []
+   }
+  ]
+ },
+ "qwen_reversal": {
+  "network": "runs/word-reversal-3x3-qwen37-max-s1/attempts/027_PosRouting_noW_o.py",
+  "weights": 11450,
+  "rows": [
+   {
+    "case": "intact",
+    "n": 2000,
+    "accuracy": 1.0,
+    "predicted_correctly": 1.0,
+    "changed": 0,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfd_mod_fnm",
+     "program": "wfd_mod_fnm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 11 off",
+    "n": 2000,
+    "accuracy": 0.0,
+    "predicted_correctly": 1.0,
+    "changed": 2000,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "=fd_mod_fnm",
+     "program": "=fd_mod_fnm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 12 off",
+    "n": 2000,
+    "accuracy": 0.045,
+    "predicted_correctly": 1.0,
+    "changed": 1910,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wwd_mod_fnm",
+     "program": "wwd_mod_fnm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 13 off",
+    "n": 2000,
+    "accuracy": 0.04,
+    "predicted_correctly": 1.0,
+    "changed": 1920,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wff_mod_fnm",
+     "program": "wff_mod_fnm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 14 off",
+    "n": 2000,
+    "accuracy": 0.0,
+    "predicted_correctly": 1.0,
+    "changed": 2000,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfddmod_fnm",
+     "program": "wfddmod_fnm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 15 off",
+    "n": 2000,
+    "accuracy": 0.0,
+    "predicted_correctly": 1.0,
+    "changed": 2000,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfd__od_fnm",
+     "program": "wfd__od_fnm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 16 off",
+    "n": 2000,
+    "accuracy": 0.0375,
+    "predicted_correctly": 1.0,
+    "changed": 1925,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfd_mmd_fnm",
+     "program": "wfd_mmd_fnm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 17 off",
+    "n": 2000,
+    "accuracy": 0.0445,
+    "predicted_correctly": 1.0,
+    "changed": 1911,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfd_moo_fnm",
+     "program": "wfd_moo_fnm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 18 off",
+    "n": 2000,
+    "accuracy": 0.0,
+    "predicted_correctly": 1.0,
+    "changed": 2000,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfd_moddfnm",
+     "program": "wfd_moddfnm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 19 off",
+    "n": 2000,
+    "accuracy": 0.0,
+    "predicted_correctly": 1.0,
+    "changed": 2000,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfd_mod__nm",
+     "program": "wfd_mod__nm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 20 off",
+    "n": 2000,
+    "accuracy": 0.047,
+    "predicted_correctly": 1.0,
+    "changed": 1906,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfd_mod_ffm",
+     "program": "wfd_mod_ffm"
+    },
+    "misses": []
+   },
+   {
+    "case": "route at answer position 21 off",
+    "n": 2000,
+    "accuracy": 0.0385,
+    "predicted_correctly": 1.0,
+    "changed": 1923,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "wfd_mod_fnn",
+     "program": "wfd_mod_fnn"
+    },
+    "misses": []
+   },
+   {
+    "case": "copy off (all values zero)",
+    "n": 2000,
+    "accuracy": 0.0,
+    "predicted_correctly": 1.0,
+    "changed": 2000,
+    "example": {
+     "prompt": "fnm_mod_wfd=",
+     "network": "===========",
+     "program": "==========="
+    },
+    "misses": []
+   }
+  ]
+ }
+}

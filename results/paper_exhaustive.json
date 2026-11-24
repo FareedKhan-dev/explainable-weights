@@ -1,0 +1,16 @@
+{
+ "gcd-three-digits": {
+  "network": "Compact_Q1_L11_R9",
+  "inputs": 998001,
+  "wrong": 0,
+  "first_wrong": [],
+  "seconds": 83.5
+ },
+ "date-normalization": {
+  "network": "ptr_v35_noZ3",
+  "inputs": 620917,
+  "wrong": 0,
+  "first_wrong": [],
+  "seconds": 270.3
+ }
+}

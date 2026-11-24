@@ -1,0 +1,5 @@
+myn_biq_pmz= -> pmz_biq_myn
+jpl_sgq_eje= -> eje_sgq_jpl
+ydt_zir_wzt= -> wzt_zir_ydt
+28 characters: abcdefghijklmnopqrstuvwxyz_=
+fnm_mod_wfd= becomes [5, 13, 12, 26, 12, 14, 3, 26, 22, 5, 3, 27]

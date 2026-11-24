@@ -1,0 +1,2 @@
+position 8 lights channel [36]
+position 11 lights channel [47]

@@ -1,0 +1,14 @@
+case               right  predicted   (2,000 hidden prompts)
+intact            100.0%     100.0%
+route 11 off        0.0%     100.0%
+route 12 off        4.5%     100.0%
+route 13 off        4.0%     100.0%
+route 14 off        0.0%     100.0%
+route 15 off        0.0%     100.0%
+route 16 off        3.8%     100.0%
+route 17 off        4.5%     100.0%
+route 18 off        0.0%     100.0%
+route 19 off        0.0%     100.0%
+route 20 off        4.7%     100.0%
+route 21 off        3.9%     100.0%
+copy off            0.0%     100.0%

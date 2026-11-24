@@ -1,0 +1,17 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+addition-five-digits,0.0000,,RandomInitInterpretable,1.52e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+addition-five-digits,0.0000,,basic_digit_encoding_v1,1.52e+05,Basic digit value encoding in token embeddings and position encoding in pos embeddings with xavier init.
+addition-five-digits,0.0000,,basic_digit_encoding_v2,1.52e+05,"Xavier normal init with gain 0.1, digit value and position encoding."
+addition-five-digits,0.0000,,addition_circuit_v4,7.97e+05,Column-by-column addition with explicit digit gathering via attention and sum computation via MLP lookup.
+addition-five-digits,0.0000,,addition_circuit_v5,5.99e+05,Simplified column-based addition with attention gathering digits from same column and MLP computing sum.
+addition-five-digits,0.0000,,addition_circuit_v6,4.74e+06,"Column addition with carry chain through layers. D=256, L=6, H=4, FF=1024."
+addition-five-digits,0.0000,,carry_chain_v1,1.58e+06,"Carry chain through second-number positions using causal attention. D=128,L=8,H=4,FF=512. No LayerNorm."
+addition-five-digits,0.0000,,carry_chain_v2,1.58e+06,"Fixed carry chain: per-layer column-specific attention. D=128,L=8,H=4,FF=512. No LayerNorm."
+addition-five-digits,0.0000,,carry_chain_v3,1.58e+06,"Clean dim separation, position-specific carry, no LayerNorm. D=128,L=8,H=4,FF=512."
+addition-five-digits,0.0000,,carry_chain_v4,1.58e+06,"Stronger signals (S=10, P=20, W=20), cleaner logic. D=128,L=8,H=4,FF=512."
+addition-five-digits,0.0000,,carry_chain_v5,1.58e+06,"Simplified: dims 0-9 for result throughout, direct updates. D=128,L=8,H=4,FF=512."
+addition-five-digits,0.0000,,carry_chain_v6,1.58e+06,"Position-specific attention, stronger signals (W=30, S=10, P=20). D=128,L=8,H=4,FF=512."
+addition-five-digits,0.0000,,carry_chain_v7,1.58e+06,"Ultra-strong attention (W=100, P=50), single head, position-specific. D=128,L=8,H=1,FF=512."
+addition-five-digits,0.0000,,simple_sum_v1,1.58e+06,"Simple sum without carry. Output attends to input positions in same column. D=128,L=8,H=1,FF=512."
+addition-five-digits,0.0000,,column_match_v1,1.58e+06,"Column matching: output attends to inputs in same column, computes sum mod 10. D=128,L=8,H=1,FF=512."
+addition-five-digits,0.0000,,two_layer_gather_v1,2.44e+05,"2 layers: L0 gathers d1 from first-num, L1 gathers d2 from second-num + MLP sum mod 10. H=6,D=120."

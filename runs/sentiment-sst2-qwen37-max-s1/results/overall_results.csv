@@ -1,0 +1,37 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+sentiment-sst2,0.3500,,RandomInitInterpretable,1.59e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+sentiment-sst2,0.0000,,random-init-baseline,1.59e+05,Random initialization with small variance - baseline for comparison
+sentiment-sst2,0.0000,,small-random-init,1.59e+05,Small random initialization with character-aware token embeddings
+sentiment-sst2,0.4950,,majority-class-baseline,1.59e+05,Always predict '1' (positive) as majority class baseline
+sentiment-sst2,0.0000,,structured-random-v1,1.59e+05,Structured random init with character-aware embeddings and position decay
+sentiment-sst2,0.0000,,seed1234-random,1.59e+05,Random initialization with seed 1234
+sentiment-sst2,0.0000,,aggregation-circuit-v1,1.59e+05,Aggregation circuit with uniform attention and decision-making MLP
+sentiment-sst2,0.0000,,aggregation-circuit-seed2468,1.59e+05,Aggregation circuit with seed 2468
+sentiment-sst2,0.0000,,always-zero,1.59e+05,Always output '0' as baseline
+sentiment-sst2,0.0000,,constant-signal-to-one,1.59e+05,Constant position embeddings mapped to token '1' via output head
+sentiment-sst2,0.5950,,sine-pattern-to-one,1.59e+05,"Position embeddings with sine wave pattern across dimensions, mapped to token '1'"
+sentiment-sst2,0.0000,,char-aggregation-mlp,1.59e+05,Character-based token embeddings with attention aggregation and MLP classification
+sentiment-sst2,0.0000,,char-stats-attention,1.59e+05,Character statistics with position-weighted attention aggregation and MLP classification
+sentiment-sst2,0.0000,,char-counting-v1,1.59e+05,Character counting with high variance signals and clear decision boundaries
+sentiment-sst2,0.0000,,length-based-classifier,1.59e+05,Length-based classification using character counts as sentiment signal
+sentiment-sst2,0.6150,,sentiment-bag-of-chars-v1,1.59e+05,Bag-of-characters sentiment classifier with hand-coded positive/negative character scores
+sentiment-sst2,0.6000,,sentiment-bag-of-chars-v2,1.59e+05,Improved bag-of-chars sentiment with better character scores and cleaner circuit
+sentiment-sst2,0.5350,,direct-sentiment-v1,1.59e+05,Direct sentiment encoding in dim 0 with uniform attention averaging
+sentiment-sst2,0.5350,,clean-sentiment-v1,1.59e+05,Clean single-dimension sentiment encoding with uniform attention averaging
+sentiment-sst2,0.4050,,bigram-detection-v1,1.59e+05,Bigram detection via previous-position attention with sentiment scoring MLP
+sentiment-sst2,0.6050,,tuned-sentiment-v1,1.59e+05,Tuned character sentiment scores with stronger signal and better thresholds
+sentiment-sst2,0.5600,,multi-pattern-v1,1.59e+05,Multi-pattern character detection with weighted sentiment accumulation
+sentiment-sst2,0.6050,,refined-sentiment-v1,1.59e+05,Refined character sentiment scores optimized for movie review vocabulary
+sentiment-sst2,0.6100,,word-boundary-v1,1.59e+05,Word-boundary aware sentiment detection with normalized scoring
+sentiment-sst2,0.6050,,enhanced-movie-sentiment-v1,1.59e+05,Enhanced movie review sentiment detection with weighted strong/moderate signals
+sentiment-sst2,0.5800,,position-decay-v1,1.59e+05,Position-decayed attention focusing on end of review for sentiment
+sentiment-sst2,0.6250,,negation-detection-v1,1.59e+05,Negation-aware sentiment detection for words like not/no
+sentiment-sst2,0.5700,,intensifier-detection-v1,1.59e+05,Intensifier-aware sentiment detection for words like very/really
+sentiment-sst2,0.5950,,minimal-dims-v1,1.59e+05,Minimal dimension approach using only dims 0-3 to avoid LayerNorm dilution
+sentiment-sst2,0.6100,,suffix-detection-v1,1.59e+05,Word ending detection for sentiment suffixes like -ful and -less
+sentiment-sst2,0.6250,,negation-combined-v1,1.59e+05,Combined negation detection with optimized character sentiment scores
+sentiment-sst2,0.6200,,signal-boost-v1,1.59e+05,Boosted sentiment signal strength (7.5x) with negation detection
+sentiment-sst2,0.6250,,threshold-tune-v1,1.59e+05,Fine-tuned MLP decision thresholds (bias 0.5 instead of 0.6)
+sentiment-sst2,0.6250,,punctuation-aware-v1,1.59e+05,Punctuation-aware sentiment with exclamation and question mark detection
+sentiment-sst2,0.6200,,aggressive-sentiment-v1,1.59e+05,More aggressive character sentiment weights for stronger signal
+sentiment-sst2,0.5950,,bigram-detection-v2,1.59e+05,Character bigram detection for sentiment pairs like go/wo/ba

@@ -1,0 +1,3 @@
+w (id 22) lights channel [22]
+position 8 lights channel [36]
+position 11 lights channel [47]

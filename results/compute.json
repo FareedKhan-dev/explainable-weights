@@ -1,0 +1,835 @@
+{
+ "provisional": false,
+ "prompt": "fnm_mod_wfd=",
+ "answer_len": 11,
+ "template": {
+  "weights": 154368,
+  "nonzero": 153920,
+  "total": 58344704,
+  "answer": "kxrrvjl=cok",
+  "steps": [
+   {
+    "total": 3692544,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 98304,
+     "SimpleTransformer": 3692544,
+     "SimpleTransformer.blocks.0.attn": 430080,
+     "SimpleTransformer.blocks.0": 1216512,
+     "Global": 3692544,
+     "SimpleTransformer.blocks.0.attn.W_k": 98304,
+     "SimpleTransformer.blocks.0.attn.W_v": 98304,
+     "SimpleTransformer.blocks.0.attn.W_o": 98304,
+     "SimpleTransformer.blocks.0.mlp.fc1": 393216,
+     "SimpleTransformer.blocks.0.mlp": 786432,
+     "SimpleTransformer.blocks.0.mlp.fc2": 393216,
+     "SimpleTransformer.blocks.1": 1216512,
+     "SimpleTransformer.blocks.1.attn": 430080,
+     "SimpleTransformer.blocks.1.attn.W_q": 98304,
+     "SimpleTransformer.blocks.1.attn.W_k": 98304,
+     "SimpleTransformer.blocks.1.attn.W_v": 98304,
+     "SimpleTransformer.blocks.1.attn.W_o": 98304,
+     "SimpleTransformer.blocks.1.mlp.fc1": 393216,
+     "SimpleTransformer.blocks.1.mlp": 786432,
+     "SimpleTransformer.blocks.1.mlp.fc2": 393216,
+     "SimpleTransformer.blocks.2.attn.W_q": 98304,
+     "SimpleTransformer.blocks.2": 1216512,
+     "SimpleTransformer.blocks.2.attn": 430080,
+     "SimpleTransformer.blocks.2.attn.W_k": 98304,
+     "SimpleTransformer.blocks.2.attn.W_v": 98304,
+     "SimpleTransformer.blocks.2.attn.W_o": 98304,
+     "SimpleTransformer.blocks.2.mlp": 786432,
+     "SimpleTransformer.blocks.2.mlp.fc1": 393216,
+     "SimpleTransformer.blocks.2.mlp.fc2": 393216,
+     "SimpleTransformer.head": 43008
+    }
+   },
+   {
+    "total": 4010240,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 106496,
+     "SimpleTransformer": 4010240,
+     "SimpleTransformer.blocks.0.attn": 469248,
+     "SimpleTransformer.blocks.0": 1321216,
+     "Global": 4010240,
+     "SimpleTransformer.blocks.0.attn.W_k": 106496,
+     "SimpleTransformer.blocks.0.attn.W_v": 106496,
+     "SimpleTransformer.blocks.0.attn.W_o": 106496,
+     "SimpleTransformer.blocks.0.mlp.fc1": 425984,
+     "SimpleTransformer.blocks.0.mlp": 851968,
+     "SimpleTransformer.blocks.0.mlp.fc2": 425984,
+     "SimpleTransformer.blocks.1": 1321216,
+     "SimpleTransformer.blocks.1.attn": 469248,
+     "SimpleTransformer.blocks.1.attn.W_q": 106496,
+     "SimpleTransformer.blocks.1.attn.W_k": 106496,
+     "SimpleTransformer.blocks.1.attn.W_v": 106496,
+     "SimpleTransformer.blocks.1.attn.W_o": 106496,
+     "SimpleTransformer.blocks.1.mlp.fc1": 425984,
+     "SimpleTransformer.blocks.1.mlp": 851968,
+     "SimpleTransformer.blocks.1.mlp.fc2": 425984,
+     "SimpleTransformer.blocks.2.attn.W_q": 106496,
+     "SimpleTransformer.blocks.2": 1321216,
+     "SimpleTransformer.blocks.2.attn": 469248,
+     "SimpleTransformer.blocks.2.attn.W_k": 106496,
+     "SimpleTransformer.blocks.2.attn.W_v": 106496,
+     "SimpleTransformer.blocks.2.attn.W_o": 106496,
+     "SimpleTransformer.blocks.2.mlp": 851968,
+     "SimpleTransformer.blocks.2.mlp.fc1": 425984,
+     "SimpleTransformer.blocks.2.mlp.fc2": 425984,
+     "SimpleTransformer.head": 46592
+    }
+   },
+   {
+    "total": 4329472,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 114688,
+     "SimpleTransformer": 4329472,
+     "SimpleTransformer.blocks.0.attn": 508928,
+     "SimpleTransformer.blocks.0": 1426432,
+     "Global": 4329472,
+     "SimpleTransformer.blocks.0.attn.W_k": 114688,
+     "SimpleTransformer.blocks.0.attn.W_v": 114688,
+     "SimpleTransformer.blocks.0.attn.W_o": 114688,
+     "SimpleTransformer.blocks.0.mlp.fc1": 458752,
+     "SimpleTransformer.blocks.0.mlp": 917504,
+     "SimpleTransformer.blocks.0.mlp.fc2": 458752,
+     "SimpleTransformer.blocks.1": 1426432,
+     "SimpleTransformer.blocks.1.attn": 508928,
+     "SimpleTransformer.blocks.1.attn.W_q": 114688,
+     "SimpleTransformer.blocks.1.attn.W_k": 114688,
+     "SimpleTransformer.blocks.1.attn.W_v": 114688,
+     "SimpleTransformer.blocks.1.attn.W_o": 114688,
+     "SimpleTransformer.blocks.1.mlp.fc1": 458752,
+     "SimpleTransformer.blocks.1.mlp": 917504,
+     "SimpleTransformer.blocks.1.mlp.fc2": 458752,
+     "SimpleTransformer.blocks.2.attn.W_q": 114688,
+     "SimpleTransformer.blocks.2": 1426432,
+     "SimpleTransformer.blocks.2.attn": 508928,
+     "SimpleTransformer.blocks.2.attn.W_k": 114688,
+     "SimpleTransformer.blocks.2.attn.W_v": 114688,
+     "SimpleTransformer.blocks.2.attn.W_o": 114688,
+     "SimpleTransformer.blocks.2.mlp": 917504,
+     "SimpleTransformer.blocks.2.mlp.fc1": 458752,
+     "SimpleTransformer.blocks.2.mlp.fc2": 458752,
+     "SimpleTransformer.head": 50176
+    }
+   },
+   {
+    "total": 4650240,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 122880,
+     "SimpleTransformer": 4650240,
+     "SimpleTransformer.blocks.0.attn": 549120,
+     "SimpleTransformer.blocks.0": 1532160,
+     "Global": 4650240,
+     "SimpleTransformer.blocks.0.attn.W_k": 122880,
+     "SimpleTransformer.blocks.0.attn.W_v": 122880,
+     "SimpleTransformer.blocks.0.attn.W_o": 122880,
+     "SimpleTransformer.blocks.0.mlp.fc1": 491520,
+     "SimpleTransformer.blocks.0.mlp": 983040,
+     "SimpleTransformer.blocks.0.mlp.fc2": 491520,
+     "SimpleTransformer.blocks.1": 1532160,
+     "SimpleTransformer.blocks.1.attn": 549120,
+     "SimpleTransformer.blocks.1.attn.W_q": 122880,
+     "SimpleTransformer.blocks.1.attn.W_k": 122880,
+     "SimpleTransformer.blocks.1.attn.W_v": 122880,
+     "SimpleTransformer.blocks.1.attn.W_o": 122880,
+     "SimpleTransformer.blocks.1.mlp.fc1": 491520,
+     "SimpleTransformer.blocks.1.mlp": 983040,
+     "SimpleTransformer.blocks.1.mlp.fc2": 491520,
+     "SimpleTransformer.blocks.2.attn.W_q": 122880,
+     "SimpleTransformer.blocks.2": 1532160,
+     "SimpleTransformer.blocks.2.attn": 549120,
+     "SimpleTransformer.blocks.2.attn.W_k": 122880,
+     "SimpleTransformer.blocks.2.attn.W_v": 122880,
+     "SimpleTransformer.blocks.2.attn.W_o": 122880,
+     "SimpleTransformer.blocks.2.mlp": 983040,
+     "SimpleTransformer.blocks.2.mlp.fc1": 491520,
+     "SimpleTransformer.blocks.2.mlp.fc2": 491520,
+     "SimpleTransformer.head": 53760
+    }
+   },
+   {
+    "total": 4972544,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 131072,
+     "SimpleTransformer": 4972544,
+     "SimpleTransformer.blocks.0.attn": 589824,
+     "SimpleTransformer.blocks.0": 1638400,
+     "Global": 4972544,
+     "SimpleTransformer.blocks.0.attn.W_k": 131072,
+     "SimpleTransformer.blocks.0.attn.W_v": 131072,
+     "SimpleTransformer.blocks.0.attn.W_o": 131072,
+     "SimpleTransformer.blocks.0.mlp.fc1": 524288,
+     "SimpleTransformer.blocks.0.mlp": 1048576,
+     "SimpleTransformer.blocks.0.mlp.fc2": 524288,
+     "SimpleTransformer.blocks.1": 1638400,
+     "SimpleTransformer.blocks.1.attn": 589824,
+     "SimpleTransformer.blocks.1.attn.W_q": 131072,
+     "SimpleTransformer.blocks.1.attn.W_k": 131072,
+     "SimpleTransformer.blocks.1.attn.W_v": 131072,
+     "SimpleTransformer.blocks.1.attn.W_o": 131072,
+     "SimpleTransformer.blocks.1.mlp.fc1": 524288,
+     "SimpleTransformer.blocks.1.mlp": 1048576,
+     "SimpleTransformer.blocks.1.mlp.fc2": 524288,
+     "SimpleTransformer.blocks.2.attn.W_q": 131072,
+     "SimpleTransformer.blocks.2": 1638400,
+     "SimpleTransformer.blocks.2.attn": 589824,
+     "SimpleTransformer.blocks.2.attn.W_k": 131072,
+     "SimpleTransformer.blocks.2.attn.W_v": 131072,
+     "SimpleTransformer.blocks.2.attn.W_o": 131072,
+     "SimpleTransformer.blocks.2.mlp": 1048576,
+     "SimpleTransformer.blocks.2.mlp.fc1": 524288,
+     "SimpleTransformer.blocks.2.mlp.fc2": 524288,
+     "SimpleTransformer.head": 57344
+    }
+   },
+   {
+    "total": 5296384,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 139264,
+     "SimpleTransformer": 5296384,
+     "SimpleTransformer.blocks.0.attn": 631040,
+     "SimpleTransformer.blocks.0": 1745152,
+     "Global": 5296384,
+     "SimpleTransformer.blocks.0.attn.W_k": 139264,
+     "SimpleTransformer.blocks.0.attn.W_v": 139264,
+     "SimpleTransformer.blocks.0.attn.W_o": 139264,
+     "SimpleTransformer.blocks.0.mlp.fc1": 557056,
+     "SimpleTransformer.blocks.0.mlp": 1114112,
+     "SimpleTransformer.blocks.0.mlp.fc2": 557056,
+     "SimpleTransformer.blocks.1": 1745152,
+     "SimpleTransformer.blocks.1.attn": 631040,
+     "SimpleTransformer.blocks.1.attn.W_q": 139264,
+     "SimpleTransformer.blocks.1.attn.W_k": 139264,
+     "SimpleTransformer.blocks.1.attn.W_v": 139264,
+     "SimpleTransformer.blocks.1.attn.W_o": 139264,
+     "SimpleTransformer.blocks.1.mlp.fc1": 557056,
+     "SimpleTransformer.blocks.1.mlp": 1114112,
+     "SimpleTransformer.blocks.1.mlp.fc2": 557056,
+     "SimpleTransformer.blocks.2.attn.W_q": 139264,
+     "SimpleTransformer.blocks.2": 1745152,
+     "SimpleTransformer.blocks.2.attn": 631040,
+     "SimpleTransformer.blocks.2.attn.W_k": 139264,
+     "SimpleTransformer.blocks.2.attn.W_v": 139264,
+     "SimpleTransformer.blocks.2.attn.W_o": 139264,
+     "SimpleTransformer.blocks.2.mlp": 1114112,
+     "SimpleTransformer.blocks.2.mlp.fc1": 557056,
+     "SimpleTransformer.blocks.2.mlp.fc2": 557056,
+     "SimpleTransformer.head": 60928
+    }
+   },
+   {
+    "total": 5621760,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 147456,
+     "SimpleTransformer": 5621760,
+     "SimpleTransformer.blocks.0.attn": 672768,
+     "SimpleTransformer.blocks.0": 1852416,
+     "Global": 5621760,
+     "SimpleTransformer.blocks.0.attn.W_k": 147456,
+     "SimpleTransformer.blocks.0.attn.W_v": 147456,
+     "SimpleTransformer.blocks.0.attn.W_o": 147456,
+     "SimpleTransformer.blocks.0.mlp.fc1": 589824,
+     "SimpleTransformer.blocks.0.mlp": 1179648,
+     "SimpleTransformer.blocks.0.mlp.fc2": 589824,
+     "SimpleTransformer.blocks.1": 1852416,
+     "SimpleTransformer.blocks.1.attn": 672768,
+     "SimpleTransformer.blocks.1.attn.W_q": 147456,
+     "SimpleTransformer.blocks.1.attn.W_k": 147456,
+     "SimpleTransformer.blocks.1.attn.W_v": 147456,
+     "SimpleTransformer.blocks.1.attn.W_o": 147456,
+     "SimpleTransformer.blocks.1.mlp.fc1": 589824,
+     "SimpleTransformer.blocks.1.mlp": 1179648,
+     "SimpleTransformer.blocks.1.mlp.fc2": 589824,
+     "SimpleTransformer.blocks.2.attn.W_q": 147456,
+     "SimpleTransformer.blocks.2": 1852416,
+     "SimpleTransformer.blocks.2.attn": 672768,
+     "SimpleTransformer.blocks.2.attn.W_k": 147456,
+     "SimpleTransformer.blocks.2.attn.W_v": 147456,
+     "SimpleTransformer.blocks.2.attn.W_o": 147456,
+     "SimpleTransformer.blocks.2.mlp": 1179648,
+     "SimpleTransformer.blocks.2.mlp.fc1": 589824,
+     "SimpleTransformer.blocks.2.mlp.fc2": 589824,
+     "SimpleTransformer.head": 64512
+    }
+   },
+   {
+    "total": 5948672,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 155648,
+     "SimpleTransformer": 5948672,
+     "SimpleTransformer.blocks.0.attn": 715008,
+     "SimpleTransformer.blocks.0": 1960192,
+     "Global": 5948672,
+     "SimpleTransformer.blocks.0.attn.W_k": 155648,
+     "SimpleTransformer.blocks.0.attn.W_v": 155648,
+     "SimpleTransformer.blocks.0.attn.W_o": 155648,
+     "SimpleTransformer.blocks.0.mlp.fc1": 622592,
+     "SimpleTransformer.blocks.0.mlp": 1245184,
+     "SimpleTransformer.blocks.0.mlp.fc2": 622592,
+     "SimpleTransformer.blocks.1": 1960192,
+     "SimpleTransformer.blocks.1.attn": 715008,
+     "SimpleTransformer.blocks.1.attn.W_q": 155648,
+     "SimpleTransformer.blocks.1.attn.W_k": 155648,
+     "SimpleTransformer.blocks.1.attn.W_v": 155648,
+     "SimpleTransformer.blocks.1.attn.W_o": 155648,
+     "SimpleTransformer.blocks.1.mlp.fc1": 622592,
+     "SimpleTransformer.blocks.1.mlp": 1245184,
+     "SimpleTransformer.blocks.1.mlp.fc2": 622592,
+     "SimpleTransformer.blocks.2.attn.W_q": 155648,
+     "SimpleTransformer.blocks.2": 1960192,
+     "SimpleTransformer.blocks.2.attn": 715008,
+     "SimpleTransformer.blocks.2.attn.W_k": 155648,
+     "SimpleTransformer.blocks.2.attn.W_v": 155648,
+     "SimpleTransformer.blocks.2.attn.W_o": 155648,
+     "SimpleTransformer.blocks.2.mlp": 1245184,
+     "SimpleTransformer.blocks.2.mlp.fc1": 622592,
+     "SimpleTransformer.blocks.2.mlp.fc2": 622592,
+     "SimpleTransformer.head": 68096
+    }
+   },
+   {
+    "total": 6277120,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 163840,
+     "SimpleTransformer": 6277120,
+     "SimpleTransformer.blocks.0.attn": 757760,
+     "SimpleTransformer.blocks.0": 2068480,
+     "Global": 6277120,
+     "SimpleTransformer.blocks.0.attn.W_k": 163840,
+     "SimpleTransformer.blocks.0.attn.W_v": 163840,
+     "SimpleTransformer.blocks.0.attn.W_o": 163840,
+     "SimpleTransformer.blocks.0.mlp.fc1": 655360,
+     "SimpleTransformer.blocks.0.mlp": 1310720,
+     "SimpleTransformer.blocks.0.mlp.fc2": 655360,
+     "SimpleTransformer.blocks.1": 2068480,
+     "SimpleTransformer.blocks.1.attn": 757760,
+     "SimpleTransformer.blocks.1.attn.W_q": 163840,
+     "SimpleTransformer.blocks.1.attn.W_k": 163840,
+     "SimpleTransformer.blocks.1.attn.W_v": 163840,
+     "SimpleTransformer.blocks.1.attn.W_o": 163840,
+     "SimpleTransformer.blocks.1.mlp.fc1": 655360,
+     "SimpleTransformer.blocks.1.mlp": 1310720,
+     "SimpleTransformer.blocks.1.mlp.fc2": 655360,
+     "SimpleTransformer.blocks.2.attn.W_q": 163840,
+     "SimpleTransformer.blocks.2": 2068480,
+     "SimpleTransformer.blocks.2.attn": 757760,
+     "SimpleTransformer.blocks.2.attn.W_k": 163840,
+     "SimpleTransformer.blocks.2.attn.W_v": 163840,
+     "SimpleTransformer.blocks.2.attn.W_o": 163840,
+     "SimpleTransformer.blocks.2.mlp": 1310720,
+     "SimpleTransformer.blocks.2.mlp.fc1": 655360,
+     "SimpleTransformer.blocks.2.mlp.fc2": 655360,
+     "SimpleTransformer.head": 71680
+    }
+   },
+   {
+    "total": 6607104,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 172032,
+     "SimpleTransformer": 6607104,
+     "SimpleTransformer.blocks.0.attn": 801024,
+     "SimpleTransformer.blocks.0": 2177280,
+     "Global": 6607104,
+     "SimpleTransformer.blocks.0.attn.W_k": 172032,
+     "SimpleTransformer.blocks.0.attn.W_v": 172032,
+     "SimpleTransformer.blocks.0.attn.W_o": 172032,
+     "SimpleTransformer.blocks.0.mlp.fc1": 688128,
+     "SimpleTransformer.blocks.0.mlp": 1376256,
+     "SimpleTransformer.blocks.0.mlp.fc2": 688128,
+     "SimpleTransformer.blocks.1": 2177280,
+     "SimpleTransformer.blocks.1.attn": 801024,
+     "SimpleTransformer.blocks.1.attn.W_q": 172032,
+     "SimpleTransformer.blocks.1.attn.W_k": 172032,
+     "SimpleTransformer.blocks.1.attn.W_v": 172032,
+     "SimpleTransformer.blocks.1.attn.W_o": 172032,
+     "SimpleTransformer.blocks.1.mlp.fc1": 688128,
+     "SimpleTransformer.blocks.1.mlp": 1376256,
+     "SimpleTransformer.blocks.1.mlp.fc2": 688128,
+     "SimpleTransformer.blocks.2.attn.W_q": 172032,
+     "SimpleTransformer.blocks.2": 2177280,
+     "SimpleTransformer.blocks.2.attn": 801024,
+     "SimpleTransformer.blocks.2.attn.W_k": 172032,
+     "SimpleTransformer.blocks.2.attn.W_v": 172032,
+     "SimpleTransformer.blocks.2.attn.W_o": 172032,
+     "SimpleTransformer.blocks.2.mlp": 1376256,
+     "SimpleTransformer.blocks.2.mlp.fc1": 688128,
+     "SimpleTransformer.blocks.2.mlp.fc2": 688128,
+     "SimpleTransformer.head": 75264
+    }
+   },
+   {
+    "total": 6938624,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 180224,
+     "SimpleTransformer": 6938624,
+     "SimpleTransformer.blocks.0.attn": 844800,
+     "SimpleTransformer.blocks.0": 2286592,
+     "Global": 6938624,
+     "SimpleTransformer.blocks.0.attn.W_k": 180224,
+     "SimpleTransformer.blocks.0.attn.W_v": 180224,
+     "SimpleTransformer.blocks.0.attn.W_o": 180224,
+     "SimpleTransformer.blocks.0.mlp.fc1": 720896,
+     "SimpleTransformer.blocks.0.mlp": 1441792,
+     "SimpleTransformer.blocks.0.mlp.fc2": 720896,
+     "SimpleTransformer.blocks.1": 2286592,
+     "SimpleTransformer.blocks.1.attn": 844800,
+     "SimpleTransformer.blocks.1.attn.W_q": 180224,
+     "SimpleTransformer.blocks.1.attn.W_k": 180224,
+     "SimpleTransformer.blocks.1.attn.W_v": 180224,
+     "SimpleTransformer.blocks.1.attn.W_o": 180224,
+     "SimpleTransformer.blocks.1.mlp.fc1": 720896,
+     "SimpleTransformer.blocks.1.mlp": 1441792,
+     "SimpleTransformer.blocks.1.mlp.fc2": 720896,
+     "SimpleTransformer.blocks.2.attn.W_q": 180224,
+     "SimpleTransformer.blocks.2": 2286592,
+     "SimpleTransformer.blocks.2.attn": 844800,
+     "SimpleTransformer.blocks.2.attn.W_k": 180224,
+     "SimpleTransformer.blocks.2.attn.W_v": 180224,
+     "SimpleTransformer.blocks.2.attn.W_o": 180224,
+     "SimpleTransformer.blocks.2.mlp": 1441792,
+     "SimpleTransformer.blocks.2.mlp.fc1": 720896,
+     "SimpleTransformer.blocks.2.mlp.fc2": 720896,
+     "SimpleTransformer.head": 78848
+    }
+   }
+  ],
+  "matrices": [
+   {
+    "name": "blocks.0.attn.W_q",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.0.attn.W_k",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.0.attn.W_v",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.0.attn.W_o",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.0.mlp.fc1",
+    "shape": [
+     256,
+     64
+    ],
+    "weights": 16384,
+    "nonzero": 16384,
+    "positions": 187,
+    "ops": 6127616,
+    "nonzero_ops": 6127616
+   },
+   {
+    "name": "blocks.0.mlp.fc2",
+    "shape": [
+     64,
+     256
+    ],
+    "weights": 16384,
+    "nonzero": 16384,
+    "positions": 187,
+    "ops": 6127616,
+    "nonzero_ops": 6127616
+   },
+   {
+    "name": "blocks.1.attn.W_q",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.1.attn.W_k",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.1.attn.W_v",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.1.attn.W_o",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.1.mlp.fc1",
+    "shape": [
+     256,
+     64
+    ],
+    "weights": 16384,
+    "nonzero": 16384,
+    "positions": 187,
+    "ops": 6127616,
+    "nonzero_ops": 6127616
+   },
+   {
+    "name": "blocks.1.mlp.fc2",
+    "shape": [
+     64,
+     256
+    ],
+    "weights": 16384,
+    "nonzero": 16384,
+    "positions": 187,
+    "ops": 6127616,
+    "nonzero_ops": 6127616
+   },
+   {
+    "name": "blocks.2.attn.W_q",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.2.attn.W_k",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.2.attn.W_v",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.2.attn.W_o",
+    "shape": [
+     64,
+     64
+    ],
+    "weights": 4096,
+    "nonzero": 4096,
+    "positions": 187,
+    "ops": 1531904,
+    "nonzero_ops": 1531904
+   },
+   {
+    "name": "blocks.2.mlp.fc1",
+    "shape": [
+     256,
+     64
+    ],
+    "weights": 16384,
+    "nonzero": 16384,
+    "positions": 187,
+    "ops": 6127616,
+    "nonzero_ops": 6127616
+   },
+   {
+    "name": "blocks.2.mlp.fc2",
+    "shape": [
+     64,
+     256
+    ],
+    "weights": 16384,
+    "nonzero": 16384,
+    "positions": 187,
+    "ops": 6127616,
+    "nonzero_ops": 6127616
+   },
+   {
+    "name": "head",
+    "shape": [
+     28,
+     64
+    ],
+    "weights": 1792,
+    "nonzero": 1792,
+    "positions": 187,
+    "ops": 670208,
+    "nonzero_ops": 670208
+   }
+  ],
+  "linear_ops": 55818752,
+  "attention_ops": 2525952,
+  "nonzero_ops": 55818752
+ },
+ "qwen": {
+  "weights": 11450,
+  "nonzero": 128,
+  "total": 3986400,
+  "answer": "wfd_mod_fnm",
+  "steps": [
+   {
+    "total": 242400,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 60000,
+     "SimpleTransformer": 242400,
+     "SimpleTransformer.blocks.0.attn": 208800,
+     "SimpleTransformer.blocks.0": 208800,
+     "Global": 242400,
+     "SimpleTransformer.blocks.0.attn.W_k": 60000,
+     "SimpleTransformer.blocks.0.attn.W_v": 60000,
+     "SimpleTransformer.head": 33600
+    }
+   },
+   {
+    "total": 265200,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 65000,
+     "SimpleTransformer": 265200,
+     "SimpleTransformer.blocks.0.attn": 228800,
+     "SimpleTransformer.blocks.0": 228800,
+     "Global": 265200,
+     "SimpleTransformer.blocks.0.attn.W_k": 65000,
+     "SimpleTransformer.blocks.0.attn.W_v": 65000,
+     "SimpleTransformer.head": 36400
+    }
+   },
+   {
+    "total": 288400,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 70000,
+     "SimpleTransformer": 288400,
+     "SimpleTransformer.blocks.0.attn": 249200,
+     "SimpleTransformer.blocks.0": 249200,
+     "Global": 288400,
+     "SimpleTransformer.blocks.0.attn.W_k": 70000,
+     "SimpleTransformer.blocks.0.attn.W_v": 70000,
+     "SimpleTransformer.head": 39200
+    }
+   },
+   {
+    "total": 312000,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 75000,
+     "SimpleTransformer": 312000,
+     "SimpleTransformer.blocks.0.attn": 270000,
+     "SimpleTransformer.blocks.0": 270000,
+     "Global": 312000,
+     "SimpleTransformer.blocks.0.attn.W_k": 75000,
+     "SimpleTransformer.blocks.0.attn.W_v": 75000,
+     "SimpleTransformer.head": 42000
+    }
+   },
+   {
+    "total": 336000,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 80000,
+     "SimpleTransformer": 336000,
+     "SimpleTransformer.blocks.0.attn": 291200,
+     "SimpleTransformer.blocks.0": 291200,
+     "Global": 336000,
+     "SimpleTransformer.blocks.0.attn.W_k": 80000,
+     "SimpleTransformer.blocks.0.attn.W_v": 80000,
+     "SimpleTransformer.head": 44800
+    }
+   },
+   {
+    "total": 360400,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 85000,
+     "SimpleTransformer": 360400,
+     "SimpleTransformer.blocks.0.attn": 312800,
+     "SimpleTransformer.blocks.0": 312800,
+     "Global": 360400,
+     "SimpleTransformer.blocks.0.attn.W_k": 85000,
+     "SimpleTransformer.blocks.0.attn.W_v": 85000,
+     "SimpleTransformer.head": 47600
+    }
+   },
+   {
+    "total": 385200,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 90000,
+     "SimpleTransformer": 385200,
+     "SimpleTransformer.blocks.0.attn": 334800,
+     "SimpleTransformer.blocks.0": 334800,
+     "Global": 385200,
+     "SimpleTransformer.blocks.0.attn.W_k": 90000,
+     "SimpleTransformer.blocks.0.attn.W_v": 90000,
+     "SimpleTransformer.head": 50400
+    }
+   },
+   {
+    "total": 410400,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 95000,
+     "SimpleTransformer": 410400,
+     "SimpleTransformer.blocks.0.attn": 357200,
+     "SimpleTransformer.blocks.0": 357200,
+     "Global": 410400,
+     "SimpleTransformer.blocks.0.attn.W_k": 95000,
+     "SimpleTransformer.blocks.0.attn.W_v": 95000,
+     "SimpleTransformer.head": 53200
+    }
+   },
+   {
+    "total": 436000,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 100000,
+     "SimpleTransformer": 436000,
+     "SimpleTransformer.blocks.0.attn": 380000,
+     "SimpleTransformer.blocks.0": 380000,
+     "Global": 436000,
+     "SimpleTransformer.blocks.0.attn.W_k": 100000,
+     "SimpleTransformer.blocks.0.attn.W_v": 100000,
+     "SimpleTransformer.head": 56000
+    }
+   },
+   {
+    "total": 462000,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 105000,
+     "SimpleTransformer": 462000,
+     "SimpleTransformer.blocks.0.attn": 403200,
+     "SimpleTransformer.blocks.0": 403200,
+     "Global": 462000,
+     "SimpleTransformer.blocks.0.attn.W_k": 105000,
+     "SimpleTransformer.blocks.0.attn.W_v": 105000,
+     "SimpleTransformer.head": 58800
+    }
+   },
+   {
+    "total": 488400,
+    "modules": {
+     "SimpleTransformer.blocks.0.attn.W_q": 110000,
+     "SimpleTransformer": 488400,
+     "SimpleTransformer.blocks.0.attn": 426800,
+     "SimpleTransformer.blocks.0": 426800,
+     "Global": 488400,
+     "SimpleTransformer.blocks.0.attn.W_k": 110000,
+     "SimpleTransformer.blocks.0.attn.W_v": 110000,
+     "SimpleTransformer.head": 61600
+    }
+   }
+  ],
+  "matrices": [
+   {
+    "name": "blocks.0.attn.W_q",
+    "shape": [
+     50,
+     50
+    ],
+    "weights": 2500,
+    "nonzero": 11,
+    "positions": 187,
+    "ops": 935000,
+    "nonzero_ops": 4114
+   },
+   {
+    "name": "blocks.0.attn.W_k",
+    "shape": [
+     50,
+     50
+    ],
+    "weights": 2500,
+    "nonzero": 11,
+    "positions": 187,
+    "ops": 935000,
+    "nonzero_ops": 4114
+   },
+   {
+    "name": "blocks.0.attn.W_v",
+    "shape": [
+     50,
+     50
+    ],
+    "weights": 2500,
+    "nonzero": 28,
+    "positions": 187,
+    "ops": 935000,
+    "nonzero_ops": 10472
+   },
+   {
+    "name": "head",
+    "shape": [
+     28,
+     50
+    ],
+    "weights": 1400,
+    "nonzero": 28,
+    "positions": 187,
+    "ops": 523600,
+    "nonzero_ops": 10472
+   }
+  ],
+  "linear_ops": 3328600,
+  "attention_ops": 657800,
+  "nonzero_ops": 29172
+ }
+}

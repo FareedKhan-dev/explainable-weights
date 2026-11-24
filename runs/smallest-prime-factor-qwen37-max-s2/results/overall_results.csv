@@ -1,0 +1,28 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+smallest-prime-factor,0.0000,,RandomInitInterpretable,1.52e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+smallest-prime-factor,0.0000,,spf-exp1-random,1.52e+05,Baseline: random init with spf_table check
+smallest-prime-factor,0.0000,,spf-exp2-xavier-init,1.52e+05,Experiment 2: Xavier initialization baseline with SPF lookup computed
+smallest-prime-factor,0.0000,,spf-exp6-vec-lookup,2.33e+07,Vectorized MLP lookup with matched-filter neurons
+smallest-prime-factor,0.0000,,spf-exp7-dense-emb,2.33e+07,Dense random embeddings with uniform attention MLP lookup
+smallest-prime-factor,0.0000,,spf-exp8-algorithmic,2.69e+05,"Algorithmic SPF using divisibility rules (2,3,5) and prime detection"
+smallest-prime-factor,0.0000,,spf-exp9-pos-select,3.35e+05,Position-selective attention with divisibility rules
+smallest-prime-factor,0.0000,,spf-exp10-algo-v2,1.33e+06,Algorithmic SPF v2 with divisibility checks for 2 and 5
+smallest-prime-factor,0.0000,,spf-exp11-simple-heuristic,5.32e+05,Simple heuristic: check last digit for div by 2 or 5
+smallest-prime-factor,0.0000,,spf-exp12-lookup-table,9.27e+05,Lookup table approach with divisibility checks for 2 and 5
+smallest-prime-factor,0.0000,,spf-exp13-trial-division,1.72e+06,"Trial division: check divisibility by 2, 3, 5"
+smallest-prime-factor,0.0000,,spf-exp14-simple-test,1.02e+05,Simple test: output digit 2 at all positions
+smallest-prime-factor,0.0000,,spf-exp15-corrected-attention,4.01e+05,"Corrected attention: position 5 attends to 0-4, predicts position 6"
+smallest-prime-factor,0.0000,,spf-exp16-full-chain,4.01e+05,Full chain: positions 5-9 each predict next output digit for div by 2 or 5
+smallest-prime-factor,0.0000,,spf-exp18-multihead-route,5.42e+05,Multi-head routing: each head routes from one input position
+smallest-prime-factor,0.0000,,spf-exp19-large-tokens,5.42e+05,"Large token embeddings dominate, position for routing only"
+smallest-prime-factor,0.0000,,spf-exp20-diagnostic,5.42e+05,Diagnostic: each position outputs its index mod 10 to understand format
+smallest-prime-factor,0.0000,,spf-exp21-div-2-5,5.42e+05,"Check divisibility by 2 and 5 using last digit, output 00002 or 00005"
+smallest-prime-factor,0.0500,,spf-exp22-always-2,5.42e+05,Always output 00002 to measure baseline (fraction of even numbers)
+smallest-prime-factor,0.0000,,spf-exp23-div2,5.42e+05,"Check if last digit is even, output 00002 if so"
+smallest-prime-factor,0.0000,,spf-exp24-div2-5-fix,5.42e+05,"Use position 4 marker to attend to last digit, check div by 2 and 5"
+smallest-prime-factor,0.0000,,spf-exp25-multihead-copy,5.42e+05,"5 heads copy input digits, check div by 2 and 5 using last digit"
+smallest-prime-factor,0.0000,,spf-exp26-flag-based,5.42e+05,"Set flags at position 4, copy via attention, output based on flags at positions 5-9"
+smallest-prime-factor,0.0000,,spf-exp27-single-layer,5.42e+05,"Copy input digits with 5 heads, check div by 2 and 5 in single MLP"
+smallest-prime-factor,0.0000,,spf-exp28-residual-flags,5.42e+05,"Position 4 writes flags, output positions attend to position 4 and read flags"
+smallest-prime-factor,0.0150,,spf-exp29-massive-weights,5.42e+05,"Use very large weights to ensure attention copies last digit, check if even"
+smallest-prime-factor,0.0000,,spf-exp30-divrules,5.42e+05,"Proper divisibility rules: check div by 2 and 5, fallback to number itself"

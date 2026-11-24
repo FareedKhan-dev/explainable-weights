@@ -1,0 +1,29 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+date-normalization,0.0000,,baseline-larger,8.08e+05,"Larger model (d=128, h=8, L=4, ff=512) with random init as baseline."
+date-normalization,0.0000,,small-init-pos,8.08e+05,Small random initialization (std=0.02) with enhanced position embeddings (std=0.1).
+date-normalization,0.0000,,structured-sep-digit-attn,8.08e+05,"Structured attention: Block 0 finds separators, Block 1 finds digits, enhanced embeddings."
+date-normalization,0.0000,,pos-aware-output,8.08e+05,Position-aware output generation with strong position embeddings for output positions 32-41.
+date-normalization,0.0000,,comprehensive-date-parse,3.19e+06,"Comprehensive date parsing with month lookup, format detection, and position-based output generation."
+date-normalization,0.0000,,digit-copy-xavier,3.19e+06,Simple digit copying with position-based routing and Xavier initialization.
+date-normalization,0.0000,,copy-circuit-identity,3.19e+06,Identity-like copy circuit with near one-hot embeddings and pass-through attention.
+date-normalization,0.0000,,very-large-model,6.10e+05,"Very large model (d=512, h=16, L=6, ff=2048) with identity-like initialization."
+date-normalization,0.0000,,small-normal-2040,7.48e+04,"Small model (d=64, h=4, L=2) with normal init std=0.05, seed 2040."
+date-normalization,0.0000,,small-normal-2041,7.48e+04,"Small model (d=64, h=4, L=2) with normal init std=0.05, seed 2041."
+date-normalization,0.0000,,explicit-copy-circuit,1.61e+05,"Hand-coded circuit with one-hot embeddings, position-based routing, and identity attention."
+date-normalization,0.0000,,uniform-01-2042,1.61e+05,"Small model with uniform init [-0.1, 0.1], seed 2042."
+date-normalization,0.0000,,tiny-normal-2043,1.26e+04,"Tiny model (d=32, h=2, L=1) with normal init std=0.05, seed 2043."
+date-normalization,0.0000,,structured-xavier-2044,6.10e+05,"Structured circuit with one-hot embeddings, sinusoidal positions, and Xavier init."
+date-normalization,0.0000,,xavier-onehot-2045,6.10e+05,"One-hot embeddings, sinusoidal positions, Xavier init, seed 2045."
+date-normalization,0.0000,,xavier-onehot-2046,6.10e+05,"One-hot embeddings, sinusoidal positions, Xavier init, seed 2046."
+date-normalization,0.0000,,xavier-onehot-2047,6.10e+05,"One-hot embeddings, sinusoidal positions, Xavier init, seed 2047."
+date-normalization,0.0000,,xavier-onehot-2048,6.10e+05,"One-hot embeddings, sinusoidal positions, Xavier init, seed 2048."
+date-normalization,0.0000,,xavier-onehot-2050,6.10e+05,"One-hot embeddings, sinusoidal positions, Xavier init, seed 2050."
+date-normalization,0.0000,,xavier-onehot-2051,6.10e+05,"One-hot embeddings, sinusoidal positions, Xavier init, seed 2051."
+date-normalization,0.0000,,xavier-onehot-2052,6.10e+05,"One-hot embeddings, sinusoidal positions, Xavier init, seed 2052."
+date-normalization,0.0000,,xavier-onehot-2053,6.10e+05,"One-hot embeddings, sinusoidal positions, Xavier init, seed 2053."
+date-normalization,0.0000,,four-layer-format-2055,8.08e+05,"4-layer model with format detection, year/month/day extraction layers."
+date-normalization,0.0000,,pos-aware-copy-2056,8.08e+05,"Position-aware copy with format detection, strong position signals for routing."
+date-normalization,0.0000,,forced-hyphen-structure-2057,8.08e+05,Force hyphens at positions 31 and 34 via strong position embeddings.
+date-normalization,0.0000,,copy-year-end-2058,8.08e+05,Copy year digits from end of input to start of output using position-based attention.
+date-normalization,0.0000,,direct-position-map-2059,8.08e+05,Direct position-to-output mapping with very strong hyphen bias at positions 32 and 35.
+date-normalization,0.0000,,single-layer-extreme-2060,8.08e+05,Single-layer model with extreme position bias (100.0) for hyphens at positions 32 and 35.

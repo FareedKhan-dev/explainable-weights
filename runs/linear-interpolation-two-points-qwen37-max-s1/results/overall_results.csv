@@ -1,0 +1,30 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+linear-interpolation-two-points,0.0000,,RandomInitInterpretable,1.52e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+linear-interpolation-two-points,0.0100,,linear_interp_v1,3.17e+06,Attention extracts 7 input values via role flags
+linear-interpolation-two-points,0.0100,,baseline_identity,3.17e+06,Simple baseline with one-hot embeddings and identity weights
+linear-interpolation-two-points,0.0100,,v3_structured_random,3.17e+06,Structured random init with sinusoidal position embeddings
+linear-interpolation-two-points,0.0100,,v4_position_based_attention,3.17e+06,Position-based attention to extract 7 input values at output positions
+linear-interpolation-two-points,0.0100,,v5_mlp_computation,3.17e+06,MLP attempts to compute interpolation formula from extracted values
+linear-interpolation-two-points,0.0100,,v6_random_lookup,3.17e+06,Random MLP weights to learn interpolation from data distribution
+linear-interpolation-two-points,0.0100,,v7_multilayer_computation,3.17e+06,"Multi-layer computation: extract values, compute differences, then result"
+linear-interpolation-two-points,0.0100,,baseline_fixed_output,3.17e+06,Always output 00 to establish baseline
+linear-interpolation-two-points,0.0100,,v8_computation_attempt,3.17e+06,"Extract values, compute differences, then approximate result"
+linear-interpolation-two-points,0.0100,,v9_strong_attention,3.17e+06,Strong attention signals to extract input values
+linear-interpolation-two-points,0.0100,,v10_test_copy,3.17e+06,Test: copy x1 to output to verify attention works
+linear-interpolation-two-points,0.0100,,v11_always_zero,3.17e+06,Always output '00' to test output head
+linear-interpolation-two-points,0.0100,,v12_interpolation_attempt,3.17e+06,"Extract 7 inputs, compute y1/y2/dy/dx/dxq, output y1 (baseline)"
+linear-interpolation-two-points,0.0100,,v13_simple_baseline,3.17e+06,"Simple baseline: extract values, output y1 as approximation"
+linear-interpolation-two-points,0.0100,,v14_fixed_layernorm,3.17e+06,"Fixed LayerNorm weights, output y1 as baseline"
+linear-interpolation-two-points,0.0100,,v15_copy_test,3.17e+06,Minimal test: copy x1 to output to verify attention works
+linear-interpolation-two-points,0.0400,,v16_fixed_output,3.17e+06,Always output '50' to test output head
+linear-interpolation-two-points,0.0100,,v17_interpolation_v2,3.17e+06,"Extract inputs, compute differences, approximate division"
+linear-interpolation-two-points,0.0250,,v18_copy_y1,3.17e+06,Copy y1 directly to output (baseline)
+linear-interpolation-two-points,0.0100,,v19_midpoint_approx,3.17e+06,Use midpoint approximation: result ≈ y1 + dy/2
+linear-interpolation-two-points,0.0150,,v20_nearest_neighbor,3.17e+06,"Output y1 if x3 closer to x1, else y2 (heuristic)"
+linear-interpolation-two-points,0.0300,,v21_average,3.17e+06,Output average of y1 and y2
+linear-interpolation-two-points,0.0100,,v22_piecewise_linear,3.17e+06,Multi-layer MLP with piecewise linear approximation
+linear-interpolation-two-points,0.0000,,v23_lookup_table,3.17e+06,MLP lookup table: output (y1+y2)/2 as heuristic
+linear-interpolation-two-points,0.0950,,v24_copy_y1_test,3.17e+06,Copy y1 to output to verify attention mechanism works
+linear-interpolation-two-points,0.0050,,v25_nearest_neighbor,3.17e+06,Output y1 if |x3-x1| < |x3-x2| else y2
+linear-interpolation-two-points,0.1050,,v26_copy_y2,3.17e+06,Copy y2 to output to verify extraction works
+linear-interpolation-two-points,0.0050,,v27_nearest_neighbor_v2,3.17e+06,Nearest-neighbor with MLP-based soft routing

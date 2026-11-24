@@ -1,0 +1,561 @@
+{
+ "provisional": false,
+ "study": "main2",
+ "runs": {
+  "addition-five-digits-qwen37-max-s1": {
+   "tools": {
+    "read": 26,
+    "glob": 4,
+    "edit": 13,
+    "bash": 36,
+    "grep": 1,
+    "write": 16
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 29,
+    "cat src/task.py": 4,
+    "cat src/eval.py": 2,
+    "cd /home/user && find": 1
+   },
+   "refused": 17,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 9,
+    "src/task.py is a link to a folder outside the ru": 4,
+    "src/eval.py is a link to a folder outside the ru": 4
+   },
+   "paths_outside": []
+  },
+  "addition-five-digits-qwen37-max-s2": {
+   "tools": {
+    "read": 19,
+    "glob": 2,
+    "edit": 18,
+    "bash": 24,
+    "grep": 4,
+    "write": 7
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 21,
+    "cat src/eval.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/OneHotAddition_v8.py": 1,
+    "cat src/task.py": 1
+   },
+   "refused": 12,
+   "refused_kinds": {
+    "src/task.py is a link to a folder outside the ru": 4,
+    "only `uv run interpretable_transformer.py [args]": 4,
+    "src/eval.py is a link to a folder outside the ru": 3,
+    "src is a link to a folder outside the run folder": 1
+   },
+   "paths_outside": []
+  },
+  "boolean-circuit-5-bits-qwen37-max-s1": {
+   "tools": {
+    "read": 3,
+    "glob": 1,
+    "bash": 2,
+    "edit": 1
+   },
+   "commands": {
+    "ls -la": 1,
+    "uv run interpretable_transformer.py --task": 1
+   },
+   "refused": 1,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 1
+   },
+   "paths_outside": []
+  },
+  "date-normalization-qwen37-max-s1": {
+   "tools": {
+    "read": 28,
+    "glob": 4,
+    "edit": 68,
+    "bash": 52,
+    "write": 13,
+    "grep": 1
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 46,
+    "cat src/task.py": 2,
+    "cd /home/user/repos/mech-interp/experiments/runs/manual/date-normalization-20250125-01 && uv": 1,
+    "ls experiments/evolve/": 1,
+    "cat src/eval.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/pos-aware-copy-2056.py": 1
+   },
+   "refused": 12,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 7,
+    "src/task.py is a link to a folder outside the ru": 3,
+    "src/eval.py is a link to a folder outside the ru": 2
+   },
+   "paths_outside": []
+  },
+  "date-normalization-qwen37-max-s2": {
+   "tools": {
+    "read": 28,
+    "glob": 5,
+    "edit": 44,
+    "bash": 65,
+    "grep": 8,
+    "write": 13
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 60,
+    "cp interpretable_transformer.py interpretable_transformers_lib/exp3-better-structure.py": 1,
+    "cat src/task.py": 1,
+    "cat src/eval.py": 1,
+    "cd experiments/runs/manual/date-normalization-may15-run1 && uv": 1,
+    "cd /home/user/repos/autoresearch/date-normalization && uv": 1
+   },
+   "refused": 18,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 7,
+    "src/task.py is a link to a folder outside the ru": 6,
+    "src/eval.py is a link to a folder outside the ru": 5
+   },
+   "paths_outside": []
+  },
+  "decimal-to-binary-8bit-qwen37-max-s1": {
+   "tools": {
+    "read": 3,
+    "glob": 1,
+    "bash": 3,
+    "edit": 3
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 3
+   },
+   "refused": 0,
+   "refused_kinds": {},
+   "paths_outside": []
+  },
+  "edit-distance-8-qwen37-max-s1": {
+   "tools": {
+    "read": 3,
+    "glob": 3,
+    "bash": 3,
+    "edit": 4
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 2,
+    "ls -la": 1
+   },
+   "refused": 1,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 1
+   },
+   "paths_outside": []
+  },
+  "edit-distance-8-qwen37-max-s2": {
+   "tools": {
+    "read": 3,
+    "glob": 2,
+    "bash": 4,
+    "edit": 4
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 4
+   },
+   "refused": 0,
+   "refused_kinds": {},
+   "paths_outside": []
+  },
+  "gcd-three-digits-qwen37-max-s1": {
+   "tools": {
+    "read": 36,
+    "glob": 8,
+    "edit": 44,
+    "bash": 51,
+    "grep": 4,
+    "write": 13
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 42,
+    "cat src/task.py": 2,
+    "cat src/eval.py": 2,
+    "pwd": 2,
+    "cp interpretable_transformer.py interpretable_transformers_lib/always-001-clean.py": 1,
+    "cd /home/user/repos/autoresearch/experiments/runs/manual/gcd-three-digits-jun16-run1 && uv": 1,
+    "cd experiments/runs/manual/gcd-three-digits-may20-run1 && uv": 1
+   },
+   "refused": 21,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 10,
+    "src/eval.py is a link to a folder outside the ru": 6,
+    "src/task.py is a link to a folder outside the ru": 5
+   },
+   "paths_outside": []
+  },
+  "gcd-three-digits-qwen37-max-s2": {
+   "tools": {
+    "read": 25,
+    "glob": 5,
+    "edit": 51,
+    "bash": 64,
+    "grep": 2,
+    "write": 10
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 54,
+    "cat src/eval.py": 2,
+    "ls -la src/": 2,
+    "grep -n \"def evaluate\\|def": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/AlwaysPredict001.py": 1,
+    "cat src/task.py | head": 1,
+    "grep -n \"vocab\" src/task.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/Always001_pos789.py": 1,
+    "cat src/task.py": 1
+   },
+   "refused": 21,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 14,
+    "src/eval.py is a link to a folder outside the ru": 4,
+    "src/task.py is a link to a folder outside the ru": 3
+   },
+   "paths_outside": []
+  },
+  "linear-interpolation-two-points-qwen37-max-s1": {
+   "tools": {
+    "read": 15,
+    "glob": 5,
+    "edit": 52,
+    "bash": 46,
+    "write": 4,
+    "grep": 5
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 41,
+    "cp interpretable_transformer.py interpretable_transformers_lib/v4_position_based_attention.py": 1,
+    "ls -la": 1,
+    "cat src/task.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/v24_copy_y1_test.py": 1,
+    "uv run debug_task.py": 1
+   },
+   "refused": 13,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 7,
+    "src/task.py is a link to a folder outside the ru": 2,
+    "src/eval.py is a link to a folder outside the ru": 2,
+    "src is a link to a folder outside the run folder": 2
+   },
+   "paths_outside": []
+  },
+  "nli-snli-qwen37-max-s1": {
+   "tools": {
+    "read": 32,
+    "glob": 2,
+    "bash": 51,
+    "edit": 39,
+    "write": 20,
+    "grep": 3
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 45,
+    "ls -la src/": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/LexicalOverlap_v5.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/MultiHeadOverlap_v9.py": 1,
+    "cat src/task.py": 1,
+    "cat src/eval.py": 1,
+    "cat src/task.py 2>/dev/null |": 1
+   },
+   "refused": 17,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 8,
+    "src/task.py is a link to a folder outside the ru": 4,
+    "src/eval.py is a link to a folder outside the ru": 4,
+    "src is a link to a folder outside the run folder": 1
+   },
+   "paths_outside": []
+  },
+  "nli-snli-qwen37-max-s2": {
+   "tools": {
+    "read": 31,
+    "glob": 5,
+    "edit": 47,
+    "bash": 60,
+    "write": 18
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 53,
+    "cat src/task.py": 3,
+    "cat src/eval.py": 2,
+    "cd /home/user && cat": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/SentenceLengthDiff.py": 1
+   },
+   "refused": 17,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 9,
+    "src/task.py is a link to a folder outside the ru": 4,
+    "src/eval.py is a link to a folder outside the ru": 4
+   },
+   "paths_outside": []
+  },
+  "paraphrase-mrpc-qwen37-max-s1": {
+   "tools": {
+    "read": 21,
+    "glob": 2,
+    "bash": 68,
+    "edit": 61,
+    "write": 2,
+    "grep": 1
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 60,
+    "cat src/task.py": 2,
+    "cat src/eval.py": 2,
+    "cp interpretable_transformer.py interpretable_transformers_lib/char-overlap.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/char-bag-compare.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/word-overlap-v1.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/vowel-ratio-v1.py": 1
+   },
+   "refused": 14,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 10,
+    "src/task.py is a link to a folder outside the ru": 2,
+    "src/eval.py is a link to a folder outside the ru": 2
+   },
+   "paths_outside": []
+  },
+  "paraphrase-mrpc-qwen37-max-s2": {
+   "tools": {
+    "read": 32,
+    "glob": 8,
+    "edit": 51,
+    "bash": 69,
+    "write": 12,
+    "grep": 1
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 61,
+    "cp interpretable_transformer.py interpretable_transformers_lib/LengthBasedPredictor.py": 1,
+    "cat experiments/runs/manual/paraphrase-mrpc-may28-run1/src/task.py": 1,
+    "cat experiments/runs/manual/paraphrase-mrpc-may28-run1/src/eval.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/RefinedCharOverlap.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/PosAlignMatch_v1.py": 1,
+    "cat src/task.py": 1,
+    "cat src/eval.py": 1,
+    "cat experiments/runs/manual/paraphrase-mrpc-may29-run1/src/task.py 2>/dev/null ||": 1
+   },
+   "refused": 23,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 13,
+    "src/task.py is a link to a folder outside the ru": 5,
+    "src/eval.py is a link to a folder outside the ru": 5
+   },
+   "paths_outside": []
+  },
+  "parity-upto10-bits-qwen37-max-s1": {
+   "tools": {
+    "read": 3,
+    "glob": 5,
+    "edit": 2,
+    "bash": 1
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 1
+   },
+   "refused": 0,
+   "refused_kinds": {},
+   "paths_outside": []
+  },
+  "sentiment-sst2-qwen37-max-s1": {
+   "tools": {
+    "read": 26,
+    "glob": 5,
+    "edit": 44,
+    "bash": 52,
+    "write": 24
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 48,
+    "cat src/task.py": 1,
+    "cat src/eval.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/sentiment-bag-of-chars-v1.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/enhanced-movie-sentiment-v1.py": 1
+   },
+   "refused": 13,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 7,
+    "src/task.py is a link to a folder outside the ru": 3,
+    "src/eval.py is a link to a folder outside the ru": 3
+   },
+   "paths_outside": []
+  },
+  "sentiment-sst2-qwen37-max-s2": {
+   "tools": {
+    "read": 25,
+    "glob": 6,
+    "edit": 62,
+    "bash": 55,
+    "write": 2,
+    "grep": 2
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 46,
+    "cat src/task.py": 3,
+    "cat src/eval.py": 3,
+    "cd \"/mnt/c/Users/25854/Desktop/code/interpretability/interpretable_transformer/experiments/runs/manual/sentiment-sst2-may27-run1\" && uv": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/BagOfCharsSentiment.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/PositionWeightedScore.py": 1
+   },
+   "refused": 15,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 9,
+    "src/task.py is a link to a folder outside the ru": 3,
+    "src/eval.py is a link to a folder outside the ru": 3
+   },
+   "paths_outside": []
+  },
+  "smallest-prime-factor-qwen37-max-s1": {
+   "tools": {
+    "read": 34,
+    "glob": 6,
+    "edit": 50,
+    "bash": 47,
+    "grep": 2,
+    "write": 11
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 41,
+    "grep -n \"model_shorthand_name\\|model_description\\|def write_weights\"": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/constant_00011.py": 1,
+    "find . -name \"eval.py\"": 1,
+    "cat src/task.py": 1,
+    "cat src/eval.py": 1,
+    "cat run.log 2>/dev/null |": 1
+   },
+   "refused": 16,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 10,
+    "src/task.py is a link to a folder outside the ru": 3,
+    "src/eval.py is a link to a folder outside the ru": 3
+   },
+   "paths_outside": []
+  },
+  "smallest-prime-factor-qwen37-max-s2": {
+   "tools": {
+    "read": 28,
+    "edit": 29,
+    "bash": 53,
+    "write": 26,
+    "glob": 7,
+    "grep": 3
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 46,
+    "cat src/task.py": 3,
+    "cat src/eval.py": 3,
+    "ls -la src/": 1
+   },
+   "refused": 16,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 8,
+    "src/task.py is a link to a folder outside the ru": 4,
+    "src/eval.py is a link to a folder outside the ru": 4
+   },
+   "paths_outside": []
+  },
+  "trec-coarse-qwen37-max-s1": {
+   "tools": {
+    "read": 32,
+    "glob": 6,
+    "edit": 34,
+    "bash": 60,
+    "write": 23,
+    "grep": 5
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 53,
+    "cat src/task.py": 3,
+    "cat src/eval.py": 3,
+    "cp interpretable_transformer.py interpretable_transformers_lib/exp02_baseline_fixed.py": 1
+   },
+   "refused": 22,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 10,
+    "src/task.py is a link to a folder outside the ru": 7,
+    "src/eval.py is a link to a folder outside the ru": 5
+   },
+   "paths_outside": []
+  },
+  "trec-coarse-qwen37-max-s2": {
+   "tools": {
+    "read": 29,
+    "glob": 5,
+    "edit": 43,
+    "bash": 42,
+    "write": 18,
+    "grep": 4
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 35,
+    "cp interpretable_transformer.py interpretable_transformers_lib/KeywordDetector-v1.py": 1,
+    "cd /tmp/interpretable_transformer && python": 1,
+    "cd experiments/runs/manual/trec-coarse-may27-run1 && uv": 1,
+    "cat experiments/evolve/src/task.py 2>/dev/null |": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/BetterCalib-v1.py": 1,
+    "ls -la src/": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/TwoLayer-v1.py": 1
+   },
+   "refused": 12,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 8,
+    "src/task.py is a link to a folder outside the ru": 2,
+    "src/eval.py is a link to a folder outside the ru": 2
+   },
+   "paths_outside": []
+  },
+  "word-reversal-3x3-qwen37-max-s1": {
+   "tools": {
+    "read": 23,
+    "glob": 4,
+    "edit": 71,
+    "bash": 35,
+    "grep": 1,
+    "write": 5
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 29,
+    "uv run -c \"import": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/PosRouting_v1.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/PosRouting_dff64.py": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/PosRouting_2heads.py": 1,
+    "cd experiments/runs/manual/word-reversal-3x3-* 2>/dev/null &&": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/PosRouting_d50.py": 1
+   },
+   "refused": 11,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 8,
+    "src/task.py is a link to a folder outside the ru": 2,
+    "src/eval.py is a link to a folder outside the ru": 1
+   },
+   "paths_outside": []
+  },
+  "word-reversal-3x3-qwen37-max-s2": {
+   "tools": {
+    "read": 27,
+    "glob": 3,
+    "edit": 92,
+    "bash": 53,
+    "grep": 1,
+    "write": 6
+   },
+   "commands": {
+    "uv run interpretable_transformer.py --task": 46,
+    "cat src/task.py": 2,
+    "cat src/eval.py": 2,
+    "cd /home/harrison/transformer_interpretability/experiments/runs/manual/word-reversal-3x3-qwen37-max-s2 && uv": 1,
+    "tail -1 results/overall_results.csv": 1,
+    "cp interpretable_transformer.py interpretable_transformers_lib/D52_UniformPos_v16.py": 1
+   },
+   "refused": 12,
+   "refused_kinds": {
+    "only `uv run interpretable_transformer.py [args]": 8,
+    "src/task.py is a link to a folder outside the ru": 2,
+    "src/eval.py is a link to a folder outside the ru": 2
+   },
+   "paths_outside": []
+  }
+ }
+}

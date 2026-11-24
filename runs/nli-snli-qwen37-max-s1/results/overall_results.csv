@@ -1,0 +1,24 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+nli-snli,0.0000,,RandomInitInterpretable,1.62e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+nli-snli,0.3150,,AlwaysNeutral,1.62e+05,Baseline that always predicts neutral (class 1). Expected ~33% accuracy if balanced.
+nli-snli,0.3450,,AlwaysEntailment,1.62e+05,Baseline that always predicts entailment (class 0). Testing class distribution.
+nli-snli,0.3400,,AlwaysContradiction,1.62e+05,Baseline that always predicts contradiction (class 2). Testing class distribution.
+nli-snli,0.3450,,LexicalOverlap_v1,1.62e+05,Lexical overlap heuristic using attention to collect premise and hypothesis words.
+nli-snli,0.3150,,LexicalOverlap_v2,1.62e+05,"Attention-based lexical overlap: hypothesis attends to premise, overlap score determines class."
+nli-snli,0.3150,,CharOverlap_v3,8.16e+05,"Character-level overlap: hypothesis chars attend to matching premise chars, aggregated at equals position."
+nli-snli,0.3150,,LengthRatio_v4,8.16e+05,"Length-based heuristic: count characters in premise/hypothesis, use ratio to predict class."
+nli-snli,0.3150,,LexicalOverlap_v5,8.16e+05,"Count matching characters between premise/hypothesis, high overlap=entailment, low=contradiction."
+nli-snli,0.3400,,WordCountRatio_v6,8.16e+05,"Compare word counts: short hypothesis=entailment, long hypothesis=contradiction, else neutral."
+nli-snli,0.3150,,NegationDetection_v7,8.16e+05,"Detect negation words (not, no, never) in hypothesis to predict contradiction."
+nli-snli,0.3150,,VocabularyDivergence_v8,8.16e+05,"Count letters in hypothesis not in premise. High divergence=contradiction, low=entailment."
+nli-snli,0.3600,,MultiHeadOverlap_v9,4.20e+05,"Multi-head attention: hypothesis and premise word-start letters compared. Match=entailment, mismatch=contradiction."
+nli-snli,0.3150,,LengthRatio_v10,4.20e+05,"Count words via spaces, compute length ratio. Short hypothesis=entailment, very different=contradiction, similar=neutral."
+nli-snli,0.3550,,FourHeadNLI_v11,4.20e+05,"4 heads: hypothesis letters, premise letters, negation detection, overlap. Match+negation for classification."
+nli-snli,0.3300,,TunedOverlap_v12,6.18e+05,"Tuned 3-layer overlap: 2 heads for letter freq collection, 2 MLP layers for match/mismatch with stronger signals and better thresholds."
+nli-snli,0.3450,,HybridOverlapLength_v13,4.20e+05,"4 heads: hyp letters, premise letters, hyp length, premise length. MLP combines overlap match/mismatch with length ratio."
+nli-snli,0.3400,,WeightedOverlap_v14,4.20e+05,"4 heads with inverse-frequency-weighted letter overlap. Rare letters (z,q,x,j) get more weight for better discrimination."
+nli-snli,0.6000,,UniformAttn_v15,4.20e+05,Small Q/K weights for near-uniform attention over hypothesis/premise. Computes letter frequency overlap with calibrated MLP thresholds.
+nli-snli,0.3300,,BigramOverlap_v16,4.20e+05,4 heads: hyp/prem letter freq + word counts. MLP computes match/mismatch + word count diff for classification.
+nli-snli,0.3450,,CalibratedOverlap_v18,4.20e+05,Very small Q/K (0.1) for uniform attention. Letter freq collection + word counts + calibrated MLP thresholds for classification.
+nli-snli,0.3450,,StrongRouting_v22,1.63e+06,"d_model=256, d_ff=1024. Very strong Q/K=50 for sharp attention routing. W_o=20 amplification."
+nli-snli,0.3450,,CombinedHeuristic_v23,4.20e+05,Letter overlap + word count ratio. Very small Q/K=0.001 for uniform attn. Calibrated thresholds for 3-class classification.

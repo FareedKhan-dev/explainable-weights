@@ -1,0 +1,37 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+paraphrase-mrpc,0.0000,,RandomInitInterpretable,1.61e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+paraphrase-mrpc,0.6800,,AlwaysPredict1,1.61e+05,"Always predict token '1' (majority class) - simple baseline, expected ~68% accuracy."
+paraphrase-mrpc,0.3200,,BigramOverlap,1.61e+05,Detect character bigram overlap between sentences using attention - expected ~68% accuracy.
+paraphrase-mrpc,0.3200,,WordOverlapDetector,1.61e+05,Detect word overlap between sentences using position-aware attention - experimental.
+paraphrase-mrpc,0.6800,,ExactMatchDetector,1.61e+05,Count exact character matches at same positions using attention - experimental.
+paraphrase-mrpc,0.6800,,CharOverlapCounter,1.61e+05,"Count character overlap between sentences using attention, threshold for prediction."
+paraphrase-mrpc,0.6800,,LengthBasedPredictor,1.61e+05,Predict based on length similarity between sentences - experimental.
+paraphrase-mrpc,0.6800,,MLPSimilarityEncoder,1.61e+05,Use MLP layers to compute similarity between sentences - experimental.
+paraphrase-mrpc,0.3200,,RefinedCharOverlap,1.61e+05,Position-weighted character overlap using attention to match chars across sentences.
+paraphrase-mrpc,0.6800,,CrossSentAttn_v1,1.61e+05,"Cross-sentence attention: aggregate sent1 at sep, compare at query pos, predict via MLP."
+paraphrase-mrpc,0.5250,,CharFreqComparator,1.61e+05,Compare character frequency distributions between sentences using attention and MLP.
+paraphrase-mrpc,0.3200,,BigramOverlap_v2,1.61e+05,Detect character bigram overlap between sentences using attention and MLP.
+paraphrase-mrpc,0.0000,,CleanAlwaysOne,1.61e+05,Clean identity pass-through with output head always predicting '1'.
+paraphrase-mrpc,0.4800,,RandomWithBias,1.61e+05,"Random embeddings with identity layers, output biased to predict '1'."
+paraphrase-mrpc,0.6800,,CrossSentAttn_v2,1.61e+05,"Cross-sentence attention: aggregate sent1 at sep, compare with sent2 at query."
+paraphrase-mrpc,0.6800,,PositionAlignedMatch,1.61e+05,Match characters at aligned positions between sentences using position-aware attention.
+paraphrase-mrpc,0.6800,,ThresholdOverlap,1.61e+05,Character overlap with threshold to allow some 0 predictions.
+paraphrase-mrpc,0.6800,,WordPositionMatch,1.61e+05,Match words at aligned positions between sentences with threshold.
+paraphrase-mrpc,0.6800,,DirectPosAlign,1.61e+05,Direct position-aligned character comparison between sentences.
+paraphrase-mrpc,0.7000,,MLPCharFreqCompare,1.61e+05,MLP-based character frequency comparison with threshold.
+paraphrase-mrpc,0.6000,,Diag22,1.61e+05,Diagnostic run to understand task format.
+paraphrase-mrpc,0.3200,,CharExistMatch_v1,6.18e+05,"Character existence matching: separator aggregates sent1, query compares char frequencies."
+paraphrase-mrpc,0.6800,,PosAlignMatch_v1,6.18e+05,"Position-aligned character matching: sent2 attends to corresponding sent1 positions, MLP compares characters."
+paraphrase-mrpc,0.3200,,CharFreqDist_v1,6.18e+05,Character frequency distribution matching: compare L1 distance between char frequency vectors.
+paraphrase-mrpc,0.6800,,BigramMatch_v1,6.18e+05,Character bigram matching with position tolerance: match bigrams between sentences.
+paraphrase-mrpc,0.6800,,WordBoundaryMatch_v1,6.18e+05,Position-aligned matching with word-boundary weighting: bonus for word-initial character matches.
+paraphrase-mrpc,0.7000,,ExactPosMatch_tuned,1.61e+05,Exact position-aligned character matching with 40% threshold.
+paraphrase-mrpc,0.8000,,MatchMismatch_v1,1.61e+05,Match vs mismatch scoring: count matches and penalize mismatches with 2x weight.
+paraphrase-mrpc,0.6800,,DotProduct_strict,1.61e+05,Dot product similarity with strict threshold to force more 0 predictions.
+paraphrase-mrpc,0.6800,,UltraStrict_v1,1.61e+05,Ultra-strict character matching: require 70% position-aligned matches for paraphrase prediction.
+paraphrase-mrpc,0.6800,,MatchMismatch_v2_3x,1.61e+05,Match vs mismatch scoring with 3x mismatch penalty (vs 2x in v1).
+paraphrase-mrpc,0.6800,,FullCharAdaptive_v1,1.61e+05,Full character set matching with character-type weighting and adaptive threshold.
+paraphrase-mrpc,0.6800,,WordMatch_v1,1.61e+05,Word-level matching with higher weight for character matches and mismatch penalty.
+paraphrase-mrpc,0.6800,,BagOfChars_v1,1.61e+05,Bag-of-chars matching: position-aligned + uniform sent1 attention for character frequency matching.
+paraphrase-mrpc,0.6800,,MatchMismatch_tuned_045,1.61e+05,"Match vs mismatch with 2x penalty, threshold at 0.45."
+paraphrase-mrpc,0.6800,,MatchMismatch_tuned_050,1.61e+05,"Match vs mismatch with 2x penalty, threshold at 0.50."

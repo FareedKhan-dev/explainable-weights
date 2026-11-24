@@ -1,0 +1,6 @@
+network written by Qwen3.7-Max, attempt 27: 11,450 weights, 128 not zero
+  correct      200 of 200 visible, 2,000 of 2,000 hidden, 20,000 of 20,000 extra
+  readable     1 layer, 1 head, no MLP, an 11-entry routing table
+  faithful     13 cases, the routing program predicts every answer
+  sufficient   151-word description, 2 fresh rebuilds of exactly 11,450 weights
+  independent  same weights under random labels, no training code

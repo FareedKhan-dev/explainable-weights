@@ -1,0 +1,2 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+word-reversal-3x3,1.0000,,WordReversal3x3_v1,1.14e+04,Single-layer single-head d_model=50 transformer performing position-based token copying via hard argmax attention to reverse three 3-letter words.

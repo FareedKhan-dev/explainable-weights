@@ -1,0 +1,2 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+word-reversal-3x3,1.0000,,WordReversalV2,3.27e+05,"Position-routed attention copy (layer 0) + MLP underscore generation (layer 1). d_model=144, 2 layers."

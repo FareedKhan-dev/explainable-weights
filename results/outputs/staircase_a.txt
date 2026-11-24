@@ -1,0 +1,14 @@
+  #  attempt name                weights  visible right
+  1  RandomInitInterpretable    154,368    0 of 200
+  2  RandomInitInterpretable    154,368    0 of 200
+  3  RandomInitInterpretable    154,368    0 of 5
+  4  PosRouting_v1               38,400    0 of 200
+  5  PosRouting_v1               38,400    0 of 3
+  6  PosRouting_v1               38,400    5 of 5
+  7  PosRouting_v1               38,400  200 of 200
+  8  PosRouting_Small32          15,168    0 of 200
+  9  PosRouting_Small32          15,168    0 of 200
+ 10  PosRouting_dff64            30,144  200 of 200
+ 11  PosRouting_dff32            26,016  200 of 200
+ 12  PosRouting_d48_dff32        16,448    0 of 200
+ 13  PosRouting_2heads           26,016  200 of 200

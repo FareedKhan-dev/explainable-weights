@@ -1,0 +1,6 @@
+* text=auto eol=lf
+# the agent's files stay byte for byte as written, so the SHA-256 in each attempts.jsonl still matches
+runs/** -text
+*.gif binary
+*.png binary
+*.pt binary

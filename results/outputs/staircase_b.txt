@@ -1,0 +1,15 @@
+  #  attempt name                weights  visible right
+ 14  PosRouting_d40                      crashed
+ 15  PosRouting_4heads_dff32     26,016    0 of 200
+ 16  PosRouting_dff16            23,952  200 of 200
+ 17  PosRouting_dff8             22,920  200 of 200
+ 18  PosRouting_dff0             21,888  200 of 200
+ 19  PosRouting_dff0                     crashed
+ 20  PosRouting_dff0                     crashed
+ 21  PosRouting_d50              14,250  200 of 200
+ 22  PosRouting_binary6          13,296    0 of 200
+ 23  PosRouting_binToken          5,211    0 of 200
+ 24  PosRouting_d52              15,236  200 of 200
+ 25  PosRouting_noLN             14,150  200 of 200
+ 26  PosRouting_noLN_v2          13,950  200 of 200
+ 27  PosRouting_noW_o            11,450  200 of 200

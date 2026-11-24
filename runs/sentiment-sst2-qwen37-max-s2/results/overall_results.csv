@@ -1,0 +1,28 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+sentiment-sst2,0.1450,,RandomInitInterpretable,1.59e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+sentiment-sst2,0.5950,,AlwaysPositive_sst2,1.59e+05,Baseline: always predict positive class (1) to measure class imbalance.
+sentiment-sst2,0.5950,,KeywordAttention_v1,1.59e+05,Attempt keyword-based sentiment detection using attention heads.
+sentiment-sst2,0.5900,,CharSentimentV1,1.59e+05,"Character-level sentiment scoring: each char gets pos/neg score, attention aggregates, head classifies."
+sentiment-sst2,0.4050,,AlwaysNegative_sst2,1.59e+05,Baseline: always predict negative class (0) to measure class balance.
+sentiment-sst2,0.5950,,UniformAttnBagOfChars,6.12e+05,"K=0 uniform attention creates bag-of-chars, MLP maps to sentiment, head classifies."
+sentiment-sst2,0.5950,,DirectCharSentiment,6.12e+05,Direct character sentiment scores in embeddings with uniform attention averaging.
+sentiment-sst2,0.0000,,MLPOnlyAccumulation,6.12e+05,"Disable attention, use MLP to accumulate character-level sentiment scores across positions."
+sentiment-sst2,0.3333,,Position80Classifier,6.12e+05,Use position 80 as special classifier token that attends to all positions for sentiment aggregation.
+sentiment-sst2,0.5750,,BagOfCharsSentiment,6.12e+05,"Bag-of-characters classifier: token embeddings encode sentiment scores, uniform attention averages across positions, head classifies."
+sentiment-sst2,0.5700,,MLPCharScorer,6.12e+05,"MLP maps one-hot char to sentiment score via positive/negative detectors, uniform attention aggregates, head classifies."
+sentiment-sst2,0.4350,,LNFixedCharScorer,6.12e+05,LayerNorm-aware char sentiment scoring: MLP accounts for LN distortion of one-hot vectors.
+sentiment-sst2,0.4350,,DirectEmbSentiment,6.12e+05,"Sentiment scores directly in token embeddings dim 0, uniform attention averages, head classifies sign."
+sentiment-sst2,0.5600,,AmplifiedCharScore,6.12e+05,Amplified (10x) char sentiment scores in MLP to survive LayerNorm distortion during attention aggregation.
+sentiment-sst2,0.4400,,SmallModelDirectScore,4.25e+04,"Smaller model (D=32, H=4) with sentiment scores directly in token embeddings, uniform attention aggregates."
+sentiment-sst2,0.6250,,PositionWeightedScore,4.25e+04,Position-weighted sentiment: later positions weighted more heavily via position embeddings.
+sentiment-sst2,0.6200,,PosBiasSentiment,4.25e+04,Position-weighted + positive bias in dim 2 to handle class imbalance (59.5% positive).
+sentiment-sst2,0.6150,,ExpPosWeight,4.25e+04,Exponential position weighting: later positions get exponentially more weight for sentiment.
+sentiment-sst2,0.6000,,QuadPosWeight,4.25e+04,Quadratic position weighting: middle-to-later positions emphasized more heavily.
+sentiment-sst2,0.5950,,LinearPosWeightLarge,4.25e+04,Linear position weighting with larger scale (0.5 instead of 0.1).
+sentiment-sst2,0.6250,,PositionWeightedScore_v2,4.25e+04,Reverted to PositionWeightedScore baseline (62.5% accuracy) for further experimentation.
+sentiment-sst2,0.6150,,HighScaleSentiment,4.25e+04,Higher sentiment score scaling (10x instead of 5x) to amplify signal.
+sentiment-sst2,0.6200,,Last20PercentFocus,4.25e+04,Focus attention on last 20% of positions where sentiment is typically expressed.
+sentiment-sst2,0.4050,,LNRefConstant,4.25e+04,"Large constant in dim 1 as LN reference, sentiment in dim 0 - LN preserves magnitude."
+sentiment-sst2,0.6250,,CausalRunningSum,4.25e+04,Causal attention accumulates sentiment scores across all positions (same as PositionWeightedScore but cleaner).
+sentiment-sst2,0.5950,,NegationDetection,4.25e+04,"MLP detects negation words (not, no) to flip sentiment predictions."
+sentiment-sst2,0.6000,,MLPAmplifySentiment,4.25e+04,"Two-stage: attention aggregates sentiment, then MLP amplifies the signal."

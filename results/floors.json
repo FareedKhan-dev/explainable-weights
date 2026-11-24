@@ -1,0 +1,96 @@
+{
+ "provisional": false,
+ "datasets": {
+  "sentiment-sst2": {
+   "visible": {
+    "label": "1",
+    "share": 0.595,
+    "count": 119,
+    "n": 200
+   },
+   "hidden": {
+    "label": "1",
+    "share": 0.555,
+    "count": 1110,
+    "n": 2000
+   },
+   "official": {
+    "split": "validation",
+    "label": "1",
+    "share": 0.5092,
+    "count": 444,
+    "n": 872
+   }
+  },
+  "paraphrase-mrpc": {
+   "visible": {
+    "label": "1",
+    "share": 0.68,
+    "count": 136,
+    "n": 200
+   },
+   "hidden": {
+    "label": "1",
+    "share": 0.6882,
+    "count": 1148,
+    "n": 1668
+   },
+   "official": {
+    "split": "validation",
+    "label": "1",
+    "share": 0.6838,
+    "count": 279,
+    "n": 408
+   }
+  },
+  "nli-snli": {
+   "visible": {
+    "label": "0",
+    "share": 0.345,
+    "count": 69,
+    "n": 200
+   },
+   "hidden": {
+    "label": "0",
+    "share": 0.342,
+    "count": 684,
+    "n": 2000
+   },
+   "official": {
+    "split": "test",
+    "label": "0",
+    "share": 0.3428,
+    "count": 3368,
+    "n": 9824
+   }
+  },
+  "trec-coarse": {
+   "visible": {
+    "label": "3",
+    "share": 0.29,
+    "count": 58,
+    "n": 200
+   },
+   "hidden": {
+    "label": "3",
+    "share": 0.2255,
+    "count": 451,
+    "n": 2000
+   },
+   "official": {
+    "split": "test",
+    "label": "2",
+    "share": 0.276,
+    "count": 138,
+    "n": 500
+   }
+  }
+ },
+ "gcd": {
+  "inputs": 998001,
+  "coprime": 607583,
+  "share": 0.6088,
+  "hidden_share": 0.609,
+  "six_over_pi_sq": 0.6079
+ }
+}

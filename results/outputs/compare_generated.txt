@@ -1,0 +1,8 @@
+problem           qwen weights   hidden    paper weights   hidden
+reversal                11,450   1.0000                3   1.0000
+addition            16,191,536   0.0060               27   1.0000
+gcd                    151,872   0.6090              332   1.0000
+dates                   12,576   0.0000              345   1.0000
+prime factor           151,744   0.0100            2,729   1.0000
+interpolation        3,166,208   0.0955              864   1.0000
+solved                1 of 6                   6 of 6

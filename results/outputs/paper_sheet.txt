@@ -1,0 +1,11 @@
+generated problem weights   (each 1.0000 on visible, hidden and extra)
+addition            27   multiplication     304   sort                53
+digit counting      75   parity              15   boolean             51
+interpolation      864   reversal             3   gcd                332
+dec to binary       89   edit distance      507   smallest prime   2,729
+dates              345
+dataset           weights   hidden  official
+trec               57,753   0.8225    0.8780
+sst-2             497,631   0.7865    0.7477
+mrpc               43,032   0.6894    0.7083
+snli            2,202,474   0.5790    0.5770

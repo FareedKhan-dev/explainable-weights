@@ -1,0 +1,38 @@
+{
+ "provisional": false,
+ "python": "3.12.14",
+ "platform": "Windows-11-10.0.26300-SP0",
+ "processor": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel",
+ "cpus": 16,
+ "packages": {
+  "torch": "2.10.0",
+  "numpy": "2.4.2",
+  "datasets": "4.8.3",
+  "pyarrow": "23.0.1",
+  "huggingface-hub": "1.7.2",
+  "matplotlib": "3.10.8"
+ },
+ "paper": {
+  "repository": "weight-space-programming-autoresearch (MIT)",
+  "commit": "4f8eb61580fe9aa307c868d0bdd86914e673ef1f",
+  "commit_date": "2026-11-16T11:19:57-05:00",
+  "clean": true
+ },
+ "agent_model_calls": {
+  "pilot and probes": {
+   "Qwen3.8-Flash-Next": 6,
+   "Qwen3.7-Max": 184
+  },
+  "main": {
+   "Qwen3.7-Max": 78
+  },
+  "main2": {
+   "Qwen3.7-Max": 784
+  }
+ },
+ "code_hashes": "runs/harness_sha256.txt (at launch, with dated notes)",
+ "threads": {
+  "evaluator": "OMP_NUM_THREADS=8 and MKL_NUM_THREADS=8 (the sandbox)",
+  "analysis": "each network scored in its own process"
+ }
+}

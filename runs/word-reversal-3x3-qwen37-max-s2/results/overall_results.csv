@@ -1,0 +1,37 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+word-reversal-3x3,0.0000,,RandomInitInterpretable,1.54e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+word-reversal-3x3,0.0000,,CopyCircuit_v1,3.01e+04,"1-layer attention copy circuit: position embeddings encode source->target mapping, token embeddings carry identity."
+word-reversal-3x3,0.0000,,CopyCircuit_v2,2.37e+04,No-residual 1-layer copy circuit. Position embeddings encode source/target mapping for attention-based token copying.
+word-reversal-3x3,0.0000,,CopyNoResidual_v1,2.37e+04,No-residual 1-layer copy circuit. Attention copies tokens from source positions using position-encoded key/query matching.
+word-reversal-3x3,1.0000,,CopyNoResidualNoMLP_v1,2.37e+04,"Pure attention copy circuit: no MLP, no residuals. Position-based key/query matching copies tokens from source to output positions."
+word-reversal-3x3,0.0000,,CopyWithResidual_v1,2.37e+04,Copy circuit WITH residual connections and MLP (standard transformer architecture).
+word-reversal-3x3,1.0000,,D40_NoResidual_v1,1.95e+04,"Smaller d_model=40, pure attention copy circuit."
+word-reversal-3x3,1.0000,,D52_Minimal_v2,1.95e+04,"Minimal d_model=52 (exact fit), pure attention copy circuit."
+word-reversal-3x3,1.0000,,D52_StrongPos_v3,1.95e+04,D=52 with stronger position embedding magnitude (20.0 instead of 10.0).
+word-reversal-3x3,1.0000,,D52_VeryStrongPos_v4,1.95e+04,D=52 with very strong position embedding magnitude (30.0).
+word-reversal-3x3,1.0000,,D52_StrongHead_v5,1.95e+04,D=52 with stronger output head weights (10.0 instead of 5.0).
+word-reversal-3x3,1.0000,,D64_StrongHead_v6,2.70e+04,D=64 (larger model) with strong output head weights (10.0).
+word-reversal-3x3,1.0000,,D64_2Heads_v7,2.19e+04,D=64 with 2 attention heads instead of 1.
+word-reversal-3x3,1.0000,,D64_HeadWt10_v8,2.70e+04,D=64 with strong output head weights (10.0).
+word-reversal-3x3,0.0000,,D128_HeadWt10_v9,1.63e+05,D=128 with strong output head weights (10.0).
+word-reversal-3x3,1.0000,,D52_StrongV_v10,1.95e+04,D=52 with stronger value projection weights (5.0 instead of 1.0).
+word-reversal-3x3,1.0000,,D52_WeakPos_v10,1.95e+04,D=52 with weaker position embeddings (magnitude 5.0)
+word-reversal-3x3,1.0000,,D52_VeryWeakPos_v11,1.95e+04,D=52 with very weak position embeddings (magnitude 2.0)
+word-reversal-3x3,1.0000,,D52_WeakHead_v12,1.95e+04,D=52 with weaker output head weights (magnitude 2.0)
+word-reversal-3x3,1.0000,,D52_WeakVO_v13,1.95e+04,D=52 with weaker V/O projection weights (magnitude 2.0)
+word-reversal-3x3,1.0000,,D52_StrongPos_v14,1.95e+04,D=52 with stronger position embeddings (magnitude 10.0)
+word-reversal-3x3,1.0000,,D52_AsymmetricPos_v15,1.95e+04,"D=52 with asymmetric position embeddings (keys=20.0, queries=5.0)"
+word-reversal-3x3,1.0000,,D52_UniformPos_v16,1.95e+04,D=52 with uniform position embedding magnitude (10.0 for both keys and queries)
+word-reversal-3x3,1.0000,,D52_LowUniformPos_v17,1.95e+04,D=52 with low uniform position embedding magnitude (5.0 for both keys and queries)
+word-reversal-3x3,1.0000,,D52_VeryLowUniformPos_v18,1.95e+04,D=52 with very low uniform position embedding magnitude (1.0 for both keys and queries)
+word-reversal-3x3,0.9100,,D52_TinyPos_v19,1.95e+04,D=52 with tiny position embedding magnitude (0.5 for both keys and queries)
+word-reversal-3x3,1.0000,,D52_MediumLowPos_v20,1.95e+04,D=52 with medium-low position embedding magnitude (0.75 for both keys and queries)
+word-reversal-3x3,1.0000,,D52_IdentityVO_v21,1.95e+04,D=52 with identity V and O projections (1.0 scale factor)
+word-reversal-3x3,1.0000,,D52_IdentityVO_LowHead_v22,1.95e+04,D=52 with identity V/O projections and lower head weight (5.0)
+word-reversal-3x3,1.0000,,D52_IdentityVO_VeryLowHead_v23,1.95e+04,D=52 with identity V/O projections and very low head weight (2.0)
+word-reversal-3x3,1.0000,,D52_IdentityVO_MinimalHead_v24,1.95e+04,D=52 with identity V/O projections and minimal head weight (1.0)
+word-reversal-3x3,0.0000,,D52_2Heads_v25,1.95e+04,D=52 with 2 attention heads
+word-reversal-3x3,1.0000,,D52_LowFF_v25,1.74e+04,D=52 with reduced feed-forward size (d_ff=20)
+word-reversal-3x3,1.0000,,D52_MinimalFF_v26,1.61e+04,D=52 with minimal feed-forward size (d_ff=8)
+word-reversal-3x3,1.0000,,D52_TinyFF_v27,1.57e+04,D=52 with tiny feed-forward size (d_ff=4)
+word-reversal-3x3,1.0000,,D52_MinimalFF_v28,1.54e+04,D=52 with minimal feed-forward size (d_ff=1)

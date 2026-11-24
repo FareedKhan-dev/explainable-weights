@@ -1,0 +1,14 @@
+task,accuracy,status,model_shorthand_name,n_params,description
+addition-five-digits,0.0000,,RandomInitInterpretable,1.52e+05,"Default architecture, no weight assignment (random init, expected ~0% accuracy)."
+addition-five-digits,0.0000,,IdentityBaseline,1.52e+05,Identity-like initialization with orthogonal embeddings and small MLP weights as baseline.
+addition-five-digits,0.0000,,DigitAttention_v1,1.52e+05,"Encode digits as one-hot, use position embeddings to mark sections, identity attention init."
+addition-five-digits,0.0000,,ZeroInitBasic,1.52e+05,Zero init with one-hot token embeddings and identity LayerNorm.
+addition-five-digits,0.0000,,PositionAttnCopy_v3,1.52e+05,Attention-based copying from input positions to answer positions using position queries.
+addition-five-digits,0.0000,,PredictZeros_v4,1.52e+05,Baseline: predict all zeros for answer positions using position embeddings.
+addition-five-digits,0.0000,,CopyAndSum_v5,1.52e+05,"Copy digit pairs from input to answer positions using attention, then sum with linear output head."
+addition-five-digits,0.0100,,OneHotAddition_v8,5.99e+05,"One-hot digit encoding, attention-based copying, MLP lookup table for digit sum mod 10."
+addition-five-digits,0.0000,,CarryPropagation_v9,5.99e+05,"Position 11 computes full sum with carries, answer positions read results via attention."
+addition-five-digits,0.0150,,SimpleDigitSum_v10,5.99e+05,"Copy A[i] and B[i] to answer positions, compute (A+B) mod 10 with MLP lookup."
+addition-five-digits,0.0000,,SumHub_v11,5.99e+05,"Use '=' position to compute full sum, answer positions read their digit."
+addition-five-digits,0.0200,,CarryLookup_v13,1.62e+07,"Copy digit pairs via attention, MLP lookup for (a+b+carry(c+d)) mod 10. D=256, 10000 neurons."
+addition-five-digits,0.0000,,CarryLookup_v14,1.62e+07,"4 heads copy A[i-1],B[i-1],A[i],B[i] to answer pos. MLP lookup with carry. Dummy keys for edge cases."
