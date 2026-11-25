@@ -8,7 +8,7 @@
 [![CPU only](https://img.shields.io/badge/hardware-CPU%20only-6b7280.svg)](#quickstart)
 [![arXiv 2611.18114](https://img.shields.io/badge/arXiv-2611.18114-b31b1b.svg)](https://arxiv.org/abs/2611.18114)
 
-<p align="center"><img src="images/g-hero.gif" width="100%" alt="The agent writes the network's routing wires one by one, and each letter of the prompt follows its wire to the answer"></p>
+<p align="center"><img src="images/g-pipeline.gif" width="100%" alt="An AI agent writes the network's weights as code, a fixed evaluator scores it and the agent tries again, and two tests check that the explanation is true"></p>
 
 Trained networks work, but their weights do not say how. This repository follows the method of the paper
 [*Interpretable weight-space programming builds transparent transformers and brain encoding models*](https://arxiv.org/abs/2611.18114): an AI
@@ -222,7 +222,7 @@ def word_reversal(rng):
     return Example(prompt, answer)
 ```
 
-It hands back the prompt and its answer as one `Example`.
+It returns the prompt and its answer as one `Example`.
 
 A transformer cannot read letters, though. Each task in our package also has a `Problem` class, kept in the repository, that holds the task's characters and turns text into ids and back. We can print a few examples, the characters and one prompt the way the network sees it:
 
@@ -303,7 +303,7 @@ class CausalSelfAttention(nn.Module):
         self.W_o = nn.Linear(d_model, d_model, bias=False)
 ```
 
-Our `__init__` method creates four weight tables without a bias: `W_q`, `W_k` and `W_v` turn each position's vector into a query, a key and a value, and `W_o` mixes the heads back together. The `forward` method puts them to work:
+Our `__init__` method creates four weight tables without a bias: `W_q`, `W_k` and `W_v` turn each position's vector into a query, a key and a value, and `W_o` mixes the heads back together. The `forward` method uses all four:
 
 ```python
 # model.py
@@ -395,7 +395,7 @@ print(f"{weights:,d} weights")
 154,368 weights
 ```
 
-These weights are random, so none of them has a job yet. PyTorch's `FlopCounterMode` counts every multiplication and addition inside a block of code. We can run the template on our prompt one letter at a time, the way the evaluator does:
+These weights are random, and none of them has a job yet. PyTorch's `FlopCounterMode` counts every multiplication and addition inside a block of code. We can run the template on our prompt one letter at a time, the way the evaluator does:
 
 ```python
 from torch.utils.flop_counter import FlopCounterMode
@@ -460,7 +460,7 @@ def train_step(model, opt, sched, problem, rng, size):
     return loss
 ```
 
-Each step draws a fresh batch of sums and computes the loss on the answer digits only. Then `backward` and `step` change all the weights at once. The trainer repeats that step:
+Each step draws a fresh batch of sums and computes the loss on the answer digits only. Then `backward` and `step` change all the weights at once. We can now write the loop that repeats it:
 
 ```python
 # baseline.py
@@ -617,7 +617,7 @@ def session(client, box, messages, limits, k, state, logs, tools=TOOLS):
     return finish(s, end, False)
 ```
 
-We just coded a session. Each turn calls the model, and a full reply goes to `take_turn`, which keeps it in the conversation and runs the tools it asked for:
+We just coded a session. Each turn calls the model, and `take_turn` keeps a full reply in the conversation and runs the tools it asked for:
 
 ```python
 # agent.py
@@ -648,7 +648,7 @@ There are two important points about this loop:
 
 One real session of our reversal run shows both points at work:
 
-![One session, a cut-off and a restart](images/g-session.gif)
+![One session runs into both limits](images/g-session.gif)
 
 I learned the first point the hard way. In my first launch, a reply cut off while thinking counted as a stalled run, every run stopped early, and I fixed the loop before the runs we look at next.
 
@@ -721,7 +721,11 @@ MIN_D = V + 22       # minimum d_model needed = 50
 
 For us, the source map is the whole algorithm in one table. The `=` writes the first answer letter by copying position 8, the first letter of the last word.
 
-Each position after it copies the next letter in reverse word order, and two routes copy a `_` to put the separators back. We can see what the plan means for our `w` and the `=` that will copy it:
+Each position after it copies the next letter in reverse word order, and two routes copy a `_` to put the separators back. Drawn as wires, the table connects every answer slot to the prompt letter it copies:
+
+![Every answer letter has its own wire](images/g-hero.gif)
+
+We can see what the plan means for our `w` and the `=` that will copy it:
 
 ![Two positions light their own slots](images/g-stream.gif)
 
@@ -786,7 +790,7 @@ position 8 lights channel [36]
 position 11 lights channel [47]
 ```
 
-Inside the network we loaded, `w` is one number in one channel. The `w` at position 8 lights the key channel of position 8, in the zone right after the letters.
+Inside the network we loaded, `w` is one number in one channel. The `w` at position 8 lights the key channel for that position, in the zone right after the letters.
 
 The `=` lights the query channel that names position 8. Both point at the same prompt position, and attention turns that match into a copy.
 
@@ -948,7 +952,7 @@ def routing(ids, off=(), steps=11, vocab=28):
     return ids[-steps:]
 ```
 
-We just coded the routing program. It never runs the network, so any answer it gets right comes from the rules alone.
+We just coded the routing program. It never runs the network, and every answer it gets right comes from the rules alone.
 
 We can switch off the single weight that holds route 14 and run the network and our program side by side:
 
@@ -1064,7 +1068,7 @@ solved                1 of 6                   6 of 6
 
 The paper's agent solved all six, with networks from three weights to under three thousand. Qwen3.7-Max solved one, and every network it failed with is larger than the paper's working one, the adder by a factor of almost six hundred thousand:
 
-![Six problems, two agents, one board](images/g-board.gif)
+![Both agents on the same six problems](images/g-board.gif)
 
 The paper's agent also solved the seven generated problems that Qwen3.7-Max never finished, and none of its generated networks missed a single prompt I checked.
 
